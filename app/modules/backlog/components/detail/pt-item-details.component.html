@@ -5,9 +5,14 @@
     <Label [text]="item.title"></Label>
 </StackLayout>
 
-<StackLayout (click)="onDescriptionTap($event)">
+<StackLayout (tap)="onDescriptionTap($event)">
     <Label text="Description"></Label>
     <Label [text]="item.description"></Label>
+</StackLayout>
+
+<StackLayout (tap)="onItemTypeTap($event)">
+    <Label text="Item Type"></Label>
+    <Label [text]="item.type"></Label>
 </StackLayout>
 
 

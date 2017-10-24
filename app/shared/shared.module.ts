@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
+import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+
+import { PtModalService } from './modals/pt-modal.service';
 
 import { MenuComponent } from './components/menu/menu.component';
 import { DialogComponent } from './components/dialog/dialog.component';
-import { TextInputModalComponent } from './modals/text-input.modal.component';
+import { TextInputModalComponent } from './modals/text-input/text-input.modal.component';
+import { ListSelectorModalComponent } from './modals/list-selector/list-selector.modal.component';
+
 
 
 @NgModule({
     imports: [
-        CommonModule,
-        NativeScriptFormsModule
+        NativeScriptModule,
+        NativeScriptFormsModule,
+        CommonModule
     ],
     exports: [
         MenuComponent,
@@ -19,11 +26,15 @@ import { TextInputModalComponent } from './modals/text-input.modal.component';
     declarations: [
         MenuComponent,
         DialogComponent,
-        TextInputModalComponent
+        TextInputModalComponent,
+        ListSelectorModalComponent
     ],
-    providers: [],
+    providers: [
+        PtModalService
+    ],
     entryComponents: [
-        TextInputModalComponent
+        TextInputModalComponent,
+        ListSelectorModalComponent
     ]
 })
 export class SharedModule { }
