@@ -1,0 +1,18 @@
+<StackLayout>
+    <Label text="detail"></Label>
+    <Label [text]="(currentSelectedItem$ | async)?.title"></Label>
+
+    <StackLayout orientation="horizontal">
+        <Button (tap)="onDetailsTap($event)" text="Details"></Button>
+        <Button (tap)="onTasksTap($event)" text="Tasks"></Button>
+        <Button (tap)="onChitchatTap($event)" text="Chitchat"></Button>
+    </StackLayout>
+
+    <StackLayout>
+        <pt-item-details [item]="currentSelectedItem$ | async" (itemSaved)="onItemSaved($event)" *ngIf="selectedDetailsScreenIndex=== 0"></pt-item-details>
+        <pt-item-tasks [item]="currentSelectedItem$ | async" (addNewTask)="onAddNewTask($event)" (toggleTask)="onToggleTask($event)"
+            *ngIf="selectedDetailsScreenIndex=== 1"></pt-item-tasks>
+        <pt-item-chitchat [item]="currentSelectedItem$ | async" (addNewComment)="onAddNewComment($event)" *ngIf="selectedDetailsScreenIndex=== 2"></pt-item-chitchat>
+    </StackLayout>
+
+</StackLayout>

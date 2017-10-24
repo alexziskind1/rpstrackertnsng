@@ -1,0 +1,28 @@
+<GridLayout rows="100, *, 50">
+    <StackLayout row="0">
+        <pt-menu></pt-menu>
+        <Label text="Backlog"></Label>
+
+        <Button (tap)="onAddTap($event)" class="btn" text="Add"></Button>
+    </StackLayout>
+
+
+
+    <StackLayout row="1">
+        <pt-list [items]="items$ | async" (listItemSelected)="selectListItem($event)"></pt-list>
+    </StackLayout>
+
+    <StackLayout row="2">
+        <app-dialog [(visible)]="showAddItemDialog">
+            <StackLayout backgroundColor="#efefef">
+                <Label text="Add Item"></Label>
+
+                <pt-new-item-form (onFormDone)="onNewItemFormDone($event)"></pt-new-item-form>
+
+                <Button (tap)="onAddDialogCloseTap($event)" class="btn" text="Close"></Button>
+            </StackLayout>
+        </app-dialog>
+    </StackLayout>
+
+
+</GridLayout>

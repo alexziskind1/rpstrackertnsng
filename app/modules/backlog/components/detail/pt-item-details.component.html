@@ -1,0 +1,35 @@
+<Label text="Details"></Label>
+
+<StackLayout>
+    <Label text="Title"></Label>
+    <TextField hint="title" [(ngModel)]="item.title"></TextField>
+</StackLayout>
+
+<StackLayout>
+    <Label text="Description"></Label>
+    <TextField hint="description" [(ngModel)]="item.description"></TextField>
+</StackLayout>
+
+<Button (tap)="onDialogSaveTap($event)" class="btn" text="Save"></Button>
+
+<!--app-dialog [(visible)]="showDialog">
+    <StackLayout [ngSwitch]="editingProp">
+        <ng-template [ngSwitchCase]="'title'">
+            <Label text="Edit Title"></Label>
+            <StackLayout>
+                <Label text="Title"></Label>
+                <TextField hint="title" [(ngModel)]="item.title"></TextField>
+            </StackLayout>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'description'">
+            <Label text="Edit Description"></Label>
+            <StackLayout>
+                <Label text="Description"></Label>
+                <TextField hint="description" [(ngModel)]="item.description"></TextField>
+            </StackLayout>
+        </ng-template>
+    </StackLayout>
+
+    <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save"></Button>
+
+</app-dialog-->
