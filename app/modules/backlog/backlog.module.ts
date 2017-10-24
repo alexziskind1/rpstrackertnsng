@@ -19,7 +19,6 @@ import { NewItemFormComponent } from './components/new-item-form/new-item-form.c
 import { BacklogRepository } from './backlog.repository';
 
 
-
 @NgModule({
     imports: [
         NativeScriptModule,
@@ -41,6 +40,6 @@ import { BacklogRepository } from './backlog.repository';
     providers: [
         BacklogRepository,
         BacklogService
-    ],
+    ]
 })
 export class BacklogModule { }

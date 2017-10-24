@@ -1,0 +1,10 @@
+<ScrollView>
+    <StackLayout>
+        <Label text="enter text" textWrap="true"></Label>
+
+        <TextView [(ngModel)]="theText"></TextView>
+
+        <Button (tap)="onModalSubmit($event)" text="Submit"></Button>
+
+    </StackLayout>
+</ScrollView>

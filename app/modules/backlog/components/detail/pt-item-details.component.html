@@ -1,14 +1,15 @@
 <Label text="Details"></Label>
 
-<StackLayout>
+<StackLayout (tap)="onTitleTap($event)">
     <Label text="Title"></Label>
-    <TextField hint="title" [(ngModel)]="item.title"></TextField>
+    <Label [text]="item.title"></Label>
 </StackLayout>
 
-<StackLayout>
+<StackLayout (click)="onDescriptionTap($event)">
     <Label text="Description"></Label>
-    <TextField hint="description" [(ngModel)]="item.description"></TextField>
+    <Label [text]="item.description"></Label>
 </StackLayout>
+
 
 <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save"></Button>
 

@@ -4,6 +4,7 @@ import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 
 import { MenuComponent } from './components/menu/menu.component';
 import { DialogComponent } from './components/dialog/dialog.component';
+import { TextInputModalComponent } from './modals/text-input.modal.component';
 
 
 @NgModule({
@@ -17,8 +18,12 @@ import { DialogComponent } from './components/dialog/dialog.component';
     ],
     declarations: [
         MenuComponent,
-        DialogComponent
+        DialogComponent,
+        TextInputModalComponent
     ],
-    providers: []
+    providers: [],
+    entryComponents: [
+        TextInputModalComponent
+    ]
 })
 export class SharedModule { }

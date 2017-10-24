@@ -1,9 +1,10 @@
-import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NSModuleFactoryLoader } from "nativescript-angular/router";
 
 import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -53,7 +54,7 @@ export function createTranslateLoader(http: Http) {
         AppComponent
     ],
     providers: [
-        Store
+        { provide: NgModuleFactoryLoader, useClass: NSModuleFactoryLoader }
     ],
     schemas: [
         NO_ERRORS_SCHEMA
