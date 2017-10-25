@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-pro-ui/sidedrawer/angular";
-import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
+import { RadSideDrawer, SideDrawerLocation } from 'nativescript-pro-ui/sidedrawer';
 
 import { NavigationService } from '../../../../core/services';
 import { BacklogService } from '../../backlog.service';
@@ -18,7 +18,8 @@ import { PtNewItem } from '../../../../shared/models';
 @Component({
     moduleId: module.id,
     selector: 'pt-backlog',
-    templateUrl: 'backlog.page.component.html'
+    templateUrl: 'backlog.page.component.html',
+    styleUrls: ['backlog.page.component.css']
 })
 export class BacklogPageComponent implements AfterViewInit, OnInit {
 
@@ -40,6 +41,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
 
     public ngAfterViewInit() {
         this.drawer = this.drawerComponent.sideDrawer;
+        this.drawer.drawerLocation = SideDrawerLocation.Right;
         this.changeDetectionRef.detectChanges();
     }
 
@@ -56,8 +58,15 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
         });
     }
 
-    public openDrawer() {
+    public showSlideout() {
+        this.drawer.mainContent.className = 'drawer-content-in';
         this.drawer.showDrawer();
+    }
+
+    public onDrawerClosing(args) {
+        this.drawer.mainContent.className = 'drawer-content-out';
+        //const mainContentLayout = (<LayoutBase>this._drawer.mainContent);
+        //mainContentLayout.className = 'drawer-content-out';
     }
 
     public onCloseDrawerTap() {
@@ -81,6 +90,10 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
             this.backlogService.addNewPtItem(newItem, this.store.value.currentUser);
         }
         this.showAddItemDialog = !this.showAddItemDialog;
+    }
+
+    public onLogoutTap(args) {
+        this.navigationService.navigate(['/auth', 'logout']);
     }
 
 }

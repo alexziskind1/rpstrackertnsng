@@ -19,9 +19,4 @@ export class MenuComponent implements OnInit {
     public onSelectPresetTap(preset: Preset) {
         this.navigationService.navigate(['/backlog', preset]);
     }
-
-    public onLogoutTap(args) {
-        this.navigationService.navigate(['/auth', 'logout']);
-    }
-
 }

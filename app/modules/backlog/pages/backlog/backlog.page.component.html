@@ -1,33 +1,54 @@
-<RadSideDrawer>
-    <StackLayout tkDrawerContent class="sideStackLayout">
-        <StackLayout class="sideTitleStackLayout">
-            <Label text="Navigation Menu"></Label>
+<ActionBar title="Backlog">
+    <ActionItem (tap)="showSlideout($event)" ios.position="right">
+        <StackLayout class="navbar_image_wrapper" ios:horizontalAlignment="right">
+            <Image src="res://icon_elipses_white"></Image>
         </StackLayout>
-        <StackLayout class="sideStackLayout">
-            <Label text="Primary" class="sideLabel sideLightGrayLabel"></Label>
-            <Label text="Social" class="sideLabel"></Label>
-            <Label text="Promotions" class="sideLabel"></Label>
-            <Label text="Labels" class="sideLabel sideLightGrayLabel"></Label>
-            <Label text="Important" class="sideLabel"></Label>
-            <Label text="Starred" class="sideLabel"></Label>
-            <Label text="Sent Mail" class="sideLabel"></Label>
-            <Label text="Drafts" class="sideLabel"></Label>
-        </StackLayout>
-        <Label text="Close Drawer" color="lightgray" padding="10" style="horizontal-align: center" (tap)="onCloseDrawerTap()"></Label>
+    </ActionItem>
+</ActionBar>
+
+<RadSideDrawer (drawerClosing)="onDrawerClosing($event)">
+    <StackLayout tkDrawerContent>
+        <GridLayout class="side-drawer-panel" rows="auto, *, 100">
+            <StackLayout row="0">
+                <Image src="res://rps_logo" class="slide-out-img" stretch="aspectFit"></Image>
+            </StackLayout>
+            <StackLayout row="1">
+
+                <pt-menu></pt-menu>
+
+            </StackLayout>
+            <StackLayout row="2">
+                <Button (tap)="onLogoutTap($event)" text="LOGOUT" class="slide-out-btn"></Button>
+            </StackLayout>
+        </GridLayout>
     </StackLayout>
+
     <StackLayout tkMainContent>
-        <Button text="OPEN DRAWER" (tap)="openDrawer()" class="drawerContentButton"></Button>
+        <Button text="OPEN DRAWER" (tap)="showSlideout($event)" class="drawerContentButton"></Button>
+
+        <GridLayout class="backlog-container" rows="*, 60">
+
+            <GridLayout row="0" class="list-container">
+                <pt-list [items]="items$ | async" (listItemSelected)="selectListItem($event)"></pt-list>
+            </GridLayout>
+
+            <StackLayout row="1" class="btn-add-wrapper">
+                <Button text="Add" class="btn-add" (tap)="onAddTap($event)"></Button>
+            </StackLayout>
+
+        </GridLayout>
+
 
         <GridLayout rows="100, *, 50">
             <StackLayout row="0">
-                <pt-menu></pt-menu>
+
                 <Label text="Backlog"></Label>
 
                 <Button (tap)="onAddTap($event)" class="btn" text="Add"></Button>
             </StackLayout>
 
             <StackLayout row="1">
-                <pt-list [items]="items$ | async" (listItemSelected)="selectListItem($event)"></pt-list>
+
             </StackLayout>
 
             <StackLayout row="2">
