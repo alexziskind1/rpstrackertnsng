@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
+
+import { RadSideDrawerComponent, SideDrawerType } from "nativescript-pro-ui/sidedrawer/angular";
+import { RadSideDrawer } from 'nativescript-pro-ui/sidedrawer';
 
 import { NavigationService } from '../../../../core/services';
 import { BacklogService } from '../../backlog.service';
@@ -17,7 +20,10 @@ import { PtNewItem } from '../../../../shared/models';
     selector: 'pt-backlog',
     templateUrl: 'backlog.page.component.html'
 })
-export class BacklogPageComponent implements OnInit {
+export class BacklogPageComponent implements AfterViewInit, OnInit {
+
+    @ViewChild(RadSideDrawerComponent) public drawerComponent: RadSideDrawerComponent;
+    private drawer: RadSideDrawer;
 
     public items$: Observable<PtItem[]> = this.store.select<PtItem[]>('backlogItems');
     public selectedPreset$: Observable<Preset> = this.store.select<Preset>('selectedPreset');
@@ -25,11 +31,17 @@ export class BacklogPageComponent implements OnInit {
     public showAddItemDialog = false;
 
     constructor(
+        private changeDetectionRef: ChangeDetectorRef,
         private activatedRoute: ActivatedRoute,
         private navigationService: NavigationService,
         private backlogService: BacklogService,
         private store: Store
     ) { }
+
+    public ngAfterViewInit() {
+        this.drawer = this.drawerComponent.sideDrawer;
+        this.changeDetectionRef.detectChanges();
+    }
 
     public ngOnInit() {
         this.activatedRoute.params.subscribe(params => {
@@ -42,6 +54,14 @@ export class BacklogPageComponent implements OnInit {
         this.selectedPreset$.subscribe(next => {
             this.backlogService.fetchItems();
         });
+    }
+
+    public openDrawer() {
+        this.drawer.showDrawer();
+    }
+
+    public onCloseDrawerTap() {
+        this.drawer.closeDrawer();
     }
 
     public selectListItem(item: PtItem) {

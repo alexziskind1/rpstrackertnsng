@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
 
 import { BacklogService } from './backlog.service';
 
@@ -23,6 +24,7 @@ import { BacklogRepository } from './backlog.repository';
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
+        NativeScriptUISideDrawerModule,
         CommonModule,
         SharedModule
     ],
