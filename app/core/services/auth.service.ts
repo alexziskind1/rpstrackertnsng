@@ -12,7 +12,7 @@ import 'rxjs/add/operator/catch';
 
 import { StorageService } from './storage.service';
 import { PtUser } from '../../shared/models/domain';
-import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../shared/models';
+import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../shared/models/domain';
 import { Store } from '../app-store';
 import { AppConfig, APP_CONFIG } from '../../app-config.module';
 import { ErrorHandlerService } from './error-handler.service';

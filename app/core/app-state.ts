@@ -1,5 +1,6 @@
 import { PtItem, PtUser } from '../shared/models/domain';
-import { Preset } from '../shared/models/ui';
+import { PresetType } from '../shared/models/ui/types';
+
 
 export type StateKey = 'users' | 'backlogItems' | 'currentUser' | 'currentSelectedItem' | 'selectedPreset';
 
@@ -8,7 +9,7 @@ export interface State {
     users: PtUser[];
     currentUser: PtUser;
     currentSelectedItem: PtItem;
-    selectedPreset: Preset;
+    selectedPreset: PresetType;
     [key: string]: any;
 }
 

@@ -1,7 +1,8 @@
-import { ItemTypeEnum } from '../enums';
+import { PtItemTypeImpl } from './ui';
+
 
 export interface PtNewItem {
     title: string;
     description?: string;
-    type: ItemTypeEnum;
+    type: PtItemTypeImpl;
 }

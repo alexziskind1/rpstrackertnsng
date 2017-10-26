@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
+import { NativeScriptUIDataFormModule } from "nativescript-pro-ui/dataform/angular";
 
 import { BacklogService } from './backlog.service';
 
@@ -25,6 +26,7 @@ import { BacklogRepository } from './backlog.repository';
         NativeScriptModule,
         NativeScriptFormsModule,
         NativeScriptUISideDrawerModule,
+        NativeScriptUIDataFormModule,
         CommonModule,
         SharedModule
     ],

@@ -1,5 +1,5 @@
 import { PtObjectBase } from './';
-import { GenderEnum } from '../../enums';
+import { GenderEnum } from './enums';
 
 export interface PtUser extends PtObjectBase {
     fullName: string;

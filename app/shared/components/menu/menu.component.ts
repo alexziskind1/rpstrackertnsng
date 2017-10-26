@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Preset } from '../../models/ui';
+
 import { Store } from '../../../core/app-store';
 import { NavigationService } from '../../../core/services/navigation.service';
+import { PresetType } from '../../../shared/models/ui/types';
 
 @Component({
     moduleId: module.id,
@@ -16,7 +17,7 @@ export class MenuComponent implements OnInit {
 
     public ngOnInit() { }
 
-    public onSelectPresetTap(preset: Preset) {
+    public onSelectPresetTap(preset: PresetType) {
         this.navigationService.navigate(['/backlog', preset]);
     }
 }

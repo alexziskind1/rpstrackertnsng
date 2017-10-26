@@ -10,7 +10,7 @@ import { NavigationService } from '../../../../core/services';
 import { BacklogService } from '../../backlog.service';
 import { Store } from '../../../../core/app-store';
 import { PtItem } from '../../../../shared/models/domain';
-import { Preset } from '../../../../shared/models/ui';
+import { PresetType } from '../../../../shared/models/ui/types';
 import { PtNewItem } from '../../../../shared/models';
 
 
@@ -27,7 +27,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
     private drawer: RadSideDrawer;
 
     public items$: Observable<PtItem[]> = this.store.select<PtItem[]>('backlogItems');
-    public selectedPreset$: Observable<Preset> = this.store.select<Preset>('selectedPreset');
+    public selectedPreset$: Observable<PresetType> = this.store.select<PresetType>('selectedPreset');
 
     public showAddItemDialog = false;
 

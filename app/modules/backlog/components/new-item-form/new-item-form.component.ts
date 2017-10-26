@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { PtNewItem } from '../../../../shared/models';
-import { ItemTypeEnum } from '../../../../shared/enums';
+
 
 @Component({
     moduleId: module.id,

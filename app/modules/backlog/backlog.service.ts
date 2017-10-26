@@ -11,7 +11,7 @@ import { Store } from '../../core/app-store';
 import { PtItem, PtUser, PtTask, PtComment } from '../../shared/models/domain';
 import { ErrorHandlerService } from '../../core/services/error-handler.service';
 import { PtNewItem, PtNewTask, PtNewComment } from '../../shared/models';
-import { PriorityEnum, StatusEnum } from '../../shared/enums';
+import { PriorityEnum, StatusEnum } from '../../shared/models/domain/enums';
 import { BacklogRepository } from './backlog.repository';
 
 
@@ -87,7 +87,7 @@ export class BacklogService {
             id: 0,
             title: newItem.title,
             description: newItem.description,
-            type: newItem.type,
+            type: newItem.type.type,
             estimate: 0,
             priority: PriorityEnum.Medium,
             status: StatusEnum.Open,

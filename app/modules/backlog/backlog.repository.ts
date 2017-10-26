@@ -1,15 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
-//import { NSHttp as Http } from 'nativescript-angular/http';
-
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { APP_CONFIG, AppConfig } from '../../app-config.module';
-import { Preset } from '../../shared/models/ui';
 import { PtTask, PtItem, PtComment } from '../../shared/models/domain';
-
-
+import { PresetType } from '../../shared/models/ui/types';
 
 
 @Injectable()
@@ -20,7 +16,7 @@ export class BacklogRepository {
         private http: Http
     ) { }
 
-    private getFilteredBacklogUrl(currentPreset: Preset, currentUserId?: number) {
+    private getFilteredBacklogUrl(currentPreset: PresetType, currentUserId?: number) {
         switch (currentPreset) {
             case 'my':
                 if (currentUserId) {
@@ -66,7 +62,7 @@ export class BacklogRepository {
     }
 
     public getPtItems(
-        currentPreset: Preset,
+        currentPreset: PresetType,
         currentUserId: number,
         errorHandler: (error: any) => ErrorObservable,
         successHandler: (data: PtItem[]) => void

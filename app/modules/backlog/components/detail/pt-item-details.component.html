@@ -1,22 +1,94 @@
 <Label text="Details"></Label>
 
-<StackLayout (tap)="onTitleTap($event)">
-    <Label text="Title"></Label>
-    <Label [text]="item.title"></Label>
-</StackLayout>
+<RadDataForm #itemDetailsDataForm [source]="item" commitMode="Manual">
 
-<StackLayout (tap)="onDescriptionTap($event)">
-    <Label text="Description"></Label>
-    <Label [text]="item.description"></Label>
-</StackLayout>
+    <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
+        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+        </TKPropertyEditor>
+        <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
+    </TKEntityProperty>
 
-<StackLayout (tap)="onItemTypeTap($event)">
-    <Label text="Item Type"></Label>
-    <Label [text]="item.type"></Label>
-</StackLayout>
+    <TKEntityProperty tkDataFormProperty name="description" displayName="Description" index="2" required="true" hintText="description">
+        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+        </TKPropertyEditor>
+    </TKEntityProperty>
 
+    <TKEntityProperty tkDataFormProperty name="type" displayName="Type" index="3" [valuesProvider]="itemTypesProvider">
+        <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="status" displayName="Status" index="4" [valuesProvider]="statusesProvider">
+        <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="estimate" displayName="Estimate" index="5">
+        <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="priority" displayName="Priority" index="6" valuesProvider="Low, Medium, High, Critical">
+        <TKPropertyEditor tkEntityPropertyEditor type="SegmentedEditor">
+            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+        </TKPropertyEditor>
+    </TKEntityProperty>
+
+
+
+    <TKEntityProperty tkDataFormProperty name="assignee" displayName="Assignee" index="7">
+        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <!-- start hidden fields -->
+    <TKEntityProperty tkDataFormProperty name="id" hidden="true">
+        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="tasks" hidden="true">
+        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+    </TKEntityProperty>
+    <TKEntityProperty tkDataFormProperty name="comments" hidden="true">
+        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+    </TKEntityProperty>
+    <TKEntityProperty tkDataFormProperty name="dateCreated" hidden="true">
+        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+    </TKEntityProperty>
+    <TKEntityProperty tkDataFormProperty name="dateModified" hidden="true">
+        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+    </TKEntityProperty>
+    <!-- end hidden fields -->
+</RadDataForm>
 
 <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save"></Button>
+
+<RadDataForm [source]="ticketOrder">
+
+    <TKEntityProperty tkDataFormProperty hidden="true" name="contactName" displayName="Contact Name">
+        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty hidden="true" name="time">
+        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="contactEmail" displayName="Contmail">
+        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+        </TKPropertyEditor>
+
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="movie" displayName="Movie Name" index="0" [converter]="movieConverter" [valuesProvider]="movieNames">
+        <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+    </TKEntityProperty>
+
+    <TKEntityProperty tkDataFormProperty name="numberOfTickets" displayName="Number of Tickets" index="5">
+        <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
+    </TKEntityProperty>
+</RadDataForm>
+
+
+
 
 <!--app-dialog [(visible)]="showDialog">
     <StackLayout [ngSwitch]="editingProp">
