@@ -11,10 +11,10 @@ import {
     ErrorHandlerService,
     LoggerService,
     NavigationService,
+    PtUserService,
     StorageNsService,
     StorageWebService,
 } from '../core/services';
-
 
 @NgModule({
     imports: [
@@ -23,6 +23,7 @@ import {
     ],
     providers: [
         AuthService,
+        PtUserService,
         ErrorHandlerService,
         LoggerService,
         NavigationService,

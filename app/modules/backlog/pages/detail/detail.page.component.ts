@@ -4,8 +4,9 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { PtItem, PtTask } from '../../../../shared/models/domain';
+import { PtItem, PtTask, PtUser } from '../../../../shared/models/domain';
 import { BacklogService } from '../../backlog.service';
+import { PtUserService } from '../../../../core/services';
 import { Store } from '../../../../core/app-store';
 import { PtNewTask, PtNewComment } from '../../../../shared/models';
 
@@ -21,9 +22,12 @@ export class DetailPageComponent implements OnInit {
 
     public currentSelectedItem$: Observable<PtItem> = this.store.select<PtItem>('currentSelectedItem');
 
+    public users$: Observable<PtUser[]> = this.store.select<PtUser[]>('users');
+
     constructor(
         private activatedRoute: ActivatedRoute,
         private backlogService: BacklogService,
+        private ptUserService: PtUserService,
         private store: Store
     ) { }
 
@@ -40,6 +44,10 @@ export class DetailPageComponent implements OnInit {
     }
     public onChitchatTap(args) {
         this.selectedDetailsScreenIndex = 2;
+    }
+
+    public onUsersRequested() {
+        this.ptUserService.fetchUsers();
     }
 
     public onItemSaved(item: PtItem) {

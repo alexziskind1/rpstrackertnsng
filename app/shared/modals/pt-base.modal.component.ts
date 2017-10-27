@@ -17,6 +17,10 @@ export class PtBaseModalComponent<T, R> {
         return this.modalContext.title;
     }
 
+    protected get payload(): T {
+        return this.modalContext.payload;
+    }
+
     public get btnOkText() {
         return this.modalContext.btnOkText;
     }

@@ -16,6 +16,21 @@ export class PtModalService {
     public enumToModalListDisplayItemArray(theEnum): PtModalListDisplayItem[] {
         let retArray: PtModalListDisplayItem[] = [];
         for (var enumMember in theEnum) {
+            const di: PtModalListDisplayItem = {
+                value: enumMember,
+                title: theEnum[enumMember],
+                img: '',
+                isSelected: false
+            };
+            retArray.push(di);
+        }
+        return retArray;
+    }
+
+    /*
+    public enumToModalListDisplayItemArray(theEnum): PtModalListDisplayItem[] {
+        let retArray: PtModalListDisplayItem[] = [];
+        for (var enumMember in theEnum) {
             const intVal = parseInt(enumMember, 10);
             const isValueProperty = intVal >= 0;
             if (isValueProperty) {
@@ -24,6 +39,7 @@ export class PtModalService {
         }
         return retArray;
     }
+    */
 
     public createPtModalContext<T, R>(
         vcRef: ViewContainerRef,

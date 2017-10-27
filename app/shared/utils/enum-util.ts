@@ -11,6 +11,7 @@ export function enumToArray(theEnum): any[] {
     return retArray;
 }
 
+/*
 export function enumValueIndex(enumVal: number, e: any): number {
     let idx = -1;
     for (var enumMember in e) {
@@ -22,6 +23,18 @@ export function enumValueIndex(enumVal: number, e: any): number {
                 break;
             }
         }
+    }
+    return idx;
+}
+*/
+
+export function enumValueIndex(enumVal: string, e: any): number {
+    let idx = 0;
+    for (var enumMember in e) {
+        if (enumMember === enumVal) {
+            break;
+        }
+        idx++;
     }
     return idx;
 }

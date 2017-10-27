@@ -1,9 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+
+import { Subscription } from 'rxjs/Subscription';
+
+
+
 import { ModalDialogParams } from 'nativescript-angular';
 import { Page } from 'ui/page';
 import { PtBaseModalComponent } from '../pt-base.modal.component';
 import { PtModalListModel } from '../../models/ui/pt-modal-list.model';
 import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-item.model';
+
 
 @Component({
     moduleId: module.id,
@@ -11,32 +17,43 @@ import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-it
     templateUrl: 'list-selector.modal.component.html',
     styleUrls: ['list-selector.modal.component.css']
 })
-export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem>, number> {
+export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem>, number> implements OnInit, OnDestroy {
     public items: PtModalListDisplayItem[] = [];
     private originalSelectedIndex: number = 0;
     private selectedIndex: number = 0;
-    private ptModalListModel: PtModalListModel<PtModalListDisplayItem>;
+    private itemsSub$: Subscription;
 
     constructor(
         params: ModalDialogParams,
         page: Page
     ) {
         super(params, page);
-        var a = 0;
-        this.ptModalListModel = this.modalContext.payload;
-        if (this.ptModalListModel.selectedIndex) {
-            this.originalSelectedIndex = this.ptModalListModel.selectedIndex;
-            this.selectedIndex = this.ptModalListModel.selectedIndex;
+    }
+
+    public ngOnInit() {
+        if (this.payload.selectedIndex) {
+            this.originalSelectedIndex = this.payload.selectedIndex;
+            this.selectedIndex = this.payload.selectedIndex;
         }
 
-        for (let i = 0; i < this.ptModalListModel.items.length; i++) {
-            this.items.push({
-                title: this.ptModalListModel.items[i].title,
-                value: this.ptModalListModel.items[i].value,
-                img: this.ptModalListModel.items[i].img,
-                isSelected: i === this.selectedIndex ? true : false
+        this.payload.loadItemsTrigger()
+            .then(() => {
+                this.itemsSub$ = this.payload.items$
+                    .subscribe(theItems => {
+                        for (let i = 0; i < theItems.length; i++) {
+                            this.items.push({
+                                title: theItems[i].title,
+                                value: theItems[i].value,
+                                img: theItems[i].img,
+                                isSelected: i === this.selectedIndex ? true : false
+                            });
+                        }
+                    });
             });
-        }
+    }
+
+    public ngOnDestroy() {
+        this.itemsSub$.unsubscribe();
     }
 
     public onItemSelected(args): void {

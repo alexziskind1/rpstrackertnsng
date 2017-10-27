@@ -2,8 +2,12 @@
     <!-- https://github.com/NativeScript/NativeScript/issues/1130 -->
 </ActionBar>
 
-<GridLayout rows="auto, *, auto" verticalAlignment="top" class="list-modal-view">
-    <Label [text]="title" ios:visibility="collapsed" class="h3" class="list-modal-header"></Label>
+<GridLayout rows="60, *, 60" verticalAlignment="top" class="list-modal-view">
+    <StackLayout orientation="horizontal" row="0">
+        <Label [text]="title" class="list-modal-header"></Label>
+        <Button class="btn btn-outline" text="X" horizontalAlignment="right" (tap)="onCancelButtonTap()"></Button>
+    </StackLayout>
+
     <ListView row="1" [items]="items" (itemTap)="onItemSelected($event)" class="list-modal-list">
         <ng-template let-item="item">
             <GridLayout>
