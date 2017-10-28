@@ -7,9 +7,9 @@ export abstract class StorageService {
         console.log('constructing base StorageService');
     }
 
-    abstract setItem(key: string, value: string | number): void;
+    abstract setItem<T>(key: string, value: T): void;
 
-    abstract getItem(key: string): string;
+    abstract getItem<T>(key: string): T;
 
     abstract removeItem(key: string): void;
 

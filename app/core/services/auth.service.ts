@@ -18,6 +18,7 @@ import { AppConfig, APP_CONFIG } from '../../app-config.module';
 import { ErrorHandlerService } from './error-handler.service';
 
 const AUTH_TOKEN_KEY = 'AUTH_TOKEN_KEY';
+const CURRENT_USER_KEY = 'CURRENT_USER_KEY';
 
 @Injectable()
 export class AuthService {
@@ -26,12 +27,24 @@ export class AuthService {
     private get registerUrl() { return `${this.config.apiEndpoint}/register`; }
 
     get token(): PtAuthToken {
-        const t = this.storageService.getItem(AUTH_TOKEN_KEY);
-        return JSON.parse(t);
+        return this.storageService.getItem<PtAuthToken>(AUTH_TOKEN_KEY);
     }
 
     set token(authToken: PtAuthToken) {
-        this.storageService.setItem(AUTH_TOKEN_KEY, JSON.stringify(authToken));
+        this.storageService.setItem<PtAuthToken>(AUTH_TOKEN_KEY, authToken);
+    }
+
+    get currentUser(): PtUser {
+        const user = this.storageService.getItem<PtUser>(CURRENT_USER_KEY);
+        if (!this.store.value.currentUser && user) {
+            this.store.set<PtUser>('currentUser', user);
+        }
+        return user;
+    }
+
+    set currentUser(ptUser: PtUser) {
+        this.storageService.setItem<PtUser>(CURRENT_USER_KEY, ptUser);
+        this.store.set<PtUser>('currentUser', ptUser);
     }
 
     constructor(
@@ -43,7 +56,9 @@ export class AuthService {
     ) { }
 
     public isLoggedIn(): boolean {
-        return (!!this.storageService.getItem(AUTH_TOKEN_KEY)) && (!!this.store.value.currentUser);
+        const hasToken = !!this.token;
+        const hasCurrentUser = !!this.currentUser;
+        return hasToken && hasCurrentUser;
     }
 
     public login(loginModel: PtLoginModel): Observable<PtUser> {
@@ -59,7 +74,8 @@ export class AuthService {
     }
 
     public logout() {
-        this.storageService.setItem(AUTH_TOKEN_KEY, '');
+        this.storageService.setItem(AUTH_TOKEN_KEY, undefined);
+        this.storageService.setItem(CURRENT_USER_KEY, undefined);
     }
 
     private loginInternal(loginModel: PtLoginModel) {
@@ -76,8 +92,9 @@ export class AuthService {
         )
             .map(response => response.json())
             .do(data => {
-                this.store.set<PtUser>('currentUser', data.user);
                 this.token = data.authToken;
+                this.currentUser = data.user;
+                //this.store.set<PtUser>('currentUser', data.user);
             })
             .catch(this.errorHandlerService.handleHttpError);
     }
@@ -93,8 +110,9 @@ export class AuthService {
         )
             .map(response => response.json())
             .do(data => {
-                this.store.set<PtUser>('currentUser', data.user);
                 this.token = data.authToken;
+                this.currentUser = data.user;
+                //this.store.set<PtUser>('currentUser', data.user);
             })
             .catch(this.errorHandlerService.handleHttpError);
     }
