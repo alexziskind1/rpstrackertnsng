@@ -3,4 +3,5 @@ export interface PtModalListDisplayItem {
     value: string;
     img: string;
     isSelected: boolean;
+    payload: any;
 }

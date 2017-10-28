@@ -154,7 +154,8 @@ export class PtItemDetailsComponent implements OnInit {
                         value: u.id.toString(),
                         title: u.fullName,
                         img: u.avatar,
-                        isSelected: false
+                        isSelected: false,
+                        payload: u
                     };
                     return di;
                 });
@@ -229,13 +230,13 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
-        this._buttonEditorHelper.updateEditorValue(args.view, args.value);
+        //this._buttonEditorHelper.updateEditorValue(args.view, args.value);
         //args.view.text
     }
 
     public editorNeedsValue(args: DataFormCustomPropertyEditorEventData) {
         //args.value = this.newView.text;
-        args.value = this._buttonEditorHelper.buttonValue;
+        //args.value = this._buttonEditorHelper.buttonValue;
     }
 }
 

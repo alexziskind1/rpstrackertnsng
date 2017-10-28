@@ -20,7 +20,8 @@ export class PtModalService {
                 value: enumMember,
                 title: theEnum[enumMember],
                 img: '',
-                isSelected: false
+                isSelected: false,
+                payload: enumMember
             };
             retArray.push(di);
         }

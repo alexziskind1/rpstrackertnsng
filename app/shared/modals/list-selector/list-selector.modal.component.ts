@@ -45,7 +45,8 @@ export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalList
                                 title: theItems[i].title,
                                 value: theItems[i].value,
                                 img: theItems[i].img,
-                                isSelected: i === this.selectedIndex ? true : false
+                                isSelected: i === this.selectedIndex ? true : false,
+                                payload: theItems[i].payload
                             });
                         }
                     });
@@ -64,7 +65,7 @@ export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalList
         newSelectedItem.isSelected = true;
         this.selectedIndex = args.index;
 
-        this.closeCallback(newSelectedItem.value);
+        this.closeCallback(newSelectedItem.payload);
     }
 
     public onCancelButtonTap(): void {

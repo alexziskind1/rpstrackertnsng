@@ -35,13 +35,13 @@
 
 
 
-    <TKEntityProperty tkDataFormProperty name="id" displayName="id" index="7">
+    <TKEntityProperty tkDataFormProperty name="assignee" displayName="Assignee" index="7">
         <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="editorNeedsView($event)" (editorHasToApplyValue)="editorHasToApplyValue($event)"
             (editorNeedsValue)="editorNeedsValue($event)"></TKCustomPropertyEditor>
     </TKEntityProperty>
 
     <!-- start hidden fields -->
-    <TKEntityProperty tkDataFormProperty name="assignee" hidden="true">
+    <TKEntityProperty tkDataFormProperty name="id" hidden="true">
         <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
     </TKEntityProperty>
 
