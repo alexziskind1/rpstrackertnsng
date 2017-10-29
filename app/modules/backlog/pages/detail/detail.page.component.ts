@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +9,6 @@ import { BacklogService } from '../../backlog.service';
 import { PtUserService } from '../../../../core/services';
 import { Store } from '../../../../core/app-store';
 import { PtNewTask, PtNewComment } from '../../../../shared/models';
-
 
 @Component({
     moduleId: module.id,

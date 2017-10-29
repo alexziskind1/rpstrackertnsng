@@ -1,5 +1,5 @@
 export interface PtModalListDisplayItem {
-    title: string;
+    key: string;
     value: string;
     img: string;
     isSelected: boolean;

@@ -17,8 +17,8 @@ export class PtModalService {
         let retArray: PtModalListDisplayItem[] = [];
         for (var enumMember in theEnum) {
             const di: PtModalListDisplayItem = {
-                value: enumMember,
-                title: theEnum[enumMember],
+                key: enumMember,
+                value: theEnum[enumMember],
                 img: '',
                 isSelected: false,
                 payload: enumMember

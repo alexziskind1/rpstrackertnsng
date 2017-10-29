@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
 
-import { Subscription } from 'rxjs/Subscription';
+//import { Observable } from 'rxjs/Observable';
+//import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+//import { Subscription } from 'rxjs/Subscription';
 
 
 
@@ -19,46 +21,70 @@ import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-it
 })
 export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem>, number> implements OnInit, OnDestroy {
     public items: PtModalListDisplayItem[] = [];
+    //public items$: BehaviorSubject<PtModalListDisplayItem[]> = new BehaviorSubject([]);
     private originalSelectedIndex: number = 0;
     private selectedIndex: number = 0;
-    private itemsSub$: Subscription;
+    //private itemsSub$: Subscription;
+
 
     constructor(
         params: ModalDialogParams,
-        page: Page
+        page: Page,
+        zone: NgZone
     ) {
         super(params, page);
-    }
-
-    public ngOnInit() {
         if (this.payload.selectedIndex) {
             this.originalSelectedIndex = this.payload.selectedIndex;
             this.selectedIndex = this.payload.selectedIndex;
         }
+        this.items = this.payload.items;
+        /*
+        setTimeout(() => {
+            this.items = this.payload.items;
+        }, 500);
 
-        this.payload.loadItemsTrigger()
-            .then(() => {
-                this.itemsSub$ = this.payload.items$
-                    .subscribe(theItems => {
-                        for (let i = 0; i < theItems.length; i++) {
-                            this.items.push({
-                                title: theItems[i].title,
-                                value: theItems[i].value,
-                                img: theItems[i].img,
-                                isSelected: i === this.selectedIndex ? true : false,
-                                payload: theItems[i].payload
+        zone.run(() => {
+            this.items = this.payload.items;
+        });
+*/
+
+
+        /*
+                this.payload.loadItemsTrigger()
+                    .then(() => {
+                        this.itemsSub$ = this.payload.items$.subscribe(theItems => {
+                            this.items$.next(theItems);
+                        });
+        
+        
+                        this.itemsSub$ = this.payload.items$
+                            .subscribe(theItems => {
+                                this.items = theItems.map((item, idx): PtModalListDisplayItem => {
+                                    return {
+                                        key: item.key,
+                                        value: item.value,
+                                        img: item.img,
+                                        isSelected: idx === this.selectedIndex ? true : false,
+                                        payload: item.payload
+                                    };
+                                });
                             });
-                        }
+                            
                     });
-            });
+        */
+    }
+
+    public ngOnInit() {
+
     }
 
     public ngOnDestroy() {
-        this.itemsSub$.unsubscribe();
+        //this.itemsSub$.unsubscribe();
     }
 
     public onItemSelected(args): void {
         const oldSelectedItem = this.items[this.selectedIndex];
+        //const oldSelectedItem = this.items$.value[this.selectedIndex];
         oldSelectedItem.isSelected = false;
 
         const newSelectedItem = this.items[args.index];

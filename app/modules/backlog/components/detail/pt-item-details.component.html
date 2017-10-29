@@ -1,66 +1,76 @@
-<Label text="Details"></Label>
+<GridLayout rows="20, 30, *">
 
-<RadDataForm #itemDetailsDataForm [source]="item" commitMode="Manual">
+    <StackLayout row="0">
+        <Label [text]="selectedValue" row="0" (tap)="onSelectorTap2()"></Label>
+        <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save" row=""></Button>
+    </StackLayout>
 
-    <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
-        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
-            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
-        </TKPropertyEditor>
-        <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
-    </TKEntityProperty>
+    <GridLayout row="1">
+        <Label #btnTapHtml class="text" [text]="selectedValue" (tap)="onSelectorTap2()"></Label>
+    </GridLayout>
 
-    <TKEntityProperty tkDataFormProperty name="description" displayName="Description" index="2" required="true" hintText="description">
-        <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
-            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
-        </TKPropertyEditor>
-    </TKEntityProperty>
 
-    <TKEntityProperty tkDataFormProperty name="type" displayName="Type" index="3" [valuesProvider]="itemTypesProvider">
-        <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
-    </TKEntityProperty>
+    <RadDataForm #itemDetailsDataForm [source]="item" commitMode="Manual" row="2">
 
-    <TKEntityProperty tkDataFormProperty name="status" displayName="Status" index="4" [valuesProvider]="statusesProvider">
-        <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
-    </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
+            <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
+        </TKEntityProperty>
 
-    <TKEntityProperty tkDataFormProperty name="estimate" displayName="Estimate" index="5">
-        <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
-    </TKEntityProperty>
-
-    <TKEntityProperty tkDataFormProperty name="priority" displayName="Priority" index="6" [valuesProvider]="prioritiesProvider">
-        <TKPropertyEditor tkEntityPropertyEditor type="SegmentedEditor">
-            <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
-        </TKPropertyEditor>
-    </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="description" displayName="Description" index="2" required="true" hintText="description">
+            <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+        </TKEntityProperty>
 
 
 
-    <TKEntityProperty tkDataFormProperty name="assignee" displayName="Assignee" index="7">
-        <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="editorNeedsView($event)" (editorHasToApplyValue)="editorHasToApplyValue($event)"
-            (editorNeedsValue)="editorNeedsValue($event)"></TKCustomPropertyEditor>
-    </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="status" displayName="Status" index="4" [valuesProvider]="statusesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+        </TKEntityProperty>
 
-    <!-- start hidden fields -->
-    <TKEntityProperty tkDataFormProperty name="id" hidden="true">
-        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-    </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="estimate" displayName="Estimate" index="5">
+            <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
+        </TKEntityProperty>
 
-    <TKEntityProperty tkDataFormProperty name="tasks" hidden="true">
-        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-    </TKEntityProperty>
-    <TKEntityProperty tkDataFormProperty name="comments" hidden="true">
-        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-    </TKEntityProperty>
-    <TKEntityProperty tkDataFormProperty name="dateCreated" hidden="true">
-        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-    </TKEntityProperty>
-    <TKEntityProperty tkDataFormProperty name="dateModified" hidden="true">
-        <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-    </TKEntityProperty>
-    <!-- end hidden fields -->
-</RadDataForm>
-
-<Button (tap)="onDialogSaveTap($event)" class="btn" text="Save"></Button>
+        <TKEntityProperty tkDataFormProperty name="priority" displayName="Priority" index="6" [valuesProvider]="prioritiesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="SegmentedEditor">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+        </TKEntityProperty>
 
 
-<Label #btnTapHtml [text]="currentAssigneeName" (tap)="onAssigneeTap($event)"></Label>
+
+        <TKEntityProperty tkDataFormProperty name="assignee" displayName="Assignee" index="7">
+            <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="editorNeedsView($event)"></TKCustomPropertyEditor>
+
+        </TKEntityProperty>
+
+        <!-- start hidden fields -->
+        <TKEntityProperty tkDataFormProperty name="id" hidden="true">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="tasks" hidden="true">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="comments" hidden="true">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="dateCreated" hidden="true">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="dateModified" hidden="true">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
+        </TKEntityProperty>
+        <!-- end hidden fields -->
+    </RadDataForm>
+
+
+    <!--StackLayout orientation="horizontal" row="3">
+        <Image src="res://checkbox_checked" class="task-checkbox"></Image>
+        <Label [text]="currentItemType" (tap)="onItemTypeTap($event)"></Label>
+    </StackLayout-->
+</GridLayout>
