@@ -8,7 +8,7 @@ export class ButtonEditorHelper extends NSObject {
 
     public updateEditorValue(editorView, newValue) {
         this.buttonValue = newValue;
-        editorView.setTitleForState(this.buttonValue + " (tap to increase)", UIControlState.Normal);
+        editorView.setTitleForState(this.buttonValue, UIControlState.Normal);
     }
 
     public "handleTap:"(sender) {

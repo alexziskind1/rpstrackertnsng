@@ -128,8 +128,8 @@ export class PtItemDetailsComponent implements OnInit {
             });
     }
 
-    onSelectorTap2(): void {
 
+    onSelectorTap2(): void {
         const ptModalListModel: PtModalListModel<PtModalListDisplayItem> = {
             items: this.frameworks.map(f => {
                 return {
@@ -149,15 +149,12 @@ export class PtItemDetailsComponent implements OnInit {
             ptModalListModel,
             this.selectedValue
         );
-        //this.zone.run(() => {
+
         this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem>, string>(ctx)
             .then(result => {
                 this.selectedValue = result;
-                //this.itemSaved.emit(this.item);
                 this._buttonEditorHelper.updateEditorValue(this.natView, this.selectedValue);
             }).catch(error => console.error(error));
-        //});
-
     }
 
 
@@ -282,55 +279,61 @@ export class PtItemDetailsComponent implements OnInit {
 
     public editorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         if (androidApplication) {
-            this._buttonEditorHelper = new ButtonEditorHelper();
-            this._buttonEditorHelper.editor = args.object;
+            if (!this.viewConnected) {
+                this._buttonEditorHelper = new ButtonEditorHelper();
+                this._buttonEditorHelper.editor = args.object;
 
-            /*
-            var androidEditorView: android.widget.Button = new android.widget.Button(args.context);
-            var that = this;
-            androidEditorView.setOnClickListener(new android.view.View.OnClickListener({
-                onClick(view: android.view.View) {
-                    that.zone.run(() => {
-                        that.onSelectorTap2.apply(that);
+                /*
+                var androidEditorView: android.widget.Button = new android.widget.Button(args.context);
+                var that = this;
+                androidEditorView.setOnClickListener(new android.view.View.OnClickListener({
+                    onClick(view: android.view.View) {
+                        that.zone.run(() => {
+                            that.onSelectorTap2.apply(that);
+                        });
+                    }
+                }));
+                args.view = androidEditorView;
+                this.updateEditorValue(androidEditorView, this.selectedValue);
+                */
+
+                /*
+                if (this.viewConnected) {
+                    return;
+                }
+                const gridLayout = <GridLayout>(<Label>this.btnTapHtml.nativeElement).parent;
+                const gridChild = gridLayout.getChildAt(0);
+                const gridChildNative = gridChild.android;
+                gridLayout.removeChild(gridChild);
+                const that = this;
+                gridChildNative.setOnClickListener(new android.view.View.OnClickListener({
+                    onClick(view: android.view.View) {
+                        that.onSelectorTap2();
+                        //that.handleTap(view, args.object);
+                    }
+                }));
+    
+                args.view = gridChildNative;
+                this.viewConnected = true;
+                this.updateEditorValue(gridChildNative, this.selectedValue);
+                */
+                const newBtn = new Button();
+                newBtn._context = args.context;
+                newBtn.text = 'TAP';
+                this.natView = newBtn.createNativeView();
+
+                newBtn.on('tap', () => {
+                    this.zone.run(() => {
+                        this.onSelectorTap2.apply(this);
                     });
-                }
-            }));
-            args.view = androidEditorView;
-            this.updateEditorValue(androidEditorView, this.selectedValue);
-            */
-
-            /*
-            if (this.viewConnected) {
-                return;
-            }
-            const gridLayout = <GridLayout>(<Label>this.btnTapHtml.nativeElement).parent;
-            const gridChild = gridLayout.getChildAt(0);
-            const gridChildNative = gridChild.android;
-            gridLayout.removeChild(gridChild);
-            const that = this;
-            gridChildNative.setOnClickListener(new android.view.View.OnClickListener({
-                onClick(view: android.view.View) {
-                    that.onSelectorTap2();
-                    //that.handleTap(view, args.object);
-                }
-            }));
-
-            args.view = gridChildNative;
-            this.viewConnected = true;
-            this.updateEditorValue(gridChildNative, this.selectedValue);
-            */
-            const newBtn = new Button();
-            newBtn._context = args.context;
-            newBtn.text = 'TAP';
-            const nativeView = newBtn.createNativeView();
-
-            newBtn.on('tap', () => {
-                this.zone.run(() => {
-                    this.onSelectorTap2.apply(this);
                 });
-            });
-            args.view = nativeView;
-            this.updateEditorValue(nativeView, this.selectedValue);
+                args.view = this.natView;
+                //this.updateEditorValue(this.natView, this.selectedValue);
+            } else {
+                args.view = this.natView;
+            }
+
+            this._buttonEditorHelper.updateEditorValue(this.natView, this.selectedValue);
 
         } else {
             if (!this.viewConnected) {
@@ -414,17 +417,22 @@ export class PtItemDetailsComponent implements OnInit {
         //var a = 0;
     }
 
+    /*
     public updateEditorValue(editorView, value) {
         this._buttonEditorHelper.buttonValue = value;
         editorView.setText(this._buttonEditorHelper.buttonValue);
         //editorView.text = this._buttonEditorHelper.buttonValue;
     }
+    */
 
+    /*
     public handleTap(editorView, editor) {
         var newValue = this._buttonEditorHelper.buttonValue + 1;
         this.updateEditorValue(editorView, newValue);
         editor.notifyValueChanged();
     }
+    */
+
 
     convertFrom(dict: any) {
         /// return this._movies.filter((movie: Movie) => movie.id == id)[0].name;

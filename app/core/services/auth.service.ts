@@ -79,8 +79,8 @@ export class AuthService {
     }
 
     private loginInternal(loginModel: PtLoginModel) {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
+        //const headers = new Headers();
+        //headers.append('Content-Type', 'application/json');
 
         return this.http.post(
             this.loginUrl,
@@ -88,7 +88,7 @@ export class AuthService {
                 loginModel: loginModel,
                 grant_type: 'password'
             },
-            { headers: headers }
+            //{ headers: headers }
         )
             .map(response => response.json())
             .do(data => {

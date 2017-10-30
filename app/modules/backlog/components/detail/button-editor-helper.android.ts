@@ -7,5 +7,6 @@ export class ButtonEditorHelper {
 
     public updateEditorValue(editorView, newValue) {
         this.buttonValue = newValue;
+        editorView.setText(this.buttonValue);
     }
 }

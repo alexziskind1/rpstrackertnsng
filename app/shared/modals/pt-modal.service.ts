@@ -1,4 +1,4 @@
-import { Injectable, ViewContainerRef } from '@angular/core';
+import { Injectable, ViewContainerRef, Type } from '@angular/core';
 import { ModalDialogOptions, ModalDialogService } from 'nativescript-angular';
 import { TextInputModalComponent } from './text-input/text-input.modal.component';
 import { ListSelectorModalComponent } from './list-selector/list-selector.modal.component';
@@ -8,6 +8,12 @@ import { PtModalListDisplayItem } from '../models/ui/pt-modal-list-display-item.
 
 @Injectable()
 export class PtModalService {
+
+    private modalIsShowing = false;
+
+    public get isModalShowing() {
+        return this.modalIsShowing;
+    }
 
     constructor(
         private modalService: ModalDialogService
@@ -63,22 +69,41 @@ export class PtModalService {
     public createTextInputModal<T, R>(
         context: PtModalContext<T, R>
     ): Promise<R> {
-        const options: ModalDialogOptions = {
-            viewContainerRef: context.vcRef,
-            context: context,
-            fullscreen: true
-        };
-        return this.modalService.showModal(TextInputModalComponent, options);
+        return this.createModal<T, R>(TextInputModalComponent, context);
     }
 
     public createListSelectorModal<T, R>(
         context: PtModalContext<T, R>
     ): Promise<R> {
-        const options: ModalDialogOptions = {
-            viewContainerRef: context.vcRef,
-            context: context,
-            fullscreen: true
-        };
-        return this.modalService.showModal(ListSelectorModalComponent, options);
+        return this.createModal<T, R>(ListSelectorModalComponent, context);
+    }
+
+
+    private createModal<T, R>(
+        type: Type<any>,
+        context: PtModalContext<T, R>
+    ): Promise<R> {
+        if (this.modalIsShowing) {
+            return Promise.reject<R>('A modal dialog is already showing.');
+        }
+
+        return new Promise<R>((resolve, reject) => {
+            const options: ModalDialogOptions = {
+                viewContainerRef: context.vcRef,
+                context: context,
+                fullscreen: true
+            };
+            this.modalIsShowing = true;
+            this.modalService.showModal(type, options)
+                .then((result) => {
+                    resolve(result);
+                    this.modalIsShowing = false;
+                })
+                .catch((err) => {
+                    reject(err);
+                    this.modalIsShowing = false;
+                });
+
+        });
     }
 }
