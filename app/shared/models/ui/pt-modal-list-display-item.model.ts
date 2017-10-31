@@ -1,7 +1,7 @@
-export interface PtModalListDisplayItem {
+export interface PtModalListDisplayItem<T> {
     key: string;
     value: string;
     img: string;
     isSelected: boolean;
-    payload: any;
+    payload: T;
 }

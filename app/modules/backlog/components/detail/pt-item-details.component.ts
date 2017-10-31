@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone } from '@angular/core';
 
-import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/toPromise';
-
+import 'rxjs/add/operator/shareReplay';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 
 import { android as androidApplication } from 'application';
@@ -28,22 +28,9 @@ import { PT_ITEM_TYPE_DISPLAY_MAPPING, PT_ITEM_TYPES } from '../../../../shared/
 import { PtItemType } from '../../../../shared/models/domain/types';
 import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../shared/constants';
 import { ButtonEditorHelper } from './button-editor-helper';
-
-
-import { ModalDialogService, ModalDialogOptions } from 'nativescript-angular';
 import { MyListSelectorModalViewComponent } from './my-list-selector/my-list-selector-modal-view.component';
-import { Subscription } from 'rxjs/Subscription';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import 'rxjs/add/operator/shareReplay';
+import { PtItemDetailsEditFormModel } from '../../../../shared/models/forms';
 
-
-export const CAR_CLASS_LIST: Array<string> = [
-    "Mini",
-    "Economy",
-    "Compact",
-    "Standard",
-    "Luxury"
-];
 
 
 @Component({
@@ -64,9 +51,16 @@ export class PtItemDetailsComponent implements OnInit {
     @Output() usersRequested = new EventEmitter();
     @Output() itemSaved = new EventEmitter<PtItem>();
 
-    //private usersLocal: BehaviorSubject<PtUser[]> = new BehaviorSubject<PtUser[]>([]);
-    //private loadedUsers: PtUser[] = [];
+
+    private users: PtUser[] = [];
+
     private usersLocal$: Observable<PtUser[]>;
+
+    private assigneesSub: Subscription;
+
+    public itemForm: PtItemDetailsEditFormModel;
+
+    private reselectedAssignee: PtUser;
 
 
     @ViewChild('itemDetailsDataForm') itemDetailsDataForm: RadDataFormComponent;
@@ -76,38 +70,19 @@ export class PtItemDetailsComponent implements OnInit {
     public statusesProvider = PT_ITEM_STATUSES;
     public prioritiesProvider = PT_ITEM_PRIORITIES;
 
-    public carClassOptions = CAR_CLASS_LIST;
-
-    public carClass = 'Economy';
-
-    private _selectedValue = 'NativeScript';
-
-    public get selectedValue() {
-        return this._selectedValue;
-    }
-    public set selectedValue(val: string) {
-        this._selectedValue = val;
-    }
-    public frameworks = [
-        "NativeScript",
-        "Xamarin 2",
-        "Onsen UI",
-        "Ionic Framework",
-        "React Native"
-    ];
-
-
-    public assigneeConverter = this;
 
     public get currentItemType() {
         return this.item ? this.item.type : '';
     }
-    public get currentAssigneeName() {
+    /*public get currentAssigneeName() {
         return this.item ? (this.item.assignee ? this.item.assignee.fullName : 'unassigned') : '...';
     }
+    public get currentAssigneeAvatar() {
+        return this.item ? (this.item.assignee ? this.item.assignee.avatar : '') : '';
+    }
+    */
 
     constructor(
-        private modalService: ModalDialogService,
         private ptModalService: PtModalService,
         private vcRef: ViewContainerRef,
         private zone: NgZone
@@ -115,136 +90,70 @@ export class PtItemDetailsComponent implements OnInit {
 
     public ngOnInit() {
 
+        this.itemForm = {
+            title: this.item.title,
+            description: this.item.description,
+            typeStr: this.item.type,
+            statusStr: this.item.status,
+            estimate: this.item.estimate,
+            priorityStr: this.item.priority,
+            assigneeName: this.item.assignee ? this.item.assignee.fullName : 'unassigned' //this.ptUserToPtItemAssigneeFormFields(this.item.assignee)
+        };
+
         this.usersLocal$ = this.users$
             .filter(users => users.length > 0)
             .distinctUntilChanged((ua1, ua2) => ua1.length === ua2.length)
-            //.do(users => this.usersLocal.next(users)).subscribe();
             .shareReplay(1);
     }
 
 
-    onSelectorTap(): void {
-        const title = `Select  Framework`;
-        const selectedIndex = this.frameworks.indexOf(this.selectedValue);
-        const options: ModalDialogOptions = {
-            viewContainerRef: this.vcRef,
-            context: {
-                items: this.frameworks,
-                title,
-                selectedIndex
-            },
-            fullscreen: false
-        };
-
-        this.modalService.showModal(MyListSelectorModalViewComponent, options)
-            .then((selectedValue: string) => {
-                if (selectedValue) {
-                    this.selectedValue = selectedValue;
-                    //this.selectedValueChange.emit(this.selectedValue);
-                }
-            });
+    private ptUserToModalListDisplayItem(u: PtUser): PtModalListDisplayItem<PtUser> {
+        if (!u) {
+            return undefined;
+        } else {
+            const di: PtModalListDisplayItem<PtUser> = {
+                key: u.id.toString(),
+                value: u.fullName,
+                img: u.avatar,
+                isSelected: false,
+                payload: u
+            };
+            return di;
+        }
     }
 
-    private usersSub$: Subscription;
-
-    private openModal() {
-        console.log('opening modal');
-    }
-
-    private users: PtUser[] = [];
-
-    onSelectorTap2(): void {
-        this.usersSub$ = this.usersLocal$.subscribe((users) => {
+    public onSelectorTap2(): void {
+        this.assigneesSub = this.usersLocal$.subscribe((users) => {
             this.users = users;
-            const ptModalListModel: PtModalListModel<PtModalListDisplayItem> = {
-                items: users.map(u => {
-                    const di: PtModalListDisplayItem = {
-                        key: u.id.toString(),
-                        value: u.fullName,
-                        img: u.avatar,
-                        isSelected: false,
-                        payload: u
-                    };
-                    return di;
-                }),
-                selectedIndex: this.frameworks.indexOf(this.selectedValue)
+            const ptModalListModel: PtModalListModel<PtModalListDisplayItem<PtUser>> = {
+                items: users.map(this.ptUserToModalListDisplayItem),
+                selectedItem: this.item ? this.ptUserToModalListDisplayItem(this.item.assignee) : undefined
             };
 
-            const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem>, PtUser> = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem>, PtUser>(
+            const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser> = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(
                 this.vcRef,
                 'Select Assignee',
                 ptModalListModel,
                 this.item.assignee
             );
 
-            this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem>, PtUser>(ctx)
+            this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(ctx)
                 .then(result => {
-                    this.item.assignee = result;
-                    this._buttonEditorHelper.updateEditorValue(this.natView, this.currentAssigneeName);
-                    this.usersSub$.unsubscribe();
+                    //this.item.assignee = result;
+                    this.reselectedAssignee = result;
+                    this.itemForm.assigneeName = result.fullName;
+
+                    this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
+                    this.assigneesSub.unsubscribe();
                 }).catch(error => {
                     console.error(error);
-                    this.usersSub$.unsubscribe();
+                    this.assigneesSub.unsubscribe();
                 });
         });
 
         if (this.users.length === 0) {
             this.usersRequested.emit();
         }
-
-        /*
-        if (this.usersLocal.value.length === 0) {
-            console.log('loading');
-            this.usersLocal.subscribe((users) => {
-                console.log('loaded');
-                this.openModal();
-            });
-
-            this.usersRequested.emit();
-        } else {
-            this.openModal();
-        }*/
-
-
-
-        /*
-    this.usersSub$ = this.users$
-        .filter(users => users.length > 0)
-        .distinctUntilChanged((ua1, ua2) => ua1.length === ua2.length)
-        .subscribe((users) => {
-            const ptModalListModel: PtModalListModel<PtModalListDisplayItem> = {
-                items: users.map(u => {
-                    const di: PtModalListDisplayItem = {
-                        key: u.id.toString(),
-                        value: u.fullName,
-                        img: u.avatar,
-                        isSelected: false,
-                        payload: u
-                    };
-                    return di;
-                }),
-                selectedIndex: this.frameworks.indexOf(this.selectedValue)
-            };
-
-            const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem>, PtUser> = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem>, PtUser>(
-                this.vcRef,
-                'Select Assignee',
-                ptModalListModel,
-                this.item.assignee
-            );
-
-            this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem>, PtUser>(ctx)
-                .then(result => {
-                    this.item.assignee = result;
-                    this._buttonEditorHelper.updateEditorValue(this.natView, this.currentAssigneeName);
-                    this.usersSub$.unsubscribe();
-                }).catch(error => {
-                    console.error(error);
-                    this.usersSub$.unsubscribe();
-                });
-        });
-        */
-
 
 
         /*
@@ -282,9 +191,24 @@ export class PtItemDetailsComponent implements OnInit {
         this.itemDetailsDataForm.dataForm.validateAndCommitAll()
             .then(ok => {
                 if (ok) {
-                    this.itemSaved.emit(this.item);
+                    const updatedItem = this.getUpdatedItem();
+                    this.itemSaved.emit(updatedItem);
                 }
             })
+    }
+
+    private getUpdatedItem(): PtItem {
+        const updatedAssignee = this.reselectedAssignee ? this.reselectedAssignee : this.item.assignee;
+        const updatedItem = Object.assign({}, this.item, {
+            title: this.itemForm.title,
+            description: this.itemForm.description,
+            type: this.itemForm.typeStr,
+            status: this.itemForm.statusStr,
+            priority: this.itemForm.priorityStr,
+            estimate: this.itemForm.estimate,
+            assignee: updatedAssignee
+        });
+        return updatedItem;
     }
 
     public onTitleTap(args) {
@@ -316,92 +240,24 @@ export class PtItemDetailsComponent implements OnInit {
             }).catch(error => console.error(error));
     }
 
-    public onItemTypeTap(args) {
-        const ptModalListModel: PtModalListModel<PtModalListDisplayItem> = {
-            items: this.ptModalService.enumToModalListDisplayItemArray(ItemTypeEnum),
-            //items$: Observable.of(this.ptModalService.enumToModalListDisplayItemArray(ItemTypeEnum)),
-            selectedIndex: 0
-            /*
-            loadItemsTrigger: () => {
-                return Promise.resolve();
-            }*/
-        };
 
-        const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem>, PtItemType> = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem>, PtItemType>(
-            this.vcRef,
-            'Edit item type',
-            ptModalListModel,
-            this.item.type
-        );
-        this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem>, PtItemType>(ctx)
-            .then(result => {
-                //this.item.type = ItemTypeEnum[ItemTypeEnum[result]];
-                this.item.type = result;
-                this.itemSaved.emit(this.item);
-            }).catch(error => console.error(error));
-    }
 
     private newView: Label;
     private _buttonEditorHelper: ButtonEditorHelper;
     private iosEditorView: StackLayout;
     private iosEditorBtn: Button;
 
-    private userToModalDisplayItem(user: PtUser) {
-
-    }
-
-    public onAssigneeTap(args) {
-        //this.users$.subscribe(users => {
-        //    console.log('users loaded');
-        //});
-
-
-        const ptModalListModel: PtModalListModel<PtModalListDisplayItem> = {
-            //items: this.ptModalService.enumToModalListDisplayItemArray(ItemTypeEnum),
-            //selectedIndex: enumValueIndex(this.item.type, ItemTypeEnum),
-            //items: Observable.of(this.ptModalService.enumToModalListDisplayItemArray(ItemTypeEnum)),
-            items: [],
-            selectedIndex: 0,
-            /*
-            items$: this.users$.map((users) => {
-                return users.map(u => {
-                    const di: PtModalListDisplayItem = {
-                        key: u.id.toString(),
-                        value: u.fullName,
-                        img: u.avatar,
-                        isSelected: false,
-                        payload: u
-                    };
-                    return di;
-                });
-            }),
-            loadItemsTrigger: () => {
-                return Promise.resolve(this.usersRequested.emit());
-            }*/
-        };
-
-        const ctx = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem>, PtUser>(
-            this.vcRef,
-            'Edit item assignee d',
-            ptModalListModel,
-            this.item.assignee
-        );
-        this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem>, PtUser>(ctx)
-            .then(result => {
-                this.item.assignee = result;
-                //this.item.type = <PtItemType>result;
-                this.itemSaved.emit(this.item);
-            }).catch(error => console.error(error));
-    }
-
     private viewConnected = false;
     private natView;
 
     public editorNeedsView(args: DataFormCustomPropertyEditorEventData) {
+        const newBtn = new Button();
+        this._buttonEditorHelper = new ButtonEditorHelper();
+        this._buttonEditorHelper.editor = args.object;
+
         if (androidApplication) {
             if (!this.viewConnected) {
-                this._buttonEditorHelper = new ButtonEditorHelper();
-                this._buttonEditorHelper.editor = args.object;
+
 
                 /*
                 var androidEditorView: android.widget.Button = new android.widget.Button(args.context);
@@ -437,9 +293,9 @@ export class PtItemDetailsComponent implements OnInit {
                 this.viewConnected = true;
                 this.updateEditorValue(gridChildNative, this.selectedValue);
                 */
-                const newBtn = new Button();
+
                 newBtn._context = args.context;
-                newBtn.text = 'TAP';
+
                 this.natView = newBtn.createNativeView();
 
                 newBtn.on('tap', () => {
@@ -447,27 +303,22 @@ export class PtItemDetailsComponent implements OnInit {
                         this.onSelectorTap2.apply(this);
                     });
                 });
-                args.view = this.natView;
-                //this.updateEditorValue(this.natView, this.selectedValue);
-            } else {
-                args.view = this.natView;
+                this.viewConnected = true;
             }
 
-            this._buttonEditorHelper.updateEditorValue(this.natView, this.currentAssigneeName);
+            args.view = this.natView;
+            this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
 
         } else {
             if (!this.viewConnected) {
-                this._buttonEditorHelper = new ButtonEditorHelper();
-                this._buttonEditorHelper.editor = args.object;
                 this._buttonEditorHelper.iosTapHandler = () => {
                     this.zone.run(() => {
                         this.onSelectorTap2.apply(this);
                     });
                 };
 
-                const newBtn = new Button();
+
                 //newBtn._context = args.context;
-                newBtn.text = 'TAP';
                 //const nativeView = newBtn.createNativeView();
 
                 /*
@@ -481,17 +332,10 @@ export class PtItemDetailsComponent implements OnInit {
                 this.natView = newBtn.nativeView;
 
                 this.natView.addTargetActionForControlEvents(this._buttonEditorHelper, "handleTap:", UIControlEvents.TouchUpInside);
-
-                args.view = this.natView;
-
-                //this.updateEditorValue(nativeView, this.selectedValue);
-
                 this.viewConnected = true;
-            } else {
-                args.view = this.natView;
             }
-
-            this._buttonEditorHelper.updateEditorValue(this.natView, this.currentAssigneeName);
+            args.view = this.natView;
+            this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
             //var iosEditorView = UIButton.buttonWithType(UIButtonType.System);
             //iosEditorView.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left;
             //iosEditorView.addTargetActionForControlEvents(this._buttonEditorHelper, "handleTap:", UIControlEvents.TouchUpInside);
@@ -517,11 +361,6 @@ export class PtItemDetailsComponent implements OnInit {
             //args.view = this.iosEditorBtn.ios;
             //args.view = this.btnTapHtml.nativeElement.ios;
         }
-
-        //this.newView = new Label();
-        //this.newView.text = 'hi there';
-        //args.view = this.newView;
-
     }
 
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
@@ -536,34 +375,4 @@ export class PtItemDetailsComponent implements OnInit {
         args.value = this._buttonEditorHelper.buttonValue;
         //var a = 0;
     }
-
-    /*
-    public updateEditorValue(editorView, value) {
-        this._buttonEditorHelper.buttonValue = value;
-        editorView.setText(this._buttonEditorHelper.buttonValue);
-        //editorView.text = this._buttonEditorHelper.buttonValue;
-    }
-    */
-
-    /*
-    public handleTap(editorView, editor) {
-        var newValue = this._buttonEditorHelper.buttonValue + 1;
-        this.updateEditorValue(editorView, newValue);
-        editor.notifyValueChanged();
-    }
-    */
-
-
-    convertFrom(dict: any) {
-        /// return this._movies.filter((movie: Movie) => movie.id == id)[0].name;
-        return this.item.assignee.fullName;
-
-    }
-
-    convertTo(name: string) {
-        // return this._movies.filter((movie: Movie) => movie.name == name)[0].id;
-        return this.item.assignee;
-    }
 }
-
-

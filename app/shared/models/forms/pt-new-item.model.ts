@@ -1,4 +1,4 @@
-import { PtItemTypeImpl } from './ui';
+import { PtItemTypeImpl } from '../ui';
 
 
 export interface PtNewItem {

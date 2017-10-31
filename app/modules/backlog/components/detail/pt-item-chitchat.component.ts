@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { PtItem, PtComment } from '../../../../shared/models/domain';
-import { PtNewComment } from '../../../../shared/models/index';
+import { PtNewComment } from '../../../../shared/models/forms';
 
 @Component({
     moduleId: module.id,

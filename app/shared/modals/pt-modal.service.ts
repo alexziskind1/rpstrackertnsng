@@ -19,10 +19,10 @@ export class PtModalService {
         private modalService: ModalDialogService
     ) { }
 
-    public enumToModalListDisplayItemArray(theEnum): PtModalListDisplayItem[] {
-        let retArray: PtModalListDisplayItem[] = [];
-        for (var enumMember in theEnum) {
-            const di: PtModalListDisplayItem = {
+    public enumToModalListDisplayItemArray<T>(theEnum): PtModalListDisplayItem<T | string>[] {
+        let retArray: PtModalListDisplayItem<T | string>[] = [];
+        for (let enumMember in theEnum) {
+            const di: PtModalListDisplayItem<T | string> = {
                 key: enumMember,
                 value: theEnum[enumMember],
                 img: '',

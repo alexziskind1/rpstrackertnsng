@@ -10,7 +10,10 @@
 
     <ListView row="1" [items]="items" (itemTap)="onItemSelected($event)" class="list-modal-list">
         <ng-template let-item="item">
-            <Label [text]="item.value"></Label>
+            <StackLayout orientation="horizontal">
+                <Image width="30" height="30" [src]="item.img"></Image>
+                <Label [text]="item.value"></Label>
+            </StackLayout>
         </ng-template>
     </ListView>
 

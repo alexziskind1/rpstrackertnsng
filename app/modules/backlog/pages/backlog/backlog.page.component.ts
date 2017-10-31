@@ -11,7 +11,7 @@ import { BacklogService } from '../../backlog.service';
 import { Store } from '../../../../core/app-store';
 import { PtItem } from '../../../../shared/models/domain';
 import { PresetType } from '../../../../shared/models/ui/types';
-import { PtNewItem } from '../../../../shared/models';
+import { PtNewItem } from '../../../../shared/models/forms';
 
 
 

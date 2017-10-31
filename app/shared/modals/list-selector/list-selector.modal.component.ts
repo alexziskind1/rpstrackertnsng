@@ -19,11 +19,11 @@ import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-it
     templateUrl: 'list-selector.modal.component.html',
     styleUrls: ['list-selector.modal.component.css']
 })
-export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem>, number> implements OnInit, OnDestroy {
-    public items: PtModalListDisplayItem[] = [];
+export class ListSelectorModalComponent<T> extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem<T>>, PtModalListDisplayItem<T>> implements OnInit, OnDestroy {
+    public items: PtModalListDisplayItem<T>[] = [];
     //public items$: BehaviorSubject<PtModalListDisplayItem[]> = new BehaviorSubject([]);
-    private originalSelectedIndex: number = 0;
-    private selectedIndex: number = 0;
+    private originalSelectedItem: PtModalListDisplayItem<T>;
+    private selectedItem: PtModalListDisplayItem<T>;
     //private itemsSub$: Subscription;
 
 
@@ -33,9 +33,9 @@ export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalList
         zone: NgZone
     ) {
         super(params, page);
-        if (this.payload.selectedIndex) {
-            this.originalSelectedIndex = this.payload.selectedIndex;
-            this.selectedIndex = this.payload.selectedIndex;
+        if (this.payload.selectedItem) {
+            this.originalSelectedItem = this.payload.selectedItem;
+            this.selectedItem = this.payload.selectedItem;
         }
         this.items = this.payload.items;
         /*
@@ -83,13 +83,13 @@ export class ListSelectorModalComponent extends PtBaseModalComponent<PtModalList
     }
 
     public onItemSelected(args): void {
-        const oldSelectedItem = this.items[this.selectedIndex];
+        //const oldSelectedItem = this.items[this.selectedIndex];
         //const oldSelectedItem = this.items$.value[this.selectedIndex];
-        oldSelectedItem.isSelected = false;
+        //oldSelectedItem.isSelected = false;
 
         const newSelectedItem = this.items[args.index];
         newSelectedItem.isSelected = true;
-        this.selectedIndex = args.index;
+        //this.selectedIndex = args.index;
 
         this.closeCallback(newSelectedItem.payload);
     }

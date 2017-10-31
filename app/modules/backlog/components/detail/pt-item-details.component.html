@@ -1,8 +1,9 @@
-<GridLayout rows="20, 30, *">
+<GridLayout rows="50, 30, *">
 
     <StackLayout row="0">
         <Label [text]="selectedValue" row="0" (tap)="onSelectorTap2()"></Label>
         <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save" row=""></Button>
+        <Image width="30" height="30" [src]="item.assignee.avatar"></Image>
     </StackLayout>
 
     <GridLayout row="1">
@@ -10,7 +11,7 @@
     </GridLayout>
 
 
-    <RadDataForm #itemDetailsDataForm [source]="item" commitMode="Manual" row="2">
+    <RadDataForm #itemDetailsDataForm [source]="itemForm" commitMode="Manual" row="2">
 
         <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
             <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
@@ -27,7 +28,7 @@
 
 
 
-        <TKEntityProperty tkDataFormProperty name="status" displayName="Status" index="4" [valuesProvider]="statusesProvider">
+        <TKEntityProperty tkDataFormProperty name="statusStr" displayName="Status" index="4" [valuesProvider]="statusesProvider">
             <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
         </TKEntityProperty>
 
@@ -35,7 +36,7 @@
             <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
         </TKEntityProperty>
 
-        <TKEntityProperty tkDataFormProperty name="priority" displayName="Priority" index="6" [valuesProvider]="prioritiesProvider">
+        <TKEntityProperty tkDataFormProperty name="priorityStr" displayName="Priority" index="6" [valuesProvider]="prioritiesProvider">
             <TKPropertyEditor tkEntityPropertyEditor type="SegmentedEditor">
                 <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
             </TKPropertyEditor>
@@ -43,29 +44,10 @@
 
 
 
-        <TKEntityProperty tkDataFormProperty name="assignee" displayName="Assignee" index="7">
+        <TKEntityProperty tkDataFormProperty name="assigneeName" displayName="Assignee" index="7">
             <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="editorNeedsView($event)"></TKCustomPropertyEditor>
-
         </TKEntityProperty>
 
-        <!-- start hidden fields -->
-        <TKEntityProperty tkDataFormProperty name="id" hidden="true">
-            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-        </TKEntityProperty>
-
-        <TKEntityProperty tkDataFormProperty name="tasks" hidden="true">
-            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-        </TKEntityProperty>
-        <TKEntityProperty tkDataFormProperty name="comments" hidden="true">
-            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-        </TKEntityProperty>
-        <TKEntityProperty tkDataFormProperty name="dateCreated" hidden="true">
-            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-        </TKEntityProperty>
-        <TKEntityProperty tkDataFormProperty name="dateModified" hidden="true">
-            <TKPropertyEditor tkEntityPropertyEditor type="Text"></TKPropertyEditor>
-        </TKEntityProperty>
-        <!-- end hidden fields -->
     </RadDataForm>
 
 

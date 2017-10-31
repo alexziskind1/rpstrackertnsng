@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PtNewItem } from '../../../../shared/models';
+import { PtNewItem } from '../../../../shared/models/forms';
 
 
 @Component({
