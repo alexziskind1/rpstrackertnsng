@@ -68,7 +68,6 @@ export class BacklogRepository {
         successHandler: (data: PtItem[]) => void
     ) {
         this.http.get(this.getFilteredBacklogUrl(currentPreset, currentUserId))
-            //.map(res => res.json())
             .catch(errorHandler)
             .do((ptItems: PtItem[]) => {
                 ptItems.forEach(i => {
@@ -85,7 +84,6 @@ export class BacklogRepository {
         successHandler: (ptItem: PtItem) => void
     ) {
         this.http.get(this.getPtItemUrl(ptItemId))
-            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -99,7 +97,7 @@ export class BacklogRepository {
             this.postPtItemUrl(),
             { item: item }
         )
-            //.map(res => res.json())
+
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -113,7 +111,6 @@ export class BacklogRepository {
             this.putPtItemUrl(item.id),
             { item: item }
         )
-            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -128,7 +125,6 @@ export class BacklogRepository {
             this.postPtTaskUrl(),
             { task: task, itemId: ptItemId }
         )
-            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -143,7 +139,6 @@ export class BacklogRepository {
             this.putPtTaskUrl(task.id),
             { task: task, itemId: ptItemId }
         )
-            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -158,7 +153,6 @@ export class BacklogRepository {
             this.postPtCommentUrl(),
             { comment: comment, itemId: ptItemId }
         )
-            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -169,7 +163,6 @@ export class BacklogRepository {
         successHandler: () => void
     ) {
         this.http.delete(this.deletePtCommentUrl(ptCommentId))
-            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
