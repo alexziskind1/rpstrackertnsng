@@ -1,19 +1,17 @@
+import { Injectable, Inject, NgZone } from '@angular/core';
 import * as _ from 'lodash';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 import { Observable, ObservableInput } from 'rxjs/Observable';
 
-
-import { Injectable, Inject, NgZone } from '@angular/core';
-import { AppConfig, APP_CONFIG } from '../../app-config.module';
-import { Store } from '../../core/app-store';
-import { PtItem, PtUser, PtTask, PtComment } from '../../shared/models/domain';
-import { ErrorHandlerService } from '../../core/services/error-handler.service';
-import { PtNewItem, PtNewTask, PtNewComment } from '../../shared/models/forms';
-import { PriorityEnum, StatusEnum } from '../../shared/models/domain/enums';
-import { BacklogRepository } from './backlog.repository';
-
+import { AppConfig, APP_CONFIG } from '../../../app-config.module';
+import { Store } from '../../../core/app-store';
+import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { PtItem, PtUser, PtTask, PtComment } from '../../../shared/models/domain';
+import { PtNewItem, PtNewTask, PtNewComment } from '../../../shared/models/forms';
+import { PriorityEnum, StatusEnum } from '../../../shared/models/domain/enums';
+import { BacklogRepository } from '../repositories/backlog.repository';
 
 
 @Injectable()

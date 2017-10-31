@@ -1,8 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http, RequestOptionsArgs, Headers } from '@angular/http';
-
-
-//import { NSHttp as Http } from 'nativescript-angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -49,7 +46,7 @@ export class AuthService {
 
     constructor(
         @Inject(APP_CONFIG) private config: AppConfig,
-        private http: Http,
+        private http: HttpClient,
         private store: Store,
         private storageService: StorageService,
         private errorHandlerService: ErrorHandlerService
@@ -90,8 +87,8 @@ export class AuthService {
             },
             //{ headers: headers }
         )
-            .map(response => response.json())
-            .do(data => {
+            // .map(response => response.json())
+            .do((data: { authToken: PtAuthToken, user: PtUser }) => {
                 this.token = data.authToken;
                 this.currentUser = data.user;
                 //this.store.set<PtUser>('currentUser', data.user);
@@ -101,15 +98,13 @@ export class AuthService {
 
     private registerInternal(registerModel: PtRegisterModel) {
         const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
 
         return this.http.post(
             this.registerUrl,
-            { registerModel: registerModel },
-            { headers: headers }
+            { registerModel: registerModel }
         )
-            .map(response => response.json())
-            .do(data => {
+            //  .map(response => response.json())
+            .do((data: { authToken: PtAuthToken, user: PtUser }) => {
                 this.token = data.authToken;
                 this.currentUser = data.user;
                 //this.store.set<PtUser>('currentUser', data.user);

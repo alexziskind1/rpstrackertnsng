@@ -1,4 +1,5 @@
 import { NgModule, Optional, SkipSelf, Inject } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
@@ -18,6 +19,7 @@ import {
 
 @NgModule({
     imports: [
+        HttpClientModule,
         NativeScriptModule,
         NativeScriptHttpModule
     ],

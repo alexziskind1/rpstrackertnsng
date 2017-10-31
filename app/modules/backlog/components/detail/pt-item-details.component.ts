@@ -28,7 +28,6 @@ import { PT_ITEM_TYPE_DISPLAY_MAPPING, PT_ITEM_TYPES } from '../../../../shared/
 import { PtItemType } from '../../../../shared/models/domain/types';
 import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../shared/constants';
 import { ButtonEditorHelper } from './button-editor-helper';
-import { MyListSelectorModalViewComponent } from './my-list-selector/my-list-selector-modal-view.component';
 import { PtItemDetailsEditFormModel } from '../../../../shared/models/forms';
 
 

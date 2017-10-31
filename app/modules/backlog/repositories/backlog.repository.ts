@@ -1,11 +1,11 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
-import { APP_CONFIG, AppConfig } from '../../app-config.module';
-import { PtTask, PtItem, PtComment } from '../../shared/models/domain';
-import { PresetType } from '../../shared/models/ui/types';
+import { APP_CONFIG, AppConfig } from '../../../app-config.module';
+import { PtTask, PtItem, PtComment } from '../../../shared/models/domain';
+import { PresetType } from '../../../shared/models/ui/types';
 
 
 @Injectable()
@@ -13,7 +13,7 @@ export class BacklogRepository {
 
     constructor(
         @Inject(APP_CONFIG) private config: AppConfig,
-        private http: Http
+        private http: HttpClient
     ) { }
 
     private getFilteredBacklogUrl(currentPreset: PresetType, currentUserId?: number) {
@@ -68,7 +68,7 @@ export class BacklogRepository {
         successHandler: (data: PtItem[]) => void
     ) {
         this.http.get(this.getFilteredBacklogUrl(currentPreset, currentUserId))
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .do((ptItems: PtItem[]) => {
                 ptItems.forEach(i => {
@@ -85,7 +85,7 @@ export class BacklogRepository {
         successHandler: (ptItem: PtItem) => void
     ) {
         this.http.get(this.getPtItemUrl(ptItemId))
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -99,7 +99,7 @@ export class BacklogRepository {
             this.postPtItemUrl(),
             { item: item }
         )
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -113,7 +113,7 @@ export class BacklogRepository {
             this.putPtItemUrl(item.id),
             { item: item }
         )
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -128,7 +128,7 @@ export class BacklogRepository {
             this.postPtTaskUrl(),
             { task: task, itemId: ptItemId }
         )
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -143,7 +143,7 @@ export class BacklogRepository {
             this.putPtTaskUrl(task.id),
             { task: task, itemId: ptItemId }
         )
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -158,7 +158,7 @@ export class BacklogRepository {
             this.postPtCommentUrl(),
             { comment: comment, itemId: ptItemId }
         )
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }
@@ -169,7 +169,7 @@ export class BacklogRepository {
         successHandler: () => void
     ) {
         this.http.delete(this.deletePtCommentUrl(ptCommentId))
-            .map(res => res.json())
+            //.map(res => res.json())
             .catch(errorHandler)
             .subscribe(successHandler);
     }

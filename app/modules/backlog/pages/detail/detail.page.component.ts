@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { PtItem, PtTask, PtUser } from '../../../../shared/models/domain';
-import { BacklogService } from '../../backlog.service';
+import { BacklogService } from '../../services/backlog.service';
 import { PtUserService } from '../../../../core/services';
 import { Store } from '../../../../core/app-store';
 import { PtNewTask, PtNewComment } from '../../../../shared/models/forms';

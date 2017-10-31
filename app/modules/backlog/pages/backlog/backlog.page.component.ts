@@ -7,7 +7,7 @@ import { RadSideDrawerComponent, SideDrawerType } from "nativescript-pro-ui/side
 import { RadSideDrawer, SideDrawerLocation } from 'nativescript-pro-ui/sidedrawer';
 
 import { NavigationService } from '../../../../core/services';
-import { BacklogService } from '../../backlog.service';
+import { BacklogService } from '../../services/backlog.service';
 import { Store } from '../../../../core/app-store';
 import { PtItem } from '../../../../shared/models/domain';
 import { PresetType } from '../../../../shared/models/ui/types';
