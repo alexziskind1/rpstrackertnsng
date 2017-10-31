@@ -66,6 +66,6 @@ export class AuthPageComponent implements OnInit {
 
     private logout() {
         this.authService.logout();
-        this.navigationService.navigate(['/auth', 'login']);
+        this.navigationService.navigate(['/auth', 'login'], { clearHistory: true });
     }
 }

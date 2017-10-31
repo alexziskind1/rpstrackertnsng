@@ -1,5 +1,5 @@
 import { NgModule, Optional, SkipSelf, Inject } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
@@ -9,12 +9,14 @@ import { Store } from '../core/app-store';
 
 import {
     AuthService,
+    AuthTokenService,
     ErrorHandlerService,
     LoggerService,
     NavigationService,
     PtUserService,
     StorageNsService,
     StorageWebService,
+    PtApiHttpInterceptor,
 } from '../core/services';
 
 @NgModule({
@@ -25,13 +27,15 @@ import {
     ],
     providers: [
         AuthService,
+        AuthTokenService,
         PtUserService,
         ErrorHandlerService,
         LoggerService,
         NavigationService,
         StorageNsService,
         StorageWebService,
-        Store
+        Store,
+        { provide: HTTP_INTERCEPTORS, useClass: PtApiHttpInterceptor, multi: true }
     ]
 })
 export class CoreModule {

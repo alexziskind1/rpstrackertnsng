@@ -47,8 +47,7 @@ export function createTranslateLoader(http: Http) {
         AppConfigModule,
         CoreModule,
         AuthModule,
-        BacklogModule,
-
+        BacklogModule
     ],
     declarations: [
         AppComponent

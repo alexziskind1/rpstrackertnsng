@@ -13,8 +13,10 @@ import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../shared/models/
 import { Store } from '../app-store';
 import { AppConfig, APP_CONFIG } from '../../app-config.module';
 import { ErrorHandlerService } from './error-handler.service';
+import { AuthTokenService } from './auth-token.service';
 
-const AUTH_TOKEN_KEY = 'AUTH_TOKEN_KEY';
+
+
 const CURRENT_USER_KEY = 'CURRENT_USER_KEY';
 
 @Injectable()
@@ -23,13 +25,6 @@ export class AuthService {
     private get loginUrl() { return `${this.config.apiEndpoint}/auth`; }
     private get registerUrl() { return `${this.config.apiEndpoint}/register`; }
 
-    get token(): PtAuthToken {
-        return this.storageService.getItem<PtAuthToken>(AUTH_TOKEN_KEY);
-    }
-
-    set token(authToken: PtAuthToken) {
-        this.storageService.setItem<PtAuthToken>(AUTH_TOKEN_KEY, authToken);
-    }
 
     get currentUser(): PtUser {
         const user = this.storageService.getItem<PtUser>(CURRENT_USER_KEY);
@@ -48,12 +43,13 @@ export class AuthService {
         @Inject(APP_CONFIG) private config: AppConfig,
         private http: HttpClient,
         private store: Store,
+        private authTokenService: AuthTokenService,
         private storageService: StorageService,
         private errorHandlerService: ErrorHandlerService
     ) { }
 
     public isLoggedIn(): boolean {
-        const hasToken = !!this.token;
+        const hasToken = !!this.authTokenService.token;
         const hasCurrentUser = !!this.currentUser;
         return hasToken && hasCurrentUser;
     }
@@ -71,8 +67,9 @@ export class AuthService {
     }
 
     public logout() {
-        this.storageService.setItem(AUTH_TOKEN_KEY, undefined);
-        this.storageService.setItem(CURRENT_USER_KEY, undefined);
+        this.authTokenService.token = { access_token: '', dateExpires: new Date() };
+        //this.storageService.setItem(AUTH_TOKEN_KEY, '');
+        this.storageService.setItem(CURRENT_USER_KEY, '');
     }
 
     private loginInternal(loginModel: PtLoginModel) {
@@ -89,7 +86,7 @@ export class AuthService {
         )
             // .map(response => response.json())
             .do((data: { authToken: PtAuthToken, user: PtUser }) => {
-                this.token = data.authToken;
+                this.authTokenService.token = data.authToken;
                 this.currentUser = data.user;
                 //this.store.set<PtUser>('currentUser', data.user);
             })
@@ -105,7 +102,7 @@ export class AuthService {
         )
             //  .map(response => response.json())
             .do((data: { authToken: PtAuthToken, user: PtUser }) => {
-                this.token = data.authToken;
+                this.authTokenService.token = data.authToken;
                 this.currentUser = data.user;
                 //this.store.set<PtUser>('currentUser', data.user);
             })
