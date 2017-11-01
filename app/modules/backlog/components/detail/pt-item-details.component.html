@@ -26,7 +26,9 @@
             </TKPropertyEditor>
         </TKEntityProperty>
 
-
+        <TKEntityProperty tkDataFormProperty name="typeStr" displayName="Type" index="3" [valuesProvider]="itemTypesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+        </TKEntityProperty>
 
         <TKEntityProperty tkDataFormProperty name="statusStr" displayName="Status" index="4" [valuesProvider]="statusesProvider">
             <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
@@ -42,17 +44,9 @@
             </TKPropertyEditor>
         </TKEntityProperty>
 
-
-
         <TKEntityProperty tkDataFormProperty name="assigneeName" displayName="Assignee" index="7">
             <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="editorNeedsView($event)"></TKCustomPropertyEditor>
         </TKEntityProperty>
-
     </RadDataForm>
 
-
-    <!--StackLayout orientation="horizontal" row="3">
-        <Image src="res://checkbox_checked" class="task-checkbox"></Image>
-        <Label [text]="currentItemType" (tap)="onItemTypeTap($event)"></Label>
-    </StackLayout-->
 </GridLayout>

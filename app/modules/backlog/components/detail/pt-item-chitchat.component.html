@@ -1,1 +1,12 @@
-<Label text="chitchat"></Label>
+<Label text="Comments"></Label>
+
+<StackLayout>
+    <TextField [(ngModel)]="newCommentText" hint="Enter new comment..."></TextField>
+    <Button (tap)="onAddTapped($event)" text="add"></Button>
+</StackLayout>
+
+
+<StackLayout *ngFor="let comment of comments" orientation="horizontal">
+    <Image width="30" height="30" [src]="comment.user.avatar"></Image>
+    <Label [text]="comment.title"></Label>
+</StackLayout>

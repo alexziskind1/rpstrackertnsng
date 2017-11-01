@@ -45,13 +45,10 @@ export class BacklogService {
             this.errorHandlerService.handleHttpError,
             (ptItems: PtItem[]) => {
 
-                ptItems.forEach(i => this.setUserAvatarUrl(i.assignee));
-
-                /*
                 ptItems.forEach(i => {
-                    i.assignee.avatar = `${this.config.apiEndpoint}/photo/${i.assignee.id}`;
+                    this.setUserAvatarUrl(i.assignee);
+                    i.comments.forEach(c => this.setUserAvatarUrl(c.user));
                 });
-                */
 
                 this.zone.run(() => {
                     this.store.set('backlogItems', ptItems);
@@ -71,6 +68,7 @@ export class BacklogService {
             (ptItem: PtItem) => {
 
                 this.setUserAvatarUrl(ptItem.assignee);
+                ptItem.comments.forEach(c => this.setUserAvatarUrl(c.user));
 
                 this.zone.run(() => {
                     this.store.set('currentSelectedItem', ptItem);
