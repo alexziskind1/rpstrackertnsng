@@ -77,7 +77,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
     }
 
     public selectListItem(item: PtItem) {
-        this.navigationService.navigate(['/detail', item.id]);
+        this.navigationService.navigate(['detail', item.id]);
     }
 
     public onAddTap(args) {

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
@@ -41,7 +41,7 @@ export class AuthService {
 
     constructor(
         @Inject(APP_CONFIG) private config: AppConfig,
-        private http: HttpClient,
+        private http: Http,
         private store: Store,
         private authTokenService: AuthTokenService,
         private storageService: StorageService,
@@ -73,18 +73,14 @@ export class AuthService {
     }
 
     private loginInternal(loginModel: PtLoginModel) {
-        //const headers = new Headers();
-        //headers.append('Content-Type', 'application/json');
-
         return this.http.post(
             this.loginUrl,
             {
                 loginModel: loginModel,
                 grant_type: 'password'
-            },
-            //{ headers: headers }
+            }
         )
-            // .map(response => response.json())
+            .map(response => response.json())
             .do((data: { authToken: PtAuthToken, user: PtUser }) => {
                 this.authTokenService.token = data.authToken;
                 this.currentUser = data.user;
@@ -100,7 +96,7 @@ export class AuthService {
             this.registerUrl,
             { registerModel: registerModel }
         )
-            //  .map(response => response.json())
+            .map(response => response.json())
             .do((data: { authToken: PtAuthToken, user: PtUser }) => {
                 this.authTokenService.token = data.authToken;
                 this.currentUser = data.user;

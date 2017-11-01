@@ -18,6 +18,6 @@ export class MenuComponent implements OnInit {
     public ngOnInit() { }
 
     public onSelectPresetTap(preset: PresetType) {
-        this.navigationService.navigate(['/backlog', preset]);
+        this.navigationService.navigate(['backlog', preset]);
     }
 }

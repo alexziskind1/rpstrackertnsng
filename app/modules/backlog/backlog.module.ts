@@ -1,5 +1,4 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
@@ -23,16 +22,17 @@ import { SharedModule } from '../../shared/shared.module';
 import { NewItemFormComponent } from './components/new-item-form/new-item-form.component';
 import { BacklogRepository } from './repositories/backlog.repository';
 import { NewItemModalComponent } from './modals/new-item/new-item.modal.component';
+import { BacklogRoutingModule } from './backlog.routing';
 
 
 @NgModule({
     imports: [
-        HttpClientModule,
         CommonModule,
         NativeScriptModule,
         NativeScriptFormsModule,
         NativeScriptUISideDrawerModule,
         NativeScriptUIDataFormModule,
+        BacklogRoutingModule,
         SharedModule
     ],
     exports: [],

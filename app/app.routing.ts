@@ -10,34 +10,11 @@ import { BacklogPageComponent } from './modules/backlog/pages/backlog/backlog.pa
 import { DetailPageComponent } from './modules/backlog/pages/detail/detail.page.component';
 
 
-export const authProviders = [
-    AuthGuard
-];
-
 const routes: Routes = [
-    {
-        path: '',
-        redirectTo: '/backlog/open',
-        pathMatch: 'full'
-    },
-    {
-        path: 'auth/:action',
-        component: AuthPageComponent
-    },
-    {
-        path: 'backlog',
-        redirectTo: 'backlog/open',
-        pathMatch: 'full'
-    },
-    {
-        path: 'backlog/:preset',
-        component: BacklogPageComponent,
-        canActivate: [AuthGuard]
-    },
-    {
-        path: 'detail/:id',
-        component: DetailPageComponent
-    }
+    { path: '', redirectTo: 'backlog/open', pathMatch: 'full' },
+    { path: 'backlog', redirectTo: 'backlog/open', pathMatch: 'full' },
+    { path: "auth", loadChildren: "./modules/auth/auth.module#AuthModule" },
+    { path: "backlog", loadChildren: "./modules/backlog/backlog.module#BacklogModule" }
 ];
 
 @NgModule({

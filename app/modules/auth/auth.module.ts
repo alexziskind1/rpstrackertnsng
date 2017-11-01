@@ -10,13 +10,18 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthService } from '../../core/services/auth.service';
-import { authProviders } from '../../app.routing';
+//import { authProviders } from '../../app.routing';
 
 import { AuthPageComponent } from './pages/auth/auth.page.component';
 import { LoginFormComponent } from './components/login-form.component';
 import { RegisterFormComponent } from './components/register-form.component';
 import { Store } from '../../core/app-store';
+import { AuthRoutingModule } from './auth.routing';
+import { AuthGuard } from '../../core/services';
 
+export const authProviders = [
+    AuthGuard
+];
 
 @NgModule({
     imports: [
@@ -24,7 +29,7 @@ import { Store } from '../../core/app-store';
         NativeScriptFormsModule,
         NativeScriptHttpModule,
         NativeScriptRouterModule,
-
+        AuthRoutingModule,
         TranslateModule.forChild()
     ],
     exports: [],
