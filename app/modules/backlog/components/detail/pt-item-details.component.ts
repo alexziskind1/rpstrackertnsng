@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone, trigger, state, style, transition, animate } from '@angular/core';
 
 import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/shareReplay';
@@ -30,7 +30,17 @@ import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../shared/constan
 import { ButtonEditorHelper } from './button-editor-helper';
 import { PtItemDetailsEditFormModel } from '../../../../shared/models/forms';
 
-
+export var slideInAnimations = [
+    trigger('slideIn', [
+        state('on', style({ transform: 'translate(0, 0)', opacity: 1 })),
+        state('off', style({ transform: 'translate(-20, 0)', opacity: 0 })),
+        transition('off => on', animate(600)),
+        transition('* => on', [
+            style({ transform: 'translate(20, 0)', opacity: 0 }),
+            animate(600)
+        ])
+    ])
+];
 
 @Component({
     moduleId: module.id,
@@ -41,6 +51,7 @@ import { PtItemDetailsEditFormModel } from '../../../../shared/models/forms';
             background-color: red;
         }
     `],
+    animations: slideInAnimations,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PtItemDetailsComponent implements OnInit {

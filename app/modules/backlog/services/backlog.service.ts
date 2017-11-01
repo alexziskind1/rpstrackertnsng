@@ -131,6 +131,20 @@ export class BacklogService {
         );
     }
 
+    public deletePtItem(item: PtItem) {
+        this.repo.deletePtItem(item.id,
+            this.errorHandlerService.handleHttpError,
+            () => {
+                this.zone.run(() => {
+                    const updatedItems = this.store.value.backlogItems.filter((i) => {
+                        return i.id !== item.id;
+                    });
+                    this.store.set('backlogItems', updatedItems);
+                });
+            }
+        );
+    }
+
     public addNewPtTask(newTask: PtNewTask, currentItem: PtItem) {
         const task: PtTask = {
             id: 0,

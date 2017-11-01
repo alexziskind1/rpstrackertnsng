@@ -23,6 +23,7 @@ import { NewItemFormComponent } from './components/new-item-form/new-item-form.c
 import { BacklogRepository } from './repositories/backlog.repository';
 import { NewItemModalComponent } from './modals/new-item/new-item.modal.component';
 import { BacklogRoutingModule } from './backlog.routing';
+import { DetailSectionSelectorComponent } from './components/detail/detail-section-selector.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { BacklogRoutingModule } from './backlog.routing';
     declarations: [
         BacklogPageComponent,
         DetailPageComponent,
+        DetailSectionSelectorComponent,
         PtListComponent,
         PtListItemComponent,
         PtItemDetailsComponent,

@@ -5,9 +5,17 @@ import { NavigationOptions } from 'nativescript-angular/router/ns-location-strat
 
 @Injectable()
 export class NavigationService {
-    constructor(private router: RouterExtensions) { }
+    constructor(private routerExtensions: RouterExtensions) { }
 
     public navigate(commands: any[], extras?: NavigationExtras & NavigationOptions): Promise<boolean> {
-        return this.router.navigate(commands, extras);
+        return this.routerExtensions.navigate(commands, extras);
+    }
+
+    public back() {
+        this.routerExtensions.back();
+    }
+
+    public backToPreviousPage() {
+        this.routerExtensions.backToPreviousPage();
     }
 }

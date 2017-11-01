@@ -1,0 +1,23 @@
+.selector {
+    border-width: 1;
+    border-color: red;
+    align-items: stretch;
+    justify-content: space-around;
+}
+.selector-btn {
+    border-top-width: 5;
+    border-top-color: transparent;
+    border-bottom-width: 5;
+    border-bottom-color: transparent;
+    color: pink;
+    padding-left: 10;
+    padding-right: 10;
+    padding-top: 2;
+    padding-bottom: 2;
+    text-transform: uppercase;
+}
+.selector-btn.active {
+    border-bottom-width: 5;
+    border-bottom-color: white;
+    color: white;
+}

@@ -1,17 +1,12 @@
-<GridLayout rows="50, 30, *">
+<GridLayout rows="50,  *" [@slideIn]="animationState">
 
     <StackLayout row="0">
-        <Label [text]="selectedValue" row="0" (tap)="onSelectorTap2()"></Label>
         <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save" row=""></Button>
         <Image width="30" height="30" [src]="item.assignee.avatar"></Image>
     </StackLayout>
 
-    <GridLayout row="1">
-        <Label #btnTapHtml class="text" [text]="selectedValue" (tap)="onSelectorTap2()"></Label>
-    </GridLayout>
 
-
-    <RadDataForm #itemDetailsDataForm [source]="itemForm" commitMode="Manual" row="2">
+    <RadDataForm #itemDetailsDataForm [source]="itemForm" commitMode="Manual" row="1">
 
         <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
             <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">

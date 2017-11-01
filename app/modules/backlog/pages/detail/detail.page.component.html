@@ -1,22 +1,30 @@
+<ActionBar title="Item">
+    <NavigationButton text="Back" android.systemIcon="ic_menu_back" (tap)="onNavBackTap()"></NavigationButton>
+
+    <ActionItem (tap)="onDeleteTap()" ios.systemIcon="16" ios.position="right" text="delete" android.systemIcon="ic_menu_delete"
+        android.position="actionBar"></ActionItem>
+</ActionBar>
+
 <StackLayout>
 
+    <StackLayout class="pt-item-detail-header">
+        <Label [text]="(currentSelectedItem$ | async)?.title" class="pt-item-detail-header-title"></Label>
 
-    <Label text="detail"></Label>
+        <pt-detail-section-selector [selectedScreen]="selectedDetailsScreen" (screenSelected)="onScreenSelected($event)"></pt-detail-section-selector>
 
-    <Label [text]="(currentSelectedItem$ | async)?.title"></Label>
-
-    <StackLayout orientation="horizontal">
-        <Button (tap)="onDetailsTap($event)" text="Details"></Button>
-        <Button (tap)="onTasksTap($event)" text="Tasks"></Button>
-        <Button (tap)="onChitchatTap($event)" text="Chitchat"></Button>
     </StackLayout>
 
-    <StackLayout>
-        <pt-item-details [item]="currentSelectedItem$ | async" [users$]="users$" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"
-            *ngIf="selectedDetailsScreenIndex=== 0"></pt-item-details>
-        <pt-item-tasks [item]="currentSelectedItem$ | async" (addNewTask)="onAddNewTask($event)" (toggleTask)="onToggleTask($event)"
-            *ngIf="selectedDetailsScreenIndex=== 1"></pt-item-tasks>
-        <pt-item-chitchat [item]="currentSelectedItem$ | async" (addNewComment)="onAddNewComment($event)" *ngIf="selectedDetailsScreenIndex=== 2"></pt-item-chitchat>
+
+    <StackLayout [ngSwitch]="selectedDetailsScreen">
+        <ng-template [ngSwitchCase]="'details'">
+            <pt-item-details [item]="currentSelectedItem$ | async" [users$]="users$" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"></pt-item-details>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'tasks'">
+            <pt-item-tasks [item]="currentSelectedItem$ | async" (addNewTask)="onAddNewTask($event)" (toggleTask)="onToggleTask($event)"></pt-item-tasks>
+        </ng-template>
+        <ng-template [ngSwitchCase]="'chitchat'">
+            <pt-item-chitchat [item]="currentSelectedItem$ | async" (addNewComment)="onAddNewComment($event)"></pt-item-chitchat>
+        </ng-template>
     </StackLayout>
 
 </StackLayout>

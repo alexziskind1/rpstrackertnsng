@@ -4,11 +4,15 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
+import { SegmentedBar, SegmentedBarItem } from 'ui/segmented-bar';
+import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
+
 import { PtItem, PtTask, PtUser } from '../../../../shared/models/domain';
 import { BacklogService } from '../../services/backlog.service';
-import { PtUserService } from '../../../../core/services';
+import { PtUserService, NavigationService } from '../../../../core/services';
 import { Store } from '../../../../core/app-store';
 import { PtNewTask, PtNewComment } from '../../../../shared/models/dto';
+import { DetailScreenType } from '../../../../shared/models/ui/types';
 
 @Component({
     moduleId: module.id,
@@ -17,16 +21,15 @@ import { PtNewTask, PtNewComment } from '../../../../shared/models/dto';
 })
 export class DetailPageComponent implements OnInit {
 
-    public selectedDetailsScreenIndex = 0;
-
+    public selectedDetailsScreen: DetailScreenType = 'details';
     public currentSelectedItem$: Observable<PtItem> = this.store.select<PtItem>('currentSelectedItem');
-
     public users$: Observable<PtUser[]> = this.store.select<PtUser[]>('users');
 
     constructor(
         private activatedRoute: ActivatedRoute,
         private backlogService: BacklogService,
         private ptUserService: PtUserService,
+        private navigationService: NavigationService,
         private store: Store
     ) { }
 
@@ -35,14 +38,40 @@ export class DetailPageComponent implements OnInit {
         this.backlogService.getItemFromCacheOrServer(parseInt(this.activatedRoute.snapshot.params['id']));
     }
 
-    public onDetailsTap(args) {
-        this.selectedDetailsScreenIndex = 0;
+    public onNavBackTap() {
+        this.navigationService.backToPreviousPage();
     }
-    public onTasksTap(args) {
-        this.selectedDetailsScreenIndex = 1;
+
+    public onDeleteTap() {
+        //Simple approach
+        //if (confirm('Are you sure you want to delete this item?')) {
+
+        //}
+
+        //Better approach with promise
+        var options: ConfirmOptions = {
+            title: "Delete Item",
+            message: "Are you sure you want to delete this item?",
+            okButtonText: "Yes",
+            cancelButtonText: "Cancel"
+        };
+        //confirm without options, with promise
+        //confirm('Are you sure you want to delete this item?')
+        //confirm with options, with promise
+        confirm(options)
+            .then((result: boolean) => {
+                // result can be true/false/undefined
+                if (result) {
+                    this.backlogService.deletePtItem(this.store.value.currentSelectedItem);
+                    setTimeout(() => {
+                        this.navigationService.backToPreviousPage();
+                    }, 100);
+                }
+            });
     }
-    public onChitchatTap(args) {
-        this.selectedDetailsScreenIndex = 2;
+
+    public onScreenSelected(screen: DetailScreenType) {
+        this.selectedDetailsScreen = screen;
     }
 
     public onUsersRequested() {
@@ -51,6 +80,7 @@ export class DetailPageComponent implements OnInit {
 
     public onItemSaved(item: PtItem) {
         this.backlogService.updatePtItem(item);
+        this.navigationService.backToPreviousPage();
     }
 
     public onAddNewTask(newTask: PtNewTask) {

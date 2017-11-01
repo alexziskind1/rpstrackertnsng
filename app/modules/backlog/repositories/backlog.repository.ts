@@ -45,6 +45,10 @@ export class BacklogRepository {
         return `${this.config.apiEndpoint}/item/${itemId}`;
     }
 
+    private deletePtItemUrl(itemId: number) {
+        return `${this.config.apiEndpoint}/item/${itemId}`;
+    }
+
     private postPtTaskUrl() {
         return `${this.config.apiEndpoint}/task`;
     }
@@ -107,6 +111,19 @@ export class BacklogRepository {
         this.http.put(
             this.putPtItemUrl(item.id),
             { item: item }
+        )
+            .map(res => res.json())
+            .catch(errorHandler)
+            .subscribe(successHandler);
+    }
+
+    public deletePtItem(
+        itemId: number,
+        errorHandler: (error: any) => ErrorObservable,
+        successHandler: () => void
+    ) {
+        this.http.delete(
+            this.deletePtItemUrl(itemId)
         )
             .map(res => res.json())
             .catch(errorHandler)
