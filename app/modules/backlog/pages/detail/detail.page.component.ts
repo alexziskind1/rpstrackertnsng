@@ -8,7 +8,7 @@ import { PtItem, PtTask, PtUser } from '../../../../shared/models/domain';
 import { BacklogService } from '../../services/backlog.service';
 import { PtUserService } from '../../../../core/services';
 import { Store } from '../../../../core/app-store';
-import { PtNewTask, PtNewComment } from '../../../../shared/models/forms';
+import { PtNewTask, PtNewComment } from '../../../../shared/models/dto';
 
 @Component({
     moduleId: module.id,

@@ -69,11 +69,6 @@ export class BacklogRepository {
     ) {
         this.http.get(this.getFilteredBacklogUrl(currentPreset, currentUserId))
             .catch(errorHandler)
-            .do((ptItems: PtItem[]) => {
-                ptItems.forEach(i => {
-                    i.assignee.avatar = `${this.config.apiEndpoint}/photo/${i.assignee.id}`;
-                });
-            })
             .subscribe(successHandler);
     }
 

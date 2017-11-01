@@ -79,7 +79,7 @@ export class PtModalService {
     }
 
 
-    private createModal<T, R>(
+    public createModal<T, R>(
         type: Type<any>,
         context: PtModalContext<T, R>
     ): Promise<R> {

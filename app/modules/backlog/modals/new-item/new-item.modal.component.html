@@ -1,0 +1,7 @@
+<GridLayout rows="60, *">
+    <Label text="New Item" row="0"></Label>
+
+    <StackLayout row="1">
+        <pt-new-item-form [btnOkText]="btnOkText" [btnCancelText]="btnCancelText" (formSaved)="onFormSaved($event)" (formCancelled)="onFormCancelled($event)"></pt-new-item-form>
+    </StackLayout>
+</GridLayout>

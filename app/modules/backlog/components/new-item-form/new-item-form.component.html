@@ -1,1 +1,28 @@
-<Label text="new item form"></Label>
+<GridLayout rows="50, *">
+
+    <StackLayout row="0">
+        <Button (tap)="onSaveTap($event)" class="btn" [text]="btnOkText"></Button>
+        <Button (tap)="onCancelTap($event)" class="btn" [text]="btnCancelText"></Button>
+    </StackLayout>
+
+    <RadDataForm #itemDetailsDataForm [source]="newItemForm" commitMode="Manual" row="1">
+
+        <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
+            <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="description" displayName="Description" index="2" required="true" hintText="description">
+            <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+        </TKEntityProperty>
+
+        <TKEntityProperty tkDataFormProperty name="typeStr" displayName="Type" index="3" [valuesProvider]="itemTypesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+        </TKEntityProperty>
+
+    </RadDataForm>
+</GridLayout>

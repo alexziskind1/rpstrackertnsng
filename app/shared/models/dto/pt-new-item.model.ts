@@ -1,8 +1,8 @@
-import { PtItemTypeImpl } from '../ui';
+import { PtItemType } from '../domain/types';
 
 
 export interface PtNewItem {
     title: string;
     description?: string;
-    type: PtItemTypeImpl;
+    type: PtItemType;
 }

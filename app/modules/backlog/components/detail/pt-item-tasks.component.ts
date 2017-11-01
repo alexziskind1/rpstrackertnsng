@@ -3,7 +3,7 @@ import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { PtItem, PtTask } from '../../../../shared/models/domain';
-import { PtNewTask } from '../../../../shared/models/forms';
+import { PtNewTask } from '../../../../shared/models/dto';
 
 
 @Component({

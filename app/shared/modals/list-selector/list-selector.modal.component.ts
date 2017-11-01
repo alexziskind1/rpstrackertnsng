@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, NgZone } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 //import { Observable } from 'rxjs/Observable';
 //import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -19,7 +19,7 @@ import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-it
     templateUrl: 'list-selector.modal.component.html',
     styleUrls: ['list-selector.modal.component.css']
 })
-export class ListSelectorModalComponent<T> extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem<T>>, PtModalListDisplayItem<T>> implements OnInit, OnDestroy {
+export class ListSelectorModalComponent<T> extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem<T>>, PtModalListDisplayItem<T>> implements OnInit {
     public items: PtModalListDisplayItem<T>[] = [];
     //public items$: BehaviorSubject<PtModalListDisplayItem[]> = new BehaviorSubject([]);
     private originalSelectedItem: PtModalListDisplayItem<T>;
@@ -29,8 +29,7 @@ export class ListSelectorModalComponent<T> extends PtBaseModalComponent<PtModalL
 
     constructor(
         params: ModalDialogParams,
-        page: Page,
-        zone: NgZone
+        page: Page
     ) {
         super(params, page);
         if (this.payload.selectedItem) {

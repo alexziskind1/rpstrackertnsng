@@ -9,7 +9,7 @@ import { AppConfig, APP_CONFIG } from '../../../app-config.module';
 import { Store } from '../../../core/app-store';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';
 import { PtItem, PtUser, PtTask, PtComment } from '../../../shared/models/domain';
-import { PtNewItem, PtNewTask, PtNewComment } from '../../../shared/models/forms';
+import { PtNewItem, PtNewTask, PtNewComment } from '../../../shared/models/dto';
 import { PriorityEnum, StatusEnum } from '../../../shared/models/domain/enums';
 import { BacklogRepository } from '../repositories/backlog.repository';
 
@@ -30,6 +30,7 @@ export class BacklogService {
     }
 
     constructor(
+        @Inject(APP_CONFIG) private config: AppConfig,
         private repo: BacklogRepository,
         private store: Store,
         private errorHandlerService: ErrorHandlerService,
@@ -43,6 +44,15 @@ export class BacklogService {
             this.currentUserId,
             this.errorHandlerService.handleHttpError,
             (ptItems: PtItem[]) => {
+
+                ptItems.forEach(i => this.setUserAvatarUrl(i.assignee));
+
+                /*
+                ptItems.forEach(i => {
+                    i.assignee.avatar = `${this.config.apiEndpoint}/photo/${i.assignee.id}`;
+                });
+                */
+
                 this.zone.run(() => {
                     this.store.set('backlogItems', ptItems);
                 });
@@ -50,11 +60,18 @@ export class BacklogService {
         );
     }
 
+    private setUserAvatarUrl(user: PtUser) {
+        user.avatar = `${this.config.apiEndpoint}/photo/${user.id}`;
+    }
+
 
     public getPtItem(id: number) {
         this.repo.getPtItem(id,
             this.errorHandlerService.handleHttpError,
             (ptItem: PtItem) => {
+
+                this.setUserAvatarUrl(ptItem.assignee);
+
                 this.zone.run(() => {
                     this.store.set('currentSelectedItem', ptItem);
 
@@ -85,7 +102,7 @@ export class BacklogService {
             id: 0,
             title: newItem.title,
             description: newItem.description,
-            type: newItem.type.type,
+            type: newItem.type,
             estimate: 0,
             priority: PriorityEnum.Medium,
             status: StatusEnum.Open,
@@ -99,8 +116,9 @@ export class BacklogService {
             item,
             this.errorHandlerService.handleHttpError,
             (nextItem: PtItem) => {
+                this.setUserAvatarUrl(nextItem.assignee);
                 this.zone.run(() => {
-                    this.store.set('backlogItems', [...this.store.value.backlogItems, nextItem]);
+                    this.store.set('backlogItems', [nextItem, ...this.store.value.backlogItems]);
                 });
             }
         );
