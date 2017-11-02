@@ -1,7 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone, trigger, state, style, transition, animate } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone } from '@angular/core';
 
-import 'rxjs/add/operator/filter';
-import 'rxjs/add/operator/shareReplay';
+
+
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -15,82 +15,44 @@ import { GridLayout } from 'ui/layouts/grid-layout';
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
 import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData } from 'nativescript-pro-ui/dataform';
 
-import { PtItem, PtUser } from '../../../../shared/models/domain';
-import { TextInputModalComponent } from '../../../../shared/modals/text-input/text-input.modal.component';
-import { PtModalService } from '../../../../shared/modals/pt-modal.service';
 
-import { PtModalContext } from '../../../../shared/models/ui/pt-modal-context.model';
-import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../shared/models/domain/enums';
-import { PtModalListModel } from '../../../../shared/models/ui/pt-modal-list.model';
-import { enumValueIndex } from '../../../../shared/utils/enum-util';
-import { PtModalListDisplayItem } from '../../../../shared/models/ui/pt-modal-list-display-item.model';
-import { PT_ITEM_TYPE_DISPLAY_MAPPING, PT_ITEM_TYPES } from '../../../../shared/models/ui/pt-item-type.model.impl';
-import { PtItemType } from '../../../../shared/models/domain/types';
-import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../shared/constants';
-import { ButtonEditorHelper } from './button-editor-helper';
-import { PtItemDetailsEditFormModel } from '../../../../shared/models/forms';
+import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
+import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES } from '../../../../../shared/constants';
+import { PtItem, PtUser } from '../../../../../shared/models/domain';
+import { PtItemType } from '../../../../../shared/models/domain/types';
+import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../shared/models/domain/enums';
+import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
+import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
+import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
 
-export var slideInAnimations = [
-    trigger('slideIn', [
-        state('on', style({ transform: 'translate(0, 0)', opacity: 1 })),
-        state('off', style({ transform: 'translate(-20, 0)', opacity: 0 })),
-        transition('off => on', animate(600)),
-        transition('* => on', [
-            style({ transform: 'translate(20, 0)', opacity: 0 }),
-            animate(600)
-        ])
-    ])
-];
+
 
 @Component({
     moduleId: module.id,
     selector: 'pt-item-details',
     templateUrl: 'pt-item-details.component.html',
-    styles: [`
-        .stack-class {
-            background-color: red;
-        }
-    `],
-    animations: slideInAnimations,
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PtItemDetailsComponent implements OnInit {
 
-    @Input() public item: PtItem;
-    @Input() public users$: Observable<PtUser[]>;
+    @Input() item: PtItem;
+    @Input() users$: Observable<PtUser[]>;
     @Output() usersRequested = new EventEmitter();
     @Output() itemSaved = new EventEmitter<PtItem>();
-
-
-    private users: PtUser[] = [];
-
-    private usersLocal$: Observable<PtUser[]>;
-
-    private assigneesSub: Subscription;
-
-    public itemForm: PtItemDetailsEditFormModel;
-
-    private reselectedAssignee: PtUser;
-
 
     @ViewChild('itemDetailsDataForm') itemDetailsDataForm: RadDataFormComponent;
     @ViewChild('btnTapHtml') btnTapHtml: ElementRef;
 
+    private users: PtUser[] = [];
+    private usersLocal$: Observable<PtUser[]>;
+    private assigneesSub: Subscription;
+    private reselectedAssignee: PtUser;
+
+    public itemForm: PtItemDetailsEditFormModel;
     public itemTypesProvider = PT_ITEM_TYPES;
     public statusesProvider = PT_ITEM_STATUSES;
     public prioritiesProvider = PT_ITEM_PRIORITIES;
 
-
-    public get currentItemType() {
-        return this.item ? this.item.type : '';
-    }
-    /*public get currentAssigneeName() {
-        return this.item ? (this.item.assignee ? this.item.assignee.fullName : 'unassigned') : '...';
-    }
-    public get currentAssigneeAvatar() {
-        return this.item ? (this.item.assignee ? this.item.assignee.avatar : '') : '';
-    }
-    */
 
     constructor(
         private ptModalService: PtModalService,
@@ -99,7 +61,6 @@ export class PtItemDetailsComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
-
         this.itemForm = {
             title: this.item.title,
             description: this.item.description,
@@ -107,7 +68,7 @@ export class PtItemDetailsComponent implements OnInit {
             statusStr: this.item.status,
             estimate: this.item.estimate,
             priorityStr: this.item.priority,
-            assigneeName: this.item.assignee ? this.item.assignee.fullName : 'unassigned' //this.ptUserToPtItemAssigneeFormFields(this.item.assignee)
+            assigneeName: this.item.assignee ? this.item.assignee.fullName : 'unassigned'
         };
 
         this.usersLocal$ = this.users$

@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-
-import { PtItem, PtTask } from '../../../../shared/models/domain';
-import { PtNewTask } from '../../../../shared/models/dto';
+import { PtItem, PtTask } from '../../../../../shared/models/domain';
+import { PtNewTask } from '../../../../../shared/models/dto';
 
 
 @Component({

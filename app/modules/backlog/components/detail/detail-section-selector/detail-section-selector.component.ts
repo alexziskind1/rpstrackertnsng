@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, ChangeDetectionStrategy, Input } from '@angular/core';
-import { DetailScreenType } from '../../../../shared/models/ui/types';
+
+import { DetailScreenType } from '../../../../../shared/models/ui/types';
 
 @Component({
     moduleId: module.id,

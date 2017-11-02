@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import 'rxjs/add/operator/switchMap';
-
 import { PageRoute } from 'nativescript-angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';

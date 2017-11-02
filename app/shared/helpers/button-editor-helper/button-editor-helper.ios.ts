@@ -13,9 +13,6 @@ export class ButtonEditorHelper extends NSObject {
 
     public "handleTap:"(sender) {
         this.iosTapHandler();
-        //var newValue = this.buttonValue + 1;
-        //this.updateEditorValue(sender, newValue);
-        //this.editor.notifyValueChanged();
     }
 
     public static ObjCExposedMethods = {

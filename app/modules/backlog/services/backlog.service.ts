@@ -1,7 +1,6 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
 import * as _ from 'lodash';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+
 
 import { Observable, ObservableInput } from 'rxjs/Observable';
 
