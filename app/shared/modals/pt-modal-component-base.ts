@@ -1,15 +1,9 @@
-import { Component } from '@angular/core';
-import { ModalDialogParams } from 'nativescript-angular';
 import { Page } from 'ui/page';
+import { ModalDialogParams } from 'nativescript-angular';
+
 import { PtModalContext } from '../models/ui/pt-modal-context.model';
 
-
-@Component({
-    moduleId: module.id,
-    selector: 'pt-base-modal',
-    templateUrl: 'base.modal.component.html'
-})
-export class PtBaseModalComponent<T, R> {
+export class PtModalComponentBase<T, R> {
     protected modalContext: PtModalContext<T, R>;
     protected closeCallback: (...args: any[]) => any;
 

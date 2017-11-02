@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { ModalDialogParams } from 'nativescript-angular';
 import { Page } from 'ui/page';
-import { PtBaseModalComponent } from '../pt-base.modal.component';
+import { PtModalComponentBase } from '../pt-modal-component-base';
 import { PtModalListModel } from '../../models/ui/pt-modal-list.model';
 import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-item.model';
 
@@ -19,7 +19,7 @@ import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-it
     templateUrl: 'list-selector.modal.component.html',
     styleUrls: ['list-selector.modal.component.css']
 })
-export class ListSelectorModalComponent<T> extends PtBaseModalComponent<PtModalListModel<PtModalListDisplayItem<T>>, PtModalListDisplayItem<T>> implements OnInit {
+export class ListSelectorModalComponent<T> extends PtModalComponentBase<PtModalListModel<PtModalListDisplayItem<T>>, PtModalListDisplayItem<T>> implements OnInit {
     public items: PtModalListDisplayItem<T>[] = [];
     //public items$: BehaviorSubject<PtModalListDisplayItem[]> = new BehaviorSubject([]);
     private originalSelectedItem: PtModalListDisplayItem<T>;

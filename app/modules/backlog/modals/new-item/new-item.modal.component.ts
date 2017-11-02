@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { Page } from 'ui/page';
 import { DatePicker } from 'ui/date-picker';
-import { PtBaseModalComponent } from '../../../../shared/modals/pt-base.modal.component';
+import { PtModalComponentBase } from '../../../../shared/modals/pt-modal-component-base';
 import { PtNewItemForm } from '../../../../shared/models/forms';
 import { PtNewItem } from '../../../../shared/models/dto';
 import { PtItemType } from '../../../../shared/models/domain/types';
@@ -14,7 +14,7 @@ import { PtItemType } from '../../../../shared/models/domain/types';
     selector: 'pt-new-item-modal',
     templateUrl: 'new-item.modal.component.html'
 })
-export class NewItemModalComponent extends PtBaseModalComponent<string, PtNewItem> {
+export class NewItemModalComponent extends PtModalComponentBase<string, PtNewItem> {
 
     constructor(
         params: ModalDialogParams,

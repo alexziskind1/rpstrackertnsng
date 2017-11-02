@@ -3,14 +3,14 @@ import { Component } from '@angular/core';
 import { ModalDialogParams } from 'nativescript-angular';
 import { Page } from 'ui/page';
 import { DatePicker } from 'ui/date-picker';
-import { PtBaseModalComponent } from '../pt-base.modal.component';
+import { PtModalComponentBase } from '../pt-modal-component-base';
 
 @Component({
     moduleId: module.id,
     selector: 'pt-text-input-modal',
     templateUrl: 'text-input.modal.component.html'
 })
-export class TextInputModalComponent extends PtBaseModalComponent<string, string> {
+export class TextInputModalComponent extends PtModalComponentBase<string, string> {
     private originalText: string;
     public theText: string;
 
