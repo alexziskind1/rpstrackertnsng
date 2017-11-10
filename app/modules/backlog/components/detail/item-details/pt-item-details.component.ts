@@ -13,18 +13,22 @@ import { StackLayout } from 'ui/layouts/stack-layout';
 import { GridLayout } from 'ui/layouts/grid-layout';
 
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
-import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData } from 'nativescript-pro-ui/dataform';
+import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData, DataFormEventData, EntityProperty, RadDataForm, PropertyEditor } from 'nativescript-pro-ui/dataform';
 
 
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
-import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES } from '../../../../../shared/constants';
+import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES, getPtTypeImage } from '../../../../../shared/constants';
 import { PtItem, PtUser } from '../../../../../shared/models/domain';
 import { PtItemType } from '../../../../../shared/models/domain/types';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../shared/models/domain/enums';
 import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
 import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
+import { Color } from 'tns-core-modules/color';
 
+
+//var colorDark = new Color("#4CAF50");
+//var colorGray = new Color("#ff0000");
 
 
 @Component({
@@ -53,6 +57,27 @@ export class PtItemDetailsComponent implements OnInit {
     public statusesProvider = PT_ITEM_STATUSES;
     public prioritiesProvider = PT_ITEM_PRIORITIES;
 
+    private selectedTypeValue: PtItemType;
+
+    public get checkboxImg() {
+        return getPtTypeImage(this.selectedTypeValue);
+        /*switch (this.selectedTypeValue) {
+
+            case 'PBI':
+                return 'res://i-pbi';
+            case 'Bug':
+                return 'res://i-bug';
+            case 'Chore':
+                return 'res://i-chore';
+            case 'Impediment':
+                return 'res://i-impediment';
+        }
+        */
+    }
+
+    public get displayName() {
+        return 'Type';
+    }
 
     constructor(
         private ptModalService: PtModalService,
@@ -75,6 +100,116 @@ export class PtItemDetailsComponent implements OnInit {
             .filter(users => users.length > 0)
             .distinctUntilChanged((ua1, ua2) => ua1.length === ua2.length)
             .shareReplay(1);
+
+        this.selectedTypeValue = <PtItemType>this.itemForm.typeStr;
+    }
+
+    public onEditorUpdate(args: DataFormEventData) {
+        if (androidApplication) {
+            /*
+            switch (args.propertyName) {
+                case "appVolume": this.editorSetupSliderAndroid(args.editor); break;
+                case "onlyOnWiFi": this.editorSetupSwitchAndroid(args.editor); break;
+                case "networkLimit": this.editorSetupStepperAndroid(args.editor); break;
+                case "networkPreference": this.editorSetupSegmentedEditorAndroid(args.editor); break;
+            }
+            */
+        } else {
+            switch (args.propertyName) {
+                case 'typeStr': this.editorSetupTypeEditorIos(args.editor); break;
+                case 'estimate': this.editorSetupEstimateEditorIos(args.editor); break;
+                case 'priorityStr': this.editorSetupSegmentedEditorIOS(args.editor); break;
+                /*
+                case "onlyOnWiFi": this.editorSetupSwitchAndroid(args.editor); break;
+                case "networkLimit": this.editorSetupStepperAndroid(args.editor); break;
+                case "networkPreference": this.editorSetupSegmentedEditorAndroid(args.editor); break;
+                */
+            }
+        }
+    }
+
+    public editorSetupSegmentedEditorIOS(editor) {
+        const selectedPriority = <PriorityEnum>editor.value;
+        const coreEditor = <UISegmentedControl>editor.editor;
+        coreEditor.tintColor = PriorityEnum.getColor(selectedPriority).ios;
+    }
+
+
+    private editorSetupTypeEditorIos(editor) {
+        //const labelDef = editor.gridLayout.definitionForView(editor.editorValueLabel);
+        const arrangedViews = editor.gridLayout.arrangedViews;
+        const defs = editor.gridLayout.definitions;
+
+
+
+        const labelDef = editor.gridLayout.definitionForView(editor.textLabel);
+        const imageDef = editor.gridLayout.definitionForView(editor.imageView);
+        labelDef.column = 0;
+        imageDef.column = 1;
+
+        this.selectedTypeValue = editor.editorValueLabel.text;
+
+
+
+        //if (!this.flipped) {
+        //var a = labelDef.column;
+        //labelDef.column = imageDef.column;
+        //imageDef.column = a;
+        //this.flipped = true;
+        //}
+
+        /*
+               setTimeout(() => {
+       
+                  
+                   const iv = UIImageView.alloc().initWithImage(UIImage.imageNamed('icon_close_black'));
+                   iv.backgroundColor = UIColor.redColor;
+                   iv.frame = CGRectMake(0, 0, 40, 40);
+       
+                   const stackV = UIStackView.alloc().init();
+                   stackV.spacing = 30;
+       
+       
+       
+                   //stackV.addArrangedSubview(iv);
+       
+                   const valueLabel = arrangedViews[1].removeFromSuperview();
+                   editor.subviews[4].removeFromSuperview();
+       
+                   editor.insertSubviewAtIndex(iv, 4);
+       
+       
+                   //arrangedViews[0].image = UIImage.imageNamed('icon_close_black');
+       
+       
+                   //arrangedViews[0] = iv;
+                   //defs[3].view = UIImageView.alloc().initWithImage(UIImage.imageNamed('icon_close_black'));
+       
+                   //arrangedViews[0].image = UIImage.imageNamed('icon_close_black');
+                   // defs[3].view.image = UIImage.imageNamed('icon_close_black');
+               }, 200);
+       */
+
+
+
+    }
+
+    private editorSetupEstimateEditorIos(editor) {
+        const labelDef = editor.gridLayout.definitionForView(editor.valueLabel);
+        labelDef.contentOffset = {
+            horizontal: -25,
+            vertical: 0
+        };
+        const numVal = parseInt(labelDef.view.text);
+        if (numVal === 1) {
+            labelDef.view.text = '1 point';
+        } else {
+            labelDef.view.text = `${numVal} points`;
+        }
+    }
+
+    private editorSetupEstimateEditorAndroid(editor) {
+        editor.getHeaderView().setPadding(12, 12, 12, 48);
     }
 
 
