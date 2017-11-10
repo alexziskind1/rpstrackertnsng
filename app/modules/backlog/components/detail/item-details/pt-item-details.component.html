@@ -1,14 +1,13 @@
-<GridLayout rows="50, *, 50">
+<GridLayout rows="50, *">
 
     <StackLayout row="0" orientation="horizontal">
-        <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save1" row=""></Button>
         <Image width="30" height="30" [src]="item.assignee.avatar"></Image>
         <Image width="30" height="30" src="~/assets/images/i-bug-sm.png"></Image>
     </StackLayout>
 
     <StackLayout row="1">
 
-        <RadDataForm #itemDetailsDataForm [source]="itemForm" commitMode="Manual" (editorUpdate)="onEditorUpdate($event)">
+        <RadDataForm #itemDetailsDataForm [source]="itemForm" (propertyCommitted)="onPropertyCommitted($event)" (editorUpdate)="onEditorUpdate($event)">
 
             <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
                 <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
@@ -47,7 +46,5 @@
         </RadDataForm>
     </StackLayout>
 
-
-    <Button (tap)="onDialogSaveTap($event)" class="btn" text="Save" row="2"></Button>
 
 </GridLayout>

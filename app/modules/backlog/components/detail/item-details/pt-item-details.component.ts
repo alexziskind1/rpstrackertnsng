@@ -58,6 +58,7 @@ export class PtItemDetailsComponent implements OnInit {
     public prioritiesProvider = PT_ITEM_PRIORITIES;
 
     private selectedTypeValue: PtItemType;
+    private selectedPriorityValue: PriorityEnum;
 
     public get checkboxImg() {
         return getPtTypeImage(this.selectedTypeValue);
@@ -102,6 +103,22 @@ export class PtItemDetailsComponent implements OnInit {
             .shareReplay(1);
 
         this.selectedTypeValue = <PtItemType>this.itemForm.typeStr;
+        this.selectedPriorityValue = <PriorityEnum>this.itemForm.priorityStr;
+    }
+
+    public onPropertyCommitted(args: DataFormEventData) {
+        switch (args.propertyName) {
+            case 'typeStr':
+
+                break;
+            case 'estimate':
+
+                break;
+            case 'priorityStr':
+
+                break;
+        }
+        this.notifyUpdateItem();
     }
 
     public onEditorUpdate(args: DataFormEventData) {
@@ -129,9 +146,11 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     public editorSetupSegmentedEditorIOS(editor) {
-        const selectedPriority = <PriorityEnum>editor.value;
+        const editorPriority = <PriorityEnum>editor.value;
+
+        this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
         const coreEditor = <UISegmentedControl>editor.editor;
-        coreEditor.tintColor = PriorityEnum.getColor(selectedPriority).ios;
+        coreEditor.tintColor = PriorityEnum.getColor(this.selectedPriorityValue).ios;
     }
 
 
@@ -250,6 +269,7 @@ export class PtItemDetailsComponent implements OnInit {
                     this.itemForm.assigneeName = result.fullName;
 
                     this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
+                    this._buttonEditorHelper.editor.notifyValueChanged();
                     this.assigneesSub.unsubscribe();
                 }).catch(error => {
                     console.error(error);
@@ -293,14 +313,17 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
 
-    public onDialogSaveTap(args) {
-        this.itemDetailsDataForm.dataForm.validateAndCommitAll()
+    public notifyUpdateItem() {
+        this.itemDetailsDataForm.dataForm.validateAll()
             .then(ok => {
                 if (ok) {
                     const updatedItem = this.getUpdatedItem();
                     this.itemSaved.emit(updatedItem);
                 }
             })
+            .catch(err => {
+                console.error(err);
+            });
     }
 
     private getUpdatedItem(): PtItem {

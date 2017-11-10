@@ -80,7 +80,7 @@ export class DetailPageComponent implements OnInit {
 
     public onItemSaved(item: PtItem) {
         this.backlogService.updatePtItem(item);
-        this.navigationService.backToPreviousPage();
+        //this.navigationService.backToPreviousPage();
     }
 
     public onAddNewTask(newTask: PtNewTask) {
