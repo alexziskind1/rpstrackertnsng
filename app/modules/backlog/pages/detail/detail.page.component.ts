@@ -10,7 +10,7 @@ import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
 import { PtItem, PtTask, PtUser } from '../../../../shared/models/domain';
 import { BacklogService } from '../../services/backlog.service';
 import { PtUserService, NavigationService } from '../../../../core/services';
-import { Store } from '../../../../core/app-store';
+import { Store } from '../../../../core/state/app-store';
 import { PtNewTask, PtNewComment } from '../../../../shared/models/dto';
 import { DetailScreenType } from '../../../../shared/models/ui/types';
 

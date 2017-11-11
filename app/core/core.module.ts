@@ -5,7 +5,7 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
 
 import { APP_CONFIG, AppConfig } from '../app-config.module';
-import { Store } from '../core/app-store';
+import { Store } from './state/app-store';
 
 import {
     AuthService,

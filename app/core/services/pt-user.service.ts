@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 
 import { AppConfig, APP_CONFIG } from '../../app-config.module';
 import { PtUser } from '../../shared/models/domain';
-import { Store } from '../app-store';
+import { Store } from '../state/app-store';
 
 
 

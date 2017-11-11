@@ -8,7 +8,7 @@ import { RadSideDrawer, SideDrawerLocation } from 'nativescript-pro-ui/sidedrawe
 
 import { NavigationService } from '../../../../core/services';
 import { BacklogService } from '../../services/backlog.service';
-import { Store } from '../../../../core/app-store';
+import { Store } from '../../../../core/state/app-store';
 import { PtItem } from '../../../../shared/models/domain';
 import { PresetType } from '../../../../shared/models/ui/types';
 import { PtModalService } from '../../../../shared/modals/pt-modal.service';

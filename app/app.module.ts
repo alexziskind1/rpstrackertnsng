@@ -16,7 +16,7 @@ import { AuthModule } from './modules/auth/auth.module';
 import { BacklogModule } from './modules/backlog/backlog.module';
 
 import { AppComponent } from './app.component';
-import { Store } from './core/app-store';
+import { Store } from './core/state/app-store';
 import { PtMissingTranslationHandler } from './core/helpers/pt-missing-translations-handler';
 
 import './rxjs-imports';

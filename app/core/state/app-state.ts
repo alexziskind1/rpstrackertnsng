@@ -1,5 +1,5 @@
-import { PtItem, PtUser } from '../shared/models/domain';
-import { PresetType } from '../shared/models/ui/types';
+import { PtItem, PtUser } from '../../shared/models/domain';
+import { PresetType } from '../../shared/models/ui/types';
 
 
 export type StateKey = 'users' | 'backlogItems' | 'currentUser' | 'currentSelectedItem' | 'selectedPreset';

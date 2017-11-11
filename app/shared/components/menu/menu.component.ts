@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Store } from '../../../core/app-store';
+//import { Store } from '../../../core/app-store';
 import { NavigationService } from '../../../core/services/navigation.service';
 import { PresetType } from '../../../shared/models/ui/types';
 
