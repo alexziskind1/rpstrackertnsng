@@ -10,7 +10,7 @@ import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ng
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app.routing';
-import { AppConfigModule } from './app-config.module';
+import { AppConfigModule } from './config/app-config.module';
 import { CoreModule } from './core/core.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { BacklogModule } from './modules/backlog/backlog.module';

@@ -5,7 +5,7 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
 
 import { AppConfig } from './models/app-config.model';
-import { APP_CONFIG } from '../app-config.module';
+import { APP_CONFIG } from '../config/app-config.module';
 import { Store } from './state/app-store';
 
 import {

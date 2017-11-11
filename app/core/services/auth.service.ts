@@ -10,7 +10,7 @@ import { PtUser } from '../../core/models/domain';
 import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
 import { Store } from '../state/app-store';
 import { AppConfig } from '../models/app-config.model';
-import { APP_CONFIG } from '../../app-config.module';
+import { APP_CONFIG } from '../../config/app-config.module';
 import { ErrorHandlerService } from './error-handler.service';
 import { AuthTokenService } from './auth-token.service';
 
