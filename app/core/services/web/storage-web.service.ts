@@ -6,7 +6,6 @@ export class StorageWebService extends StorageService {
 
     constructor() {
         super();
-        console.log('constructing StorageWebService');
     }
 
     setItem<T>(key: string, value: T): void {

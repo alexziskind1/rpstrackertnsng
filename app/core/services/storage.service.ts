@@ -3,9 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export abstract class StorageService {
 
-    constructor() {
-        console.log('constructing base StorageService');
-    }
+    constructor() { }
 
     abstract setItem<T>(key: string, value: T): void;
 

@@ -22,7 +22,6 @@ import { PtMissingTranslationHandler } from './core/helpers/pt-missing-translati
 import './rxjs-imports';
 
 export function createTranslateLoader(http: Http) {
-    console.log('inint TranslateHttpLoader');
     return new TranslateHttpLoader(<any>http, '/assets/i18n/', '.json');
 }
 

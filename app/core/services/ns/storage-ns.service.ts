@@ -7,7 +7,6 @@ export class StorageNsService extends StorageService {
 
     constructor() {
         super();
-        console.log('constructing StorageNsService');
     }
 
     setItem<T>(key: string, value: T): void {

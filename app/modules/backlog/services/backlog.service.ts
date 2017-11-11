@@ -159,7 +159,6 @@ export class BacklogService {
             this.errorHandlerService.handleHttpError,
             (nextTask: PtTask) => {
                 this.getPtItem(currentItem.id);
-                console.log(nextTask);
             }
         );
     }
@@ -206,7 +205,6 @@ export class BacklogService {
             this.errorHandlerService.handleHttpError,
             (nextComment: PtComment) => {
                 this.getPtItem(currentItem.id);
-                console.log(nextComment);
             }
         );
     }

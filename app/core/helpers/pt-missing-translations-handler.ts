@@ -2,7 +2,6 @@ import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx
 
 export class PtMissingTranslationHandler implements MissingTranslationHandler {
     handle(params: MissingTranslationHandlerParams) {
-        console.log('missing translation');
-        return 'some value';
+        return 'missing translation';
     }
 }
