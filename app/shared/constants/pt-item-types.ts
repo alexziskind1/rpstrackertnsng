@@ -1,4 +1,4 @@
-import { PtItemType } from '../models/domain/types';
+import { PtItemType } from '../../core/models/domain/types';
 
 
 export const PT_ITEM_TYPE_PBI: PtItemType = 'PBI';

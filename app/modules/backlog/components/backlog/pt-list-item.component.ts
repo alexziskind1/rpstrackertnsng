@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy } from '@angular/core';
-import { PtItem } from '../../../../shared/models/domain';
+import { PtItem } from '../../../../core/models/domain';
 
 
 @Component({

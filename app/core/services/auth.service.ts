@@ -6,8 +6,8 @@ import { of } from 'rxjs/observable/of';
 
 
 import { StorageService } from './storage.service';
-import { PtUser } from '../../shared/models/domain';
-import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../shared/models/domain';
+import { PtUser } from '../../core/models/domain';
+import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
 import { Store } from '../state/app-store';
 import { AppConfig, APP_CONFIG } from '../../app-config.module';
 import { ErrorHandlerService } from './error-handler.service';

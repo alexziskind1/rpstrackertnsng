@@ -5,8 +5,8 @@ import { PageRoute } from 'nativescript-angular/router';
 
 import { AuthService } from '../../../../core/services/auth.service';
 import { NavigationService } from '../../../../core/services/navigation.service';
-import { PtUser } from '../../../../shared/models/domain';
-import { PtLoginModel, PtRegisterModel } from '../../../../shared/models/domain';
+import { PtUser } from '../../../../core/models/domain';
+import { PtLoginModel, PtRegisterModel } from '../../../../core/models/domain';
 
 type AuthAction = 'login' | 'logout' | 'register';
 

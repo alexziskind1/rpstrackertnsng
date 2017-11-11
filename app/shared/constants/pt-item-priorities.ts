@@ -1,4 +1,4 @@
-import { PriorityEnum } from '../models/domain/enums';
+import { PriorityEnum } from '../../core/models/domain/enums';
 
 export const PT_ITEM_PRIORITIES = [
     PriorityEnum.Low,

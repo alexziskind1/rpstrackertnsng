@@ -6,7 +6,7 @@ import { DatePicker } from 'ui/date-picker';
 import { PtModalComponentBase } from '../../../../shared/modals/pt-modal-component-base';
 import { PtNewItemForm } from '../../../../shared/models/forms';
 import { PtNewItem } from '../../../../shared/models/dto';
-import { PtItemType } from '../../../../shared/models/domain/types';
+import { PtItemType } from '../../../../core/models/domain/types';
 
 
 @Component({

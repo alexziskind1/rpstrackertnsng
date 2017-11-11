@@ -7,7 +7,7 @@ import {
 }
     from '../../constants';
 import { DictType } from '../../../core/types';
-import { PtItemType } from '../domain/types';
+import { PtItemType } from '../../../core/models/domain/types';
 
 
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PtRegisterModel } from '../../../shared/models/domain';
+import { PtRegisterModel } from '../../../core/models/domain';
 
 
 @Component({

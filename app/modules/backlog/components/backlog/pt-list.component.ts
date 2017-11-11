@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { PtItem } from '../../../../shared/models/domain';
+import { PtItem } from '../../../../core/models/domain';
 import { ItemEventData } from 'ui/list-view';
 
 @Component({

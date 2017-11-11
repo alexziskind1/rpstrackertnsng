@@ -1,4 +1,3 @@
-export * from './filter-state.model';
 export * from './pt-item-type.model.impl';
 export * from './pt-list-display-item.model';
 export * from './pt-modal-context.model';

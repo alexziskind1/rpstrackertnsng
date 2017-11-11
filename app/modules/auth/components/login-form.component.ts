@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { PtLoginModel } from '../../../shared/models/domain';
+import { PtLoginModel } from '../../../core/models/domain';
 
 
 @Component({

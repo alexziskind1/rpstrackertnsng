@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { ErrorObservable } from 'rxjs/observable/ErrorObservable';
 
 import { APP_CONFIG, AppConfig } from '../../../app-config.module';
-import { PtTask, PtItem, PtComment } from '../../../shared/models/domain';
+import { PtTask, PtItem, PtComment } from '../../../core/models/domain';
 import { PresetType } from '../../../shared/models/ui/types';
 
 

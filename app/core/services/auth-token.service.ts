@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 
-import { PtAuthToken } from '../../shared/models/domain';
+import { PtAuthToken } from '../../core/models/domain';
 
 const AUTH_TOKEN_KEY = 'AUTH_TOKEN_KEY';
 

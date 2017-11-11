@@ -1,4 +1,4 @@
-import { PtItemType } from '../domain/types';
+import { PtItemType } from '../../../core/models/domain/types';
 
 
 export interface PtNewItem {

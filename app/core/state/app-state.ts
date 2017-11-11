@@ -1,4 +1,4 @@
-import { PtItem, PtUser } from '../../shared/models/domain';
+import { PtItem, PtUser } from '../../core/models/domain';
 import { PresetType } from '../../shared/models/ui/types';
 
 

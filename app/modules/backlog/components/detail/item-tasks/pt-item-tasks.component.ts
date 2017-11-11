@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
-import { PtItem, PtTask } from '../../../../../shared/models/domain';
+import { PtItem, PtTask } from '../../../../../core/models/domain';
 import { PtNewTask } from '../../../../../shared/models/dto';
 
 

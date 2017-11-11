@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { SegmentedBar, SegmentedBarItem } from 'ui/segmented-bar';
 import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
 
-import { PtItem, PtTask, PtUser } from '../../../../shared/models/domain';
+import { PtItem, PtTask, PtUser } from '../../../../core/models/domain';
 import { BacklogService } from '../../services/backlog.service';
 import { PtUserService, NavigationService } from '../../../../core/services';
 import { Store } from '../../../../core/state/app-store';

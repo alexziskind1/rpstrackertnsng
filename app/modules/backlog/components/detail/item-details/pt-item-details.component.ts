@@ -18,9 +18,9 @@ import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData, DataFormEv
 
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
 import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES, getPtTypeImage } from '../../../../../shared/constants';
-import { PtItem, PtUser } from '../../../../../shared/models/domain';
-import { PtItemType } from '../../../../../shared/models/domain/types';
-import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../shared/models/domain/enums';
+import { PtItem, PtUser } from '../../../../../core/models/domain';
+import { PtItemType } from '../../../../../core/models/domain/types';
+import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
 import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
 import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
