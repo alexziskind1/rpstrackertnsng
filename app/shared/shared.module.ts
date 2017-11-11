@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { NativeScriptUISideDrawerModule } from "nativescript-pro-ui/sidedrawer/angular";
+import { NativeScriptUIDataFormModule } from "nativescript-pro-ui/dataform/angular";
 
 import { PtModalService } from './modals/pt-modal.service';
 
@@ -15,11 +17,15 @@ import { ListSelectorModalComponent } from './modals/list-selector/list-selector
 
 @NgModule({
     imports: [
+        CommonModule,
         NativeScriptModule,
         NativeScriptFormsModule,
-        CommonModule
+        NativeScriptUISideDrawerModule,
+        NativeScriptUIDataFormModule
     ],
     exports: [
+        NativeScriptUISideDrawerModule,
+        NativeScriptUIDataFormModule,
         MenuComponent,
         DialogComponent
     ],
