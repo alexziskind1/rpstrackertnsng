@@ -4,7 +4,7 @@ import * as _ from 'lodash';
 
 import { Observable, ObservableInput } from 'rxjs/Observable';
 
-import { AppConfig } from '../../../core/models/app-config.model';
+import { AppConfig } from '../../../core/models/core/app-config.model';
 import { APP_CONFIG } from '../../../config/app-config.module';
 import { Store } from '../../../core/state/app-store';
 import { ErrorHandlerService } from '../../../core/services/error-handler.service';

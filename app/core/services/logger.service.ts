@@ -1,18 +1,28 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
+
+import { AppConfig } from '../models/core/app-config.model';
+import { APP_CONFIG } from '../../config/app-config.module';
+import { LoggingLevelEnum } from '../models/enums/logging-level.enum';
 
 
 @Injectable()
 export class LoggerService {
-    logs: string[] = [];
-    errors: string[] = [];
+    private logs: string[] = [];
+    private errors: string[] = [];
+
+    constructor( @Inject(APP_CONFIG) private config: AppConfig) { }
 
     log(message: string) {
-        this.logs.push(message);
-        console.log(message);
+        if (this.config.loggingEnabled && this.config.loggingLevel === LoggingLevelEnum.Debug) {
+            this.logs.push(message);
+            console.log(message);
+        }
     }
 
     error(message: string) {
-        this.errors.push(message);
-        console.error(message);
+        if (this.config.loggingEnabled) {
+            this.errors.push(message);
+            console.error(message);
+        }
     }
 }
