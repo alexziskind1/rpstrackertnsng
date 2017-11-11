@@ -17,7 +17,7 @@ import { BacklogModule } from './modules/backlog/backlog.module';
 
 import { AppComponent } from './app.component';
 import { Store } from './core/app-store';
-import { PtMissingTranslationHandler } from './core/pt-missing-translations-handler';
+import { PtMissingTranslationHandler } from './core/helpers/pt-missing-translations-handler';
 
 import './rxjs-imports';
 
