@@ -5,7 +5,7 @@ import {
     PT_ITEM_TYPE_CHORE,
     PT_ITEM_TYPE_IMPEDIMENT
 }
-    from '../../constants';
+    from '../../../core/constants';
 import { DictType } from '../../../core/types';
 import { PtItemType } from '../../../core/models/domain/types';
 

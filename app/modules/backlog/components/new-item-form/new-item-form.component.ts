@@ -2,7 +2,7 @@ import { Component, Input, EventEmitter, OnInit, Output, ViewChild } from '@angu
 
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
 
-import { PT_ITEM_TYPES } from '../../../../shared/constants';
+import { PT_ITEM_TYPES } from '../../../../core/constants';
 import { PtNewItemForm } from '../../../../shared/models/forms/pt-new-item-form.model';
 
 

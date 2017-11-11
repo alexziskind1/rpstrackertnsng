@@ -16,11 +16,11 @@ import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
 import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData, DataFormEventData, EntityProperty, RadDataForm, PropertyEditor } from 'nativescript-pro-ui/dataform';
 
 
-import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
-import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES, getPtTypeImage } from '../../../../../shared/constants';
 import { PtItem, PtUser } from '../../../../../core/models/domain';
 import { PtItemType } from '../../../../../core/models/domain/types';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
+import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES, getPtTypeImage } from '../../../../../core/constants';
+import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
 import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
 import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
