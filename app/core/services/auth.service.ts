@@ -9,10 +9,10 @@ import { StorageService } from './storage.service';
 import { PtUser } from '../../core/models/domain';
 import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
 import { Store } from '../state/app-store';
-import { AppConfig, APP_CONFIG } from '../../app-config.module';
+import { AppConfig } from '../models/app-config.model';
+import { APP_CONFIG } from '../../app-config.module';
 import { ErrorHandlerService } from './error-handler.service';
 import { AuthTokenService } from './auth-token.service';
-
 
 
 const CURRENT_USER_KEY = 'CURRENT_USER_KEY';

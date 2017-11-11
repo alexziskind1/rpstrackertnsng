@@ -3,10 +3,10 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { AppConfig, APP_CONFIG } from '../../app-config.module';
+import { AppConfig } from '../models/app-config.model';
+import { APP_CONFIG } from '../../app-config.module';
 import { PtUser } from '../../core/models/domain';
 import { Store } from '../state/app-store';
-
 
 
 @Injectable()
