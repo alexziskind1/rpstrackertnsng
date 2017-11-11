@@ -9,16 +9,9 @@ import { APP_CONFIG } from '../config/app-config.module';
 import { Store } from './state/app-store';
 
 import {
-    AuthService,
-    AuthTokenService,
-    ErrorHandlerService,
-    LoggerService,
-    NavigationService,
-    PtUserService,
-    StorageNsService,
-    StorageWebService,
+    SERVICES,
     PtApiHttpInterceptor,
-} from '../core/services';
+} from './services';
 
 
 @NgModule({
@@ -27,14 +20,7 @@ import {
         NativeScriptHttpModule
     ],
     providers: [
-        AuthService,
-        AuthTokenService,
-        PtUserService,
-        ErrorHandlerService,
-        LoggerService,
-        NavigationService,
-        StorageNsService,
-        StorageWebService,
+        ...SERVICES,
         Store,
         { provide: HTTP_INTERCEPTORS, useClass: PtApiHttpInterceptor, multi: true }
     ]

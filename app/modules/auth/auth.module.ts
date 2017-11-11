@@ -10,16 +10,16 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AuthService } from '../../core/services/auth.service';
-//import { authProviders } from '../../app.routing';
-
-import { AuthPageComponent } from './pages/auth/auth.page.component';
-import { LoginFormComponent } from './components/login-form.component';
-import { RegisterFormComponent } from './components/register-form.component';
 import { Store } from '../../core/state/app-store';
 import { AuthRoutingModule } from './auth.routing';
 import { AuthGuard } from '../../core/services';
 
-export const authProviders = [
+
+import { PAGES } from './pages';
+import { COMPONENTS } from './components';
+
+
+export const AUTH_PROVIDERS = [
     AuthGuard
 ];
 
@@ -34,13 +34,12 @@ export const authProviders = [
     ],
     exports: [],
     declarations: [
-        AuthPageComponent,
-        LoginFormComponent,
-        RegisterFormComponent
+        ...PAGES,
+        ...COMPONENTS
     ],
     providers: [
         AuthService,
-        authProviders,
+        AUTH_PROVIDERS,
         Store
     ]
 })
