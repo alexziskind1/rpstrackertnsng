@@ -1,16 +1,14 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone } from '@angular/core';
 
 
-
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
 
 import { android as androidApplication } from 'application';
-import { Label } from 'ui/label';
+import { Color } from 'color';
 import { Button } from 'ui/button';
-import { StackLayout } from 'ui/layouts/stack-layout';
-import { GridLayout } from 'ui/layouts/grid-layout';
+
 
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
 import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData, DataFormEventData, EntityProperty, RadDataForm, PropertyEditor } from 'nativescript-pro-ui/dataform';
@@ -21,14 +19,10 @@ import { PtItemType } from '../../../../../core/models/domain/types';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
 import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES, getPtTypeImage } from '../../../../../core/constants';
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
-import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
+
+import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
-import { Color } from 'tns-core-modules/color';
-
-
-//var colorDark = new Color("#4CAF50");
-//var colorGray = new Color("#ff0000");
 
 
 @Component({
@@ -45,7 +39,6 @@ export class PtItemDetailsComponent implements OnInit {
     @Output() itemSaved = new EventEmitter<PtItem>();
 
     @ViewChild('itemDetailsDataForm') itemDetailsDataForm: RadDataFormComponent;
-    @ViewChild('btnTapHtml') btnTapHtml: ElementRef;
 
     private users: PtUser[] = [];
     private usersLocal$: Observable<PtUser[]>;
@@ -60,23 +53,15 @@ export class PtItemDetailsComponent implements OnInit {
     private selectedTypeValue: PtItemType;
     private selectedPriorityValue: PriorityEnum;
 
-    public get checkboxImg() {
-        return getPtTypeImage(this.selectedTypeValue);
-        /*switch (this.selectedTypeValue) {
+    private itemTypeEditorBtnHelper: ButtonEditorHelper;
+    private itemTypeEditorViewConnected = false;
+    private itemTypeNativeView;
 
-            case 'PBI':
-                return 'res://i-pbi';
-            case 'Bug':
-                return 'res://i-bug';
-            case 'Chore':
-                return 'res://i-chore';
-            case 'Impediment':
-                return 'res://i-impediment';
-        }
-        */
+    public get itemTypeImage() {
+        return getPtTypeImage(this.selectedTypeValue);
     }
 
-    public get displayName() {
+    public get itemTypeEditorDisplayName() {
         return 'Type';
     }
 
@@ -135,7 +120,7 @@ export class PtItemDetailsComponent implements OnInit {
             switch (args.propertyName) {
                 case 'typeStr': this.editorSetupTypeEditorIos(args.editor); break;
                 case 'estimate': this.editorSetupEstimateEditorIos(args.editor); break;
-                case 'priorityStr': this.editorSetupSegmentedEditorIOS(args.editor); break;
+                case 'priorityStr': this.editorSetupPriorityEditorIOS(args.editor); break;
                 /*
                 case "onlyOnWiFi": this.editorSetupSwitchAndroid(args.editor); break;
                 case "networkLimit": this.editorSetupStepperAndroid(args.editor); break;
@@ -145,9 +130,8 @@ export class PtItemDetailsComponent implements OnInit {
         }
     }
 
-    public editorSetupSegmentedEditorIOS(editor) {
+    public editorSetupPriorityEditorIOS(editor) {
         const editorPriority = <PriorityEnum>editor.value;
-
         this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
         const coreEditor = <UISegmentedControl>editor.editor;
         coreEditor.tintColor = PriorityEnum.getColor(this.selectedPriorityValue).ios;
@@ -155,11 +139,8 @@ export class PtItemDetailsComponent implements OnInit {
 
 
     private editorSetupTypeEditorIos(editor) {
-        //const labelDef = editor.gridLayout.definitionForView(editor.editorValueLabel);
         const arrangedViews = editor.gridLayout.arrangedViews;
         const defs = editor.gridLayout.definitions;
-
-
 
         const labelDef = editor.gridLayout.definitionForView(editor.textLabel);
         const imageDef = editor.gridLayout.definitionForView(editor.imageView);
@@ -167,50 +148,6 @@ export class PtItemDetailsComponent implements OnInit {
         imageDef.column = 1;
 
         this.selectedTypeValue = editor.editorValueLabel.text;
-
-
-
-        //if (!this.flipped) {
-        //var a = labelDef.column;
-        //labelDef.column = imageDef.column;
-        //imageDef.column = a;
-        //this.flipped = true;
-        //}
-
-        /*
-               setTimeout(() => {
-       
-                  
-                   const iv = UIImageView.alloc().initWithImage(UIImage.imageNamed('icon_close_black'));
-                   iv.backgroundColor = UIColor.redColor;
-                   iv.frame = CGRectMake(0, 0, 40, 40);
-       
-                   const stackV = UIStackView.alloc().init();
-                   stackV.spacing = 30;
-       
-       
-       
-                   //stackV.addArrangedSubview(iv);
-       
-                   const valueLabel = arrangedViews[1].removeFromSuperview();
-                   editor.subviews[4].removeFromSuperview();
-       
-                   editor.insertSubviewAtIndex(iv, 4);
-       
-       
-                   //arrangedViews[0].image = UIImage.imageNamed('icon_close_black');
-       
-       
-                   //arrangedViews[0] = iv;
-                   //defs[3].view = UIImageView.alloc().initWithImage(UIImage.imageNamed('icon_close_black'));
-       
-                   //arrangedViews[0].image = UIImage.imageNamed('icon_close_black');
-                   // defs[3].view.image = UIImage.imageNamed('icon_close_black');
-               }, 200);
-       */
-
-
-
     }
 
     private editorSetupEstimateEditorIos(editor) {
@@ -247,7 +184,7 @@ export class PtItemDetailsComponent implements OnInit {
         }
     }
 
-    public onSelectorTap2(): void {
+    public onItemTypeEditorBtnTap(): void {
         this.assigneesSub = this.usersLocal$.subscribe((users) => {
             this.users = users;
             const ptModalListModel: PtModalListModel<PtModalListDisplayItem<PtUser>> = {
@@ -264,12 +201,11 @@ export class PtItemDetailsComponent implements OnInit {
 
             this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(ctx)
                 .then(result => {
-                    //this.item.assignee = result;
                     this.reselectedAssignee = result;
                     this.itemForm.assigneeName = result.fullName;
 
-                    this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
-                    this._buttonEditorHelper.editor.notifyValueChanged();
+                    this.itemTypeEditorBtnHelper.updateEditorValue(this.itemTypeNativeView, this.itemForm.assigneeName);
+                    this.itemTypeEditorBtnHelper.editor.notifyValueChanged();
                     this.assigneesSub.unsubscribe();
                 }).catch(error => {
                     console.error(error);
@@ -280,36 +216,6 @@ export class PtItemDetailsComponent implements OnInit {
         if (this.users.length === 0) {
             this.usersRequested.emit();
         }
-
-
-        /*
-        const ptModalListModel: PtModalListModel<PtModalListDisplayItem> = {
-            items: this.frameworks.map(f => {
-                return {
-                    key: f,
-                    value: f,
-                    img: '',
-                    isSelected: false,
-                    payload: f
-                };
-            }),
-            selectedIndex: this.frameworks.indexOf(this.selectedValue)
-        };
-
-        const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem>, string> = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem>, string>(
-            this.vcRef,
-            'select framework d',
-            ptModalListModel,
-            this.selectedValue
-        );
-
-        this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem>, string>(ctx)
-            .then(result => {
-                this.selectedValue = result;
-                this._buttonEditorHelper.updateEditorValue(this.natView, this.selectedValue);
-            }).catch(error => console.error(error));
-
-            */
     }
 
 
@@ -371,129 +277,52 @@ export class PtItemDetailsComponent implements OnInit {
 
 
 
-    private newView: Label;
-    private _buttonEditorHelper: ButtonEditorHelper;
-    private iosEditorView: StackLayout;
-    private iosEditorBtn: Button;
-
-    private viewConnected = false;
-    private natView;
 
     public editorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         const newBtn = new Button();
-        this._buttonEditorHelper = new ButtonEditorHelper();
-        this._buttonEditorHelper.editor = args.object;
+        this.itemTypeEditorBtnHelper = new ButtonEditorHelper();
+        this.itemTypeEditorBtnHelper.editor = args.object;
 
         if (androidApplication) {
-            if (!this.viewConnected) {
-
-
-                /*
-                var androidEditorView: android.widget.Button = new android.widget.Button(args.context);
-                var that = this;
-                androidEditorView.setOnClickListener(new android.view.View.OnClickListener({
-                    onClick(view: android.view.View) {
-                        that.zone.run(() => {
-                            that.onSelectorTap2.apply(that);
-                        });
-                    }
-                }));
-                args.view = androidEditorView;
-                this.updateEditorValue(androidEditorView, this.selectedValue);
-                */
-
-                /*
-                if (this.viewConnected) {
-                    return;
-                }
-                const gridLayout = <GridLayout>(<Label>this.btnTapHtml.nativeElement).parent;
-                const gridChild = gridLayout.getChildAt(0);
-                const gridChildNative = gridChild.android;
-                gridLayout.removeChild(gridChild);
-                const that = this;
-                gridChildNative.setOnClickListener(new android.view.View.OnClickListener({
-                    onClick(view: android.view.View) {
-                        that.onSelectorTap2();
-                        //that.handleTap(view, args.object);
-                    }
-                }));
-    
-                args.view = gridChildNative;
-                this.viewConnected = true;
-                this.updateEditorValue(gridChildNative, this.selectedValue);
-                */
+            if (!this.itemTypeEditorViewConnected) {
 
                 newBtn._context = args.context;
 
-                this.natView = newBtn.createNativeView();
+                this.itemTypeNativeView = newBtn.createNativeView();
 
                 newBtn.on('tap', () => {
                     this.zone.run(() => {
-                        this.onSelectorTap2.apply(this);
+                        this.onItemTypeEditorBtnTap.apply(this);
                     });
                 });
-                this.viewConnected = true;
+                this.itemTypeEditorViewConnected = true;
             }
 
-            args.view = this.natView;
-            this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
+            args.view = this.itemTypeNativeView;
+            this.itemTypeEditorBtnHelper.updateEditorValue(this.itemTypeNativeView, this.itemForm.assigneeName);
 
         } else {
-            if (!this.viewConnected) {
-                this._buttonEditorHelper.iosTapHandler = () => {
+            if (!this.itemTypeEditorViewConnected) {
+                this.itemTypeEditorBtnHelper.iosTapHandler = () => {
                     this.zone.run(() => {
-                        this.onSelectorTap2.apply(this);
+                        this.onItemTypeEditorBtnTap.apply(this);
                     });
                 };
 
 
-                //newBtn._context = args.context;
-                //const nativeView = newBtn.createNativeView();
+                this.itemTypeNativeView = newBtn.nativeView;
 
-                /*
-                newBtn.on('tap', () => {
-                    this.zone.run(() => {
-                        this.onSelectorTap2.apply(this);
-                    });
-                });
-                */
-
-                this.natView = newBtn.nativeView;
-
-                this.natView.addTargetActionForControlEvents(this._buttonEditorHelper, "handleTap:", UIControlEvents.TouchUpInside);
-                this.viewConnected = true;
+                this.itemTypeNativeView.addTargetActionForControlEvents(this.itemTypeEditorBtnHelper, "handleTap:", UIControlEvents.TouchUpInside);
+                this.itemTypeEditorViewConnected = true;
             }
-            args.view = this.natView;
-            this._buttonEditorHelper.updateEditorValue(this.natView, this.itemForm.assigneeName);
-            //var iosEditorView = UIButton.buttonWithType(UIButtonType.System);
-            //iosEditorView.contentHorizontalAlignment = UIControlContentHorizontalAlignment.Left;
-            //iosEditorView.addTargetActionForControlEvents(this._buttonEditorHelper, "handleTap:", UIControlEvents.TouchUpInside);
+            args.view = this.itemTypeNativeView;
+            this.itemTypeEditorBtnHelper.updateEditorValue(this.itemTypeNativeView, this.itemForm.assigneeName);
 
-            /*
-            this.iosEditorView = new StackLayout();
-            this.iosEditorView.className = 'stack-class';
-
-            this.iosEditorBtn = new Button();
-
-            this.iosEditorView.addChild(this.iosEditorBtn);
-
-            setTimeout(() => {
-                this.iosEditorBtn.set('text', 'TAP');
-                this.iosEditorBtn.text = 'TAP';
-            }, 500);
-
-            this.iosEditorView.on('tap', () => this.onDescriptionTap(null));
-            */
-
-            //this._buttonEditorHelper.editorBtn = this.iosEditorBtn;
-
-            //args.view = this.iosEditorBtn.ios;
-            //args.view = this.btnTapHtml.nativeElement.ios;
         }
     }
 
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
-        this._buttonEditorHelper.updateEditorValue(args.view, args.value);
+        this.itemTypeEditorBtnHelper.updateEditorValue(args.view, args.value);
         //args.view.text
         //return args.value.valueForKey('fullName');
         //var a = 0;
@@ -501,7 +330,7 @@ export class PtItemDetailsComponent implements OnInit {
 
     public editorNeedsValue(args: DataFormCustomPropertyEditorEventData) {
         //args.value = this.newView.text;
-        args.value = this._buttonEditorHelper.buttonValue;
+        args.value = this.itemTypeEditorBtnHelper.buttonValue;
         //var a = 0;
     }
 }

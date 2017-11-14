@@ -9,7 +9,7 @@ import { StorageService } from './storage.service';
 import { PtUser } from '../../core/models/domain';
 import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
 import { Store } from '../state/app-store';
-import { AppConfig } from '../models/core/app-config.model';
+import { AppConfig } from '../models/core';
 import { APP_CONFIG } from '../../config/app-config.module';
 import { ErrorHandlerService } from './error-handler.service';
 import { AuthTokenService } from './auth-token.service';

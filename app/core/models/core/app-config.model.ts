@@ -1,6 +1,5 @@
-import { TypeProvider } from "@angular/core";
-//import { LoggingLevel } from "../types/logging-level";
-import { LoggingLevelEnum } from "../enums/logging-level.enum";
+import { TypeProvider } from '@angular/core';
+import { LoggingLevelEnum } from '../enums';
 
 export type AppType = 'Ns' | 'Web';
 

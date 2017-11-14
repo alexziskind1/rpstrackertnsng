@@ -2,7 +2,7 @@ import { NgModule, InjectionToken, TypeProvider } from '@angular/core';
 import { StorageService } from '../core/services/storage.service';
 import { StorageWebService } from '../core/services/web/storage-web.service';
 import { StorageNsService } from '../core/services/ns/storage-ns.service';
-import { AppConfig } from '../core/models/core/app-config.model';
+import { AppConfig } from '../core/models/core';
 
 import { environment } from '../environments/environment';
 

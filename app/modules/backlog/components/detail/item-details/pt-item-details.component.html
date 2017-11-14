@@ -22,7 +22,8 @@
                 </TKPropertyEditor>
             </TKEntityProperty>
 
-            <TKEntityProperty tkDataFormProperty name="typeStr" displayName="Type" index="3" [imageResource]="checkboxImg" [valuesProvider]="itemTypesProvider">
+            <TKEntityProperty tkDataFormProperty name="typeStr" [displayName]="itemTypeEditorDisplayName" index="3" [imageResource]="itemTypeImage"
+                [valuesProvider]="itemTypesProvider">
                 <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
             </TKEntityProperty>
 

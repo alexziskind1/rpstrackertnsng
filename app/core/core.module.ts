@@ -4,7 +4,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
 
-import { AppConfig } from './models/core/app-config.model';
+import { AppConfig } from './models/core';
 import { APP_CONFIG } from '../config/app-config.module';
 import { Store } from './state/app-store';
 

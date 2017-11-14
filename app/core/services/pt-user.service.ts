@@ -3,7 +3,7 @@ import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { AppConfig } from '../models/core/app-config.model';
+import { AppConfig } from '../models/core';
 import { APP_CONFIG } from '../../config/app-config.module';
 import { PtUser } from '../../core/models/domain';
 import { Store } from '../state/app-store';
