@@ -25,6 +25,11 @@ import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
 
 
+var colorLight = new Color("#CDDC39");
+var colorDark = new Color("#4CAF50");
+var colorGray = new Color("#F9F9F9");
+
+
 @Component({
     moduleId: module.id,
     selector: 'pt-item-details',
@@ -118,6 +123,7 @@ export class PtItemDetailsComponent implements OnInit {
             */
         } else {
             switch (args.propertyName) {
+                case 'description': this.editorSetupDescriptionEditorIos(args.editor); break;
                 case 'typeStr': this.editorSetupTypeEditorIos(args.editor); break;
                 case 'estimate': this.editorSetupEstimateEditorIos(args.editor); break;
                 case 'priorityStr': this.editorSetupPriorityEditorIOS(args.editor); break;
@@ -130,18 +136,12 @@ export class PtItemDetailsComponent implements OnInit {
         }
     }
 
-    private editorSetupPriorityEditorIOS(editor) {
-        const editorPriority = <PriorityEnum>editor.value;
-        this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
-        const coreEditor = <UISegmentedControl>editor.editor;
-        coreEditor.tintColor = PriorityEnum.getColor(this.selectedPriorityValue).ios;
+    private editorSetupDescriptionEditorIos(editor) {
+        const textViewDef = editor.gridLayout.definitionForView(editor.textView);
+        textViewDef.view.font = UIFont.fontWithNameSize(textViewDef.view.font.fontName, 17);
     }
 
-
     private editorSetupTypeEditorIos(editor) {
-        const arrangedViews = editor.gridLayout.arrangedViews;
-        const defs = editor.gridLayout.definitions;
-
         const labelDef = editor.gridLayout.definitionForView(editor.textLabel);
         const imageDef = editor.gridLayout.definitionForView(editor.imageView);
         labelDef.column = 0;
@@ -162,11 +162,33 @@ export class PtItemDetailsComponent implements OnInit {
         } else {
             labelDef.view.text = `${numVal} points`;
         }
+
+        //editor.valueLabel.textColor = colorDark.ios;
+
+
+        var coreEditor = <UIStepper>editor.editor;
+        coreEditor.tintColor = colorLight.ios;
+
+
+        for (var i = 0; i < coreEditor.subviews.count; i++) {
+            if (coreEditor.subviews[i] instanceof UIButton) {
+                (<any>coreEditor.subviews[i]).imageView.tintColor = colorDark.ios;
+            }
+        }
+
     }
 
     private editorSetupEstimateEditorAndroid(editor) {
         editor.getHeaderView().setPadding(12, 12, 12, 48);
     }
+
+    private editorSetupPriorityEditorIOS(editor) {
+        const editorPriority = <PriorityEnum>editor.value;
+        this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
+        const coreEditor = <UISegmentedControl>editor.editor;
+        coreEditor.tintColor = PriorityEnum.getColor(this.selectedPriorityValue).ios;
+    }
+
 
 
     private ptUserToModalListDisplayItem(u: PtUser): PtModalListDisplayItem<PtUser> {
@@ -264,6 +286,7 @@ export class PtItemDetailsComponent implements OnInit {
 
     public onAssigneeEditorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         const newBtn = new Button();
+        newBtn.style.color = colorDark;
         this.itemTypeEditorBtnHelper = new ButtonEditorHelper();
         this.itemTypeEditorBtnHelper.editor = args.object;
 
@@ -294,8 +317,8 @@ export class PtItemDetailsComponent implements OnInit {
                 };
 
 
-                this.itemTypeNativeView = newBtn.nativeView;
-
+                this.itemTypeNativeView = <UIButton>newBtn.nativeView;
+                this.itemTypeNativeView.setTitleColorForState(colorDark.ios, UIControlState.Normal);
                 this.itemTypeNativeView.addTargetActionForControlEvents(this.itemTypeEditorBtnHelper, "handleTap:", UIControlEvents.TouchUpInside);
                 this.itemTypeEditorViewConnected = true;
             }
