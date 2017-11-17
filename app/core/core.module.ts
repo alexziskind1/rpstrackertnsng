@@ -27,7 +27,7 @@ import {
 })
 export class CoreModule {
     constructor(
-        @Inject(APP_CONFIG) config: AppConfig,
+        //@Inject(APP_CONFIG) config: AppConfig,
         @Optional() @SkipSelf() parentModule: CoreModule
     ) {
         if (parentModule) {
