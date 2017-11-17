@@ -10,7 +10,7 @@
         <RadDataForm #itemDetailsDataForm [source]="itemForm" (propertyCommitted)="onPropertyCommitted($event)" (editorUpdate)="onEditorUpdate($event)">
 
             <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
-                <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+                <TKPropertyEditor tkEntityPropertyEditor type="Text">
                     <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
                 </TKPropertyEditor>
                 <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
