@@ -130,7 +130,7 @@ export class PtItemDetailsComponent implements OnInit {
         }
     }
 
-    public editorSetupPriorityEditorIOS(editor) {
+    private editorSetupPriorityEditorIOS(editor) {
         const editorPriority = <PriorityEnum>editor.value;
         this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
         const coreEditor = <UISegmentedControl>editor.editor;
@@ -219,7 +219,7 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
 
-    public notifyUpdateItem() {
+    private notifyUpdateItem() {
         this.itemDetailsDataForm.dataForm.validateAll()
             .then(ok => {
                 if (ok) {
@@ -246,20 +246,6 @@ export class PtItemDetailsComponent implements OnInit {
         return updatedItem;
     }
 
-    public onTitleTap(args) {
-        const ctx = this.ptModalService.createPtModalContext(
-            this.vcRef,
-            'Edit title',
-            this.item.title,
-            this.item.title
-        );
-        this.ptModalService.createTextInputModal<string, string>(ctx)
-            .then(result => {
-                this.item.title = result;
-                this.itemSaved.emit(this.item);
-            }).catch(error => console.error(error));
-    }
-
 
     public onDescriptionTap(args) {
         const ctx = this.ptModalService.createPtModalContext<string, string>(
@@ -276,9 +262,7 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
 
-
-
-    public editorNeedsView(args: DataFormCustomPropertyEditorEventData) {
+    public onAssigneeEditorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         const newBtn = new Button();
         this.itemTypeEditorBtnHelper = new ButtonEditorHelper();
         this.itemTypeEditorBtnHelper.editor = args.object;
