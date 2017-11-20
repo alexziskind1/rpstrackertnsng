@@ -2,9 +2,8 @@ import { platformNativeScriptDynamic } from 'nativescript-angular/platform';
 
 import * as app from 'application';
 import { AppModule } from './app.module';
+import { setAppEvents } from './globals/app-events';
 
-app.on(app.uncaughtErrorEvent, (args) => {
-    console.error('appliocation error');
-});
+setAppEvents();
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);
