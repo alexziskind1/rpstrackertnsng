@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf, Inject } from '@angular/core';
+import { NgModule, Optional, SkipSelf, Inject, ErrorHandler } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
@@ -12,6 +12,7 @@ import {
     SERVICES,
     PtApiHttpInterceptor,
 } from './services';
+import { RpsErrorHandler } from './helpers/rps-error-handler';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import {
     providers: [
         ...SERVICES,
         Store,
+        { provide: ErrorHandler, useClass: RpsErrorHandler },
         { provide: HTTP_INTERCEPTORS, useClass: PtApiHttpInterceptor, multi: true }
     ]
 })
