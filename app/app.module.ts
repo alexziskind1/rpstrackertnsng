@@ -18,11 +18,11 @@ import { BacklogModule } from './modules/backlog/backlog.module';
 import { AppComponent } from './app.component';
 import { Store } from './core/state/app-store';
 import { PtMissingTranslationHandler } from './core/helpers/pt-missing-translations-handler';
-import { createTranslateLoader, setStatusBarColors } from './utils';
+import { createTranslateLoader } from './utils';
 import './utils/console-color';
 import './rxjs-imports';
 
-setStatusBarColors();
+
 
 @NgModule({
     bootstrap: [
@@ -32,7 +32,6 @@ setStatusBarColors();
         NativeScriptModule,
         NativeScriptHttpModule,
         NativeScriptFormsModule,
-
 
         TranslateModule.forRoot({
             loader: {
