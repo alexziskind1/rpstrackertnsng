@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
-export class ErrorHandlerService {
+export class ServerErrorHandlerService {
 
     constructor() { }
 
     public handleHttpError(error: any) {
-        console.error(error);
         return Observable.throw(error.json().error || 'Server error');
+        //throw new Error('Server Error: ' + error.json().error || 'Something went wrong');
     }
 
 }

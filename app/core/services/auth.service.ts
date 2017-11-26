@@ -11,7 +11,7 @@ import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/do
 import { Store } from '../state/app-store';
 import { AppConfig } from '../models/core';
 import { APP_CONFIG } from '../../config/app-config.module';
-import { ErrorHandlerService } from './error-handler.service';
+import { ServerErrorHandlerService } from './server-error-handler.service';
 import { AuthTokenService } from './auth-token.service';
 
 
@@ -43,7 +43,7 @@ export class AuthService {
         private store: Store,
         private authTokenService: AuthTokenService,
         private storageService: StorageService,
-        private errorHandlerService: ErrorHandlerService
+        private errorHandlerService: ServerErrorHandlerService
     ) { }
 
     public isLoggedIn(): boolean {

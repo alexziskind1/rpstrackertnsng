@@ -7,7 +7,7 @@ import { Observable, ObservableInput } from 'rxjs/Observable';
 import { AppConfig } from '../../../core/models/core';
 import { APP_CONFIG } from '../../../config/app-config.module';
 import { Store } from '../../../core/state/app-store';
-import { ErrorHandlerService } from '../../../core/services/error-handler.service';
+import { ServerErrorHandlerService } from '../../../core/services/server-error-handler.service';
 import { PtItem, PtUser, PtTask, PtComment } from '../../../core/models/domain';
 import { PtNewItem, PtNewTask, PtNewComment } from '../../../shared/models/dto';
 import { PriorityEnum, StatusEnum } from '../../../core/models/domain/enums';
@@ -33,7 +33,7 @@ export class BacklogService {
         @Inject(APP_CONFIG) private config: AppConfig,
         private repo: BacklogRepository,
         private store: Store,
-        private errorHandlerService: ErrorHandlerService,
+        private errorHandlerService: ServerErrorHandlerService,
         private zone: NgZone
     ) { }
 
