@@ -1,6 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
-import { PtItem } from '../../../../core/models/domain';
+import { Component, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
+
 import { ItemEventData } from 'ui/list-view';
+
+import { PtItem } from '../../../../core/models/domain';
+
 
 @Component({
     moduleId: module.id,
@@ -8,18 +11,16 @@ import { ItemEventData } from 'ui/list-view';
     templateUrl: 'pt-list.component.html',
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PtListComponent implements OnInit {
+export class PtListComponent {
 
     @Input() items: PtItem[];
     @Output() listItemSelected: EventEmitter<PtItem> = new EventEmitter<PtItem>();
 
     constructor() { }
 
-    ngOnInit() { }
-
     public listItemTap(args: ItemEventData) {
-        let lv = args.object;
-        let item = <PtItem>(<any>lv).items[args.index];
+        const lv = args.object;
+        const item = <PtItem>(<any>lv).items[args.index];
         this.listItemSelected.emit(item);
     }
 }
