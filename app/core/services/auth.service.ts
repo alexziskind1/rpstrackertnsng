@@ -2,17 +2,16 @@ import { Injectable, Inject } from '@angular/core';
 import { Http } from '@angular/http';
 
 import { Observable } from 'rxjs/Observable';
-import { of } from 'rxjs/observable/of';
 
-
-import { StorageService } from './storage.service';
-import { PtUser } from '../../core/models/domain';
-import { PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
-import { Store } from '../state/app-store';
 import { AppConfig } from '../models/core';
 import { APP_CONFIG } from '../../config/app-config.module';
+import { Store } from '../state/app-store';
+import { StorageService } from './storage.service';
 import { ServerErrorHandlerService } from './server-error-handler.service';
 import { AuthTokenService } from './auth-token.service';
+import { PtUser, PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
+
+
 
 
 const CURRENT_USER_KEY = 'CURRENT_USER_KEY';

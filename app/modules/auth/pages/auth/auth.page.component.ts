@@ -13,7 +13,7 @@ type AuthAction = 'login' | 'logout' | 'register';
 
 @Component({
     moduleId: module.id,
-    selector: 'app-auth-page',
+    selector: 'pt-auth-page',
     templateUrl: 'auth.page.component.html'
 })
 export class AuthPageComponent implements OnInit {
