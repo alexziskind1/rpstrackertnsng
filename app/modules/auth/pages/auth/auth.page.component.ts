@@ -27,7 +27,7 @@ export class AuthPageComponent implements OnInit {
         private navigationService: NavigationService
     ) { }
 
-    ngOnInit() {
+    public ngOnInit() {
         /*
         this.pageRoute.activatedRoute
             .switchMap(activatedRoute => activatedRoute.params)

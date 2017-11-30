@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { PtRegisterModel } from '../../../core/models/domain';
 
 
@@ -7,7 +7,7 @@ import { PtRegisterModel } from '../../../core/models/domain';
     selector: 'pt-register-form',
     templateUrl: 'register-form.component.html'
 })
-export class RegisterFormComponent implements OnInit {
+export class RegisterFormComponent  {
 
     @Output() registerInitiated = new EventEmitter<PtRegisterModel>();
 
@@ -16,8 +16,6 @@ export class RegisterFormComponent implements OnInit {
     public fullName: string;
 
     constructor() { }
-
-    ngOnInit() { }
 
     public onRegisterTap(isValid: boolean) {
         if (isValid) {

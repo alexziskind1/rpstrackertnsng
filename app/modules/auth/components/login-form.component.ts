@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter } from '@angular/core';
 import { PtLoginModel } from '../../../core/models/domain';
 
 
@@ -7,7 +7,7 @@ import { PtLoginModel } from '../../../core/models/domain';
     selector: 'pt-login-form',
     templateUrl: 'login-form.component.html'
 })
-export class LoginFormComponent implements OnInit {
+export class LoginFormComponent  {
 
     @Output() loginInitiated = new EventEmitter<PtLoginModel>();
 
@@ -15,8 +15,6 @@ export class LoginFormComponent implements OnInit {
     public password = 'nuvious';
 
     constructor() { }
-
-    ngOnInit() { }
 
     public onLoginTap(isValid: boolean) {
         if (isValid) {
