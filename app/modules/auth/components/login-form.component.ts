@@ -5,7 +5,8 @@ import { PtLoginModel } from '../../../core/models/domain';
 @Component({
     moduleId: module.id,
     selector: 'pt-login-form',
-    templateUrl: 'login-form.component.html'
+    templateUrl: 'login-form.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginFormComponent  {
 

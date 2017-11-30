@@ -5,7 +5,8 @@ import { PtRegisterModel } from '../../../core/models/domain';
 @Component({
     moduleId: module.id,
     selector: 'pt-register-form',
-    templateUrl: 'register-form.component.html'
+    templateUrl: 'register-form.component.html',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RegisterFormComponent  {
 
