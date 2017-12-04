@@ -22,6 +22,9 @@ import './utils/console-color';
 import './rxjs-imports';
 
 
+import { registerElement } from 'nativescript-angular/element-registry';
+registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').PullToRefresh);
+
 
 @NgModule({
     bootstrap: [

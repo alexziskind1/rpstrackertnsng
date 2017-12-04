@@ -4,7 +4,7 @@ import { StorageWebService } from '../core/services/web/storage-web.service';
 import { StorageNsService } from '../core/services/ns/storage-ns.service';
 import { AppConfig } from '../core/models/core';
 
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');

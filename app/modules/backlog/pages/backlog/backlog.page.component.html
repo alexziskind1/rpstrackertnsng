@@ -28,7 +28,8 @@
         <GridLayout class="backlog-container" rows="*, 60">
 
             <GridLayout row="0" class="list-container">
-                <pt-list [items]="items$ | async" (listItemSelected)="selectListItem($event)"></pt-list>
+                <pt-list [items]="items$ | async" [isRefreshing]="isListRefreshing$ | async" (listItemSelected)="selectListItem($event)"
+                    (listRefreshRequested)="onListRefreshRequested($event)"></pt-list>
             </GridLayout>
 
             <StackLayout row="1" class="btn-add-wrapper">

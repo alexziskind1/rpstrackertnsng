@@ -2,6 +2,7 @@ import { Component, OnInit, AfterViewInit, ViewChild, ChangeDetectorRef, ViewCon
 import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 import { RadSideDrawerComponent, SideDrawerType } from "nativescript-pro-ui/sidedrawer/angular";
 import { RadSideDrawer, SideDrawerLocation } from 'nativescript-pro-ui/sidedrawer';
@@ -14,7 +15,6 @@ import { PresetType } from '../../../../shared/models/ui/types';
 import { PtModalService } from '../../../../shared/modals/pt-modal.service';
 import { NewItemModalComponent } from '../../modals/new-item/new-item.modal.component';
 import { PtNewItem } from '../../../../shared/models/dto';
-
 
 
 @Component({
@@ -30,7 +30,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
 
     public items$: Observable<PtItem[]> = this.store.select<PtItem[]>('backlogItems');
     public selectedPreset$: Observable<PresetType> = this.store.select<PresetType>('selectedPreset');
-
+    public isListRefreshing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
     constructor(
         private changeDetectionRef: ChangeDetectorRef,
@@ -74,6 +74,17 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
 
     public onCloseDrawerTap() {
         this.drawer.closeDrawer();
+    }
+
+    public onListRefreshRequested(notifyRefreshComplete: () => void) {
+        this.isListRefreshing$.next(true);
+        this.backlogService.fetchItems()
+            .then(() => {
+                this.isListRefreshing$.next(false);
+            })
+            .catch(() => {
+                this.isListRefreshing$.next(false);
+            });
     }
 
     public selectListItem(item: PtItem) {

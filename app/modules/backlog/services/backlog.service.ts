@@ -39,22 +39,28 @@ export class BacklogService {
 
 
     public fetchItems() {
-        this.repo.getPtItems(
-            this.currentPreset,
-            this.currentUserId,
-            this.errorHandlerService.handleHttpError,
-            (ptItems: PtItem[]) => {
+        return new Promise((resolve, reject) => {
+            this.repo.getPtItems(
+                this.currentPreset,
+                this.currentUserId,
+                (error) => {
+                    reject(error);
+                    return this.errorHandlerService.handleHttpError(error);
+                },
+                (ptItems: PtItem[]) => {
 
-                ptItems.forEach(i => {
-                    this.setUserAvatarUrl(i.assignee);
-                    i.comments.forEach(c => this.setUserAvatarUrl(c.user));
-                });
+                    ptItems.forEach(i => {
+                        this.setUserAvatarUrl(i.assignee);
+                        i.comments.forEach(c => this.setUserAvatarUrl(c.user));
+                    });
 
-                this.zone.run(() => {
-                    this.store.set('backlogItems', ptItems);
-                });
-            }
-        );
+                    this.zone.run(() => {
+                        this.store.set('backlogItems', ptItems);
+                        resolve();
+                    });
+                }
+            );
+        });
     }
 
     private setUserAvatarUrl(user: PtUser) {
