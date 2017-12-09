@@ -4,7 +4,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 
 import { AuthService } from '../../core/services/auth.service';
@@ -25,7 +24,6 @@ export const AUTH_PROVIDERS = [
     imports: [
         NativeScriptModule,
         NativeScriptFormsModule,
-        NativeScriptRouterModule,
         AuthRoutingModule,
         TranslateModule.forChild()
     ],
