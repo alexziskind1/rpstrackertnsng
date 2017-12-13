@@ -1,5 +1,5 @@
 import { Component, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
-import { PtRegisterModel } from '../../../core/models/domain';
+import { PtRegisterModel } from '../../../../core/models/domain';
 
 
 @Component({

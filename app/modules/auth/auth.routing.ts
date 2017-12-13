@@ -1,13 +1,24 @@
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
-import { AuthPageComponent } from './pages/auth/auth.page.component';
+import { AuthContainerComponent } from './containers';
+import { LoginPageComponent, RegisterPageComponent } from './pages';
 
 
 const routes: Routes = [
     {
-        path: 'auth/:action',
-        component: AuthPageComponent
+        path: 'auth',
+        component: AuthContainerComponent,
+        children: [
+            {
+                path: "login",
+                component: LoginPageComponent
+            },
+            {
+                path: "register",
+                component: RegisterPageComponent
+            }
+        ]
     }
 ];
 
@@ -15,4 +26,8 @@ const routes: Routes = [
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class AuthRoutingModule { }
+export class AuthRoutingModule { 
+    constructor() {
+        console.log('AuthRoutingModule constructor');
+    } 
+}
