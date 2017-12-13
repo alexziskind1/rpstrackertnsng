@@ -5,6 +5,7 @@ import { BacklogPageComponent } from './pages/backlog/backlog.page.component';
 import { DetailPageComponent } from './pages/detail/detail.page.component';
 import { AuthGuard } from '../../core/services';
 
+console.log('BacklogRoutingModule');
 
 const routes: Routes = [
     {
@@ -22,4 +23,9 @@ const routes: Routes = [
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class BacklogRoutingModule { }
+export class BacklogRoutingModule {
+    constructor() {
+
+        console.log('BacklogRoutingModule constructor');
+    } 
+ }

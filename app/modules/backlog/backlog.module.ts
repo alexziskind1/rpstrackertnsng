@@ -14,7 +14,7 @@ import { PAGES } from './pages';
 import { COMPONENTS } from './components';
 import { NewItemModalComponent } from './modals/new-item/new-item.modal.component';
 
-
+console.log('BacklogModule');
 
 @NgModule({
     imports: [
@@ -41,4 +41,9 @@ import { NewItemModalComponent } from './modals/new-item/new-item.modal.componen
         NO_ERRORS_SCHEMA
     ]
 })
-export class BacklogModule { }
+export class BacklogModule {
+    constructor() {
+        console.log('BacklogModule constructor');
+    } 
+    
+ }
