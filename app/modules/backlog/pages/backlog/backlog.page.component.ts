@@ -100,9 +100,4 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
                 }
             });
     }
-
-    public onLogoutTap(args) {
-        this.navigationService.navigate(['/auth', 'logout'], { clearHistory: true });
-    }
-
 }
