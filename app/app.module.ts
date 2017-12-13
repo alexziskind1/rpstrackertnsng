@@ -21,8 +21,9 @@ import { createTranslateLoader } from './utils';
 import './utils/console-color';
 import './rxjs-imports';
 
-
 import { registerElement } from 'nativescript-angular/element-registry';
+//import { SettingsModule } from './modules/settings/settings.module';
+
 registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').PullToRefresh);
 
 
@@ -48,7 +49,8 @@ registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').Pul
         AppConfigModule,
         CoreModule,
         AuthModule,
-        BacklogModule
+        BacklogModule,
+        //SettingsModule
     ],
     declarations: [
         AppComponent

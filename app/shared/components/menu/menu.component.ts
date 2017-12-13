@@ -20,4 +20,8 @@ export class MenuComponent implements OnInit {
     public onSelectPresetTap(preset: PresetType) {
         this.navigationService.navigate(['backlog', preset]);
     }
+
+    public onSettingsTap() {
+        this.navigationService.navigate(['settings']);
+    }
 }

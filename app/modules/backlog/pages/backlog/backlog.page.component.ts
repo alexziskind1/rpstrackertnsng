@@ -88,7 +88,20 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
     }
 
     public selectListItem(item: PtItem) {
-        this.navigationService.navigate(['detail', item.id]);
+        //this.navigationService.navigate(['detail', item.id]);
+
+        //this.router.navigate(['detail', item.id]);
+        // this.routerExtensions.navigate()
+        const transition: NavigationTransition = {
+            duration: 5000,
+            name: 'flipRight'
+        };
+        const options: NavigationOptions = {
+            animated: true,
+            transition: transition
+        };
+
+        this.routerExtensions.navigate(['detail', item.id], options);
     }
 
     public onAddTap(args) {
