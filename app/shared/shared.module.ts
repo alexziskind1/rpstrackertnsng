@@ -12,7 +12,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { TextInputModalComponent } from './modals/text-input/text-input.modal.component';
 import { ListSelectorModalComponent } from './modals/list-selector/list-selector.modal.component';
-
+import { LogoutDirective } from './directives/app-logout-attribute.directive';
 
 
 @NgModule({
@@ -27,13 +27,15 @@ import { ListSelectorModalComponent } from './modals/list-selector/list-selector
         NativeScriptUISideDrawerModule,
         NativeScriptUIDataFormModule,
         MenuComponent,
-        DialogComponent
+        DialogComponent,
+        LogoutDirective
     ],
     declarations: [
         MenuComponent,
         DialogComponent,
         TextInputModalComponent,
-        ListSelectorModalComponent
+        ListSelectorModalComponent,
+        LogoutDirective
     ],
     providers: [
         PtModalService
