@@ -1,3 +1,4 @@
+@import 'nativescript-theme-core/css/forest.css';
 @import url("~/platform.css");
 
 .fa {
@@ -17,7 +18,8 @@ TextView {
     font-size: 14;
 }
 
-Button:highlighted {
+
+.link:highlighted {
   animation-name: btnHighlight;
   animation-duration: 500ms;
 }
