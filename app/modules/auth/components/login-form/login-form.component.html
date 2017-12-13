@@ -1,8 +1,9 @@
 <Label class="title" [text]="'modules.auth.pages.auth.login' | translate">
 </Label>
 
-<StackLayout class="auth-form">
+<StackLayout class="login-container">
     <Label text="email" class="h2"></Label>
+    <Label class="fa" [text]="'fa-user' | fonticon"></Label>
     <TextField #emailModel="ngModel" hint="email..." [(ngModel)]="email" required email>
     </TextField>
 
@@ -16,6 +17,7 @@
     </StackLayout>
 
     <Label text="password" class="h2"></Label>
+    <Label class="fa" [text]="'fa-lock' | fonticon"></Label>
     <TextField #passwordModel="ngModel" hint="password..." [(ngModel)]="password" secure="true" required>
     </TextField>
 

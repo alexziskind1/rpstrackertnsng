@@ -8,6 +8,7 @@ import { NSModuleFactoryLoader } from "nativescript-angular/router";
 
 import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
 import { AppRoutingModule } from './app.routing';
 import { AppConfigModule } from './config/app-config.module';
@@ -43,6 +44,9 @@ registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').Pul
                 deps: [Http]
             },
             missingTranslationHandler: { provide: MissingTranslationHandler, useClass: PtMissingTranslationHandler }
+        }),
+        TNSFontIconModule.forRoot({
+            'fa': './assets/css/font-awesome.css'
         }),
 
         AppRoutingModule,

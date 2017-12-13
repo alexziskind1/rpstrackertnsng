@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { TranslateModule } from '@ngx-translate/core';
+import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
@@ -23,7 +24,8 @@ export const AUTH_PROVIDERS = [
         NativeScriptModule,
         NativeScriptFormsModule,
         AuthRoutingModule,
-        TranslateModule.forChild()
+        TranslateModule.forChild(),
+        TNSFontIconModule
     ],
     exports: [],
     declarations: [
@@ -37,8 +39,8 @@ export const AUTH_PROVIDERS = [
         Store
     ]
 })
-export class AuthModule { 
+export class AuthModule {
     constructor() {
         console.log('AuthModule constructor');
-    } 
+    }
 }

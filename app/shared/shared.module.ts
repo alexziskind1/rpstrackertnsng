@@ -15,6 +15,7 @@ import { ListSelectorModalComponent } from './modals/list-selector/list-selector
 import { LogoutDirective } from './directives/app-logout-attribute.directive';
 
 
+
 @NgModule({
     imports: [
         CommonModule,
