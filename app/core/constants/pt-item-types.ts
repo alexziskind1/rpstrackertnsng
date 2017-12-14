@@ -16,13 +16,13 @@ export const PT_ITEM_TYPES: PtItemType[] = [
 export const getPtTypeImage = (type: PtItemType): string => {
     switch (type) {
         case PT_ITEM_TYPE_PBI:
-            return 'res://i-pbi';
+            return 'res://ipbi';
         case PT_ITEM_TYPE_BUG:
-            return 'res://i-bug';
+            return 'res://ibug';
         case PT_ITEM_TYPE_CHORE:
-            return 'res://i-chore';
+            return 'res://ichore';
         case PT_ITEM_TYPE_IMPEDIMENT:
-            return 'res://i-impediment';
+            return 'res://iimpediment';
         default:
             return '';
     }

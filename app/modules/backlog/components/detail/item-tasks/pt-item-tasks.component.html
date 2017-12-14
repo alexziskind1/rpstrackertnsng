@@ -7,7 +7,7 @@
 
 
 <StackLayout *ngFor="let task of tasks" orientation="horizontal">
-    <Image (tap)="toggleTapped(task)" [src]="task.completed ? 'res://checkbox_checked' : 'res://checkbox_unchecked'" class="task-checkbox"></Image>
+    <Image (tap)="toggleTapped(task)" [src]="task.completed ? 'res://checkboxchecked' : 'res://checkboxunchecked'" class="task-checkbox"></Image>
 
     <Label [text]="task.title"></Label>
 </StackLayout>
