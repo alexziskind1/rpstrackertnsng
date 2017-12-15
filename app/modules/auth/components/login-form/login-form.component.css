@@ -1,13 +1,12 @@
-.input-field {
-  margin-bottom: 10;
-  width: 100%;
-}
-
-
 .login-field-wrapper {
   border-width: 1;
   border-color: #999999;
   color: #ffffff;
+  height: 40;
+}
+
+.login-field-validation-wrapper {
+  height: 30;
 }
 
 .login-field {
@@ -29,13 +28,14 @@
   
   .btn-login {
      vertical-align: middle;
-      height: 100%;
       background-color: #999999;
       border-color: #999999;
       border-width: 1;
       color: white;
+      font-size: 18;
       padding: 10;
-      margin-top:30;
+      margin-top:20;
+      margin-bottom:30;
   }
 
   .btn-outline {
@@ -85,5 +85,7 @@
     padding-bottom: 2;
     padding-left: 5;
     padding-right: 5;
+    vertical-align: middle;
+    font-size: 14;
   }
   

@@ -17,6 +17,18 @@ TextView {
     font-size: 14;
 }
 
+Button {
+    color: #555c95;
+    border-radius: 0;
+}
+
+.hr {
+    width: 100%;
+    border-bottom-width: 1;
+    border-bottom-color: #999999;
+    margin: 0;
+    height: 1;
+}
 
 .link:highlighted {
   animation-name: btnHighlight;
@@ -119,11 +131,13 @@ TextView {
     color: #ffffff;
 }
 
+/*
 .input-field {
     margin-left: 15;
     margin-right: 15;
     font-size: 14;
 }
+*/
 
 .input {
     color: #4b5833;
@@ -169,4 +183,14 @@ TextView {
     font-size: 14;
     color: #555a97;
     margin-left: 10;
+}
+
+.input-field {
+    font-size: 18;
+    margin-bottom: 5;
+    width: 100%;
+}
+
+.input-field.with-validation {
+    height: 70;
 }
