@@ -1,5 +1,7 @@
-<StackLayout>
-    <Label text="login page"></Label>
-
-    <pt-login-form (loginInitiated)="onLogin($event)"></pt-login-form>
-</StackLayout>
+<GridLayout rows="50, *, 50" class="login-page-wrapper">
+    <Label class="title" row="0" [text]="'modules.auth.pages.auth.login' | translate"></Label>
+    <StackLayout row="1">
+        <pt-login-form (loginInitiated)="onLogin($event)"></pt-login-form>
+    </StackLayout>
+    <Button [nsRouterLink]="['/auth/register']" [text]="'modules.auth.pages.auth.register' | translate" row="2"></Button>
+</GridLayout>

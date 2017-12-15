@@ -5,7 +5,8 @@ import { PtUser, PtRegisterModel } from '../../../../core/models/domain';
 @Component({
     moduleId: module.id,
     selector: 'pt-register-page',
-    templateUrl: 'register.page.component.html'
+    templateUrl: 'register.page.component.html',
+    styleUrls: ['register.page.component.css']
 })
 export class RegisterPageComponent {
 

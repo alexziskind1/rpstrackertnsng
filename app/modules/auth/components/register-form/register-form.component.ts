@@ -6,9 +6,10 @@ import { PtRegisterModel } from '../../../../core/models/domain';
     moduleId: module.id,
     selector: 'pt-register-form',
     templateUrl: 'register-form.component.html',
+    styleUrls: ['register-form.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class RegisterFormComponent  {
+export class RegisterFormComponent {
 
     @Output() registerInitiated = new EventEmitter<PtRegisterModel>();
 

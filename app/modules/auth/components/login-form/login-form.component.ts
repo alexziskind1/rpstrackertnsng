@@ -6,9 +6,10 @@ import { PtLoginModel } from '../../../../core/models/domain';
     moduleId: module.id,
     selector: 'pt-login-form',
     templateUrl: 'login-form.component.html',
+    styleUrls: ['login-form.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class LoginFormComponent  {
+export class LoginFormComponent {
 
     @Output() loginInitiated = new EventEmitter<PtLoginModel>();
 

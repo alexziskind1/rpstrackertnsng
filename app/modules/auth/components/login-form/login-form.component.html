@@ -1,45 +1,39 @@
-<Label class="title" [text]="'modules.auth.pages.auth.login' | translate">
-</Label>
-
-<StackLayout class="login-container form">
-    <Label text="email" class="h2"></Label>
-    <Label class="fa" [text]="'fa-user' | fonticon"></Label>
+<StackLayout>
 
     <StackLayout class="input-field">
-        <Label text="Option 2" class="label font-weight-bold m-b-5"></Label>
-        <TextField #emailModel="ngModel" class="input input-border" hint="email..." [(ngModel)]="email" required email>
-        </TextField>
-    </StackLayout>
 
-    <GridLayout class="input-field input-sides" rows="auto, auto" columns="*,*">
-        <Label text="Option 3" class="label font-weight-bold" row="0" col="0"></Label>
-        <TextField class="input right" row="0" col="1"></TextField>
-        <StackLayout class="hr-light" row="1" colSpan="2"></StackLayout>
-    </GridLayout>
+        <GridLayout columns="*, 25" class="login-field-wrapper">
+            <TextField #emailModel="ngModel" class="login-field" hint="Email" [(ngModel)]="email" col="0" required email>
+            </TextField>
+            <Label class="fa login-icon" [text]="'fa-envelope' | fonticon" col="1"></Label>
+        </GridLayout>
 
-    <StackLayout class="input-field">
         <StackLayout *ngIf="emailModel.errors && emailModel.touched">
             <Label *ngIf="emailModel.errors.required" text="email is missing" class="validation">
             </Label>
-            <Label *ngIf="emailModel.errors.email" text="the email is not in the correct format" class="validation">
+            <Label *ngIf="emailModel.errors.email && !emailModel.errors.required" text="the email is not in the correct format" class="validation">
             </Label>
         </StackLayout>
     </StackLayout>
-
-    <Label text="password" class="h2"></Label>
-    <Label class="fa" [text]="'fa-lock' | fonticon"></Label>
-    <TextField #passwordModel="ngModel" hint="password..." [(ngModel)]="password" secure="true" required>
-    </TextField>
 
     <StackLayout class="input-field">
-        <StackLayout *ngIf="passwordModel.errors && passwordModel.touched">
-            <Label *ngIf="passwordModel.errors.required" text="password is required" class="validation">
-            </Label>
+        <GridLayout columns="*, 25" class="login-field-wrapper">
+            <TextField #passwordModel="ngModel" class="login-field" hint="Password" [(ngModel)]="password" secure="true" col="0" required>
+            </TextField>
+            <Label class="fa login-icon" [text]="'fa-lock' | fonticon" col="1"></Label>
+        </GridLayout>
+
+        <StackLayout>
+            <StackLayout *ngIf="passwordModel.errors && passwordModel.touched">
+                <Label *ngIf="passwordModel.errors.required" text="password is required" class="validation">
+                </Label>
+            </StackLayout>
         </StackLayout>
     </StackLayout>
 
+
     <Button [text]="'modules.auth.pages.auth.login' | translate" (tap)="onLoginTap(emailModel.valid && passwordModel.valid)"
-        class="btn btn-rounded-lg" [class.btn-outline]="!(emailModel.valid && passwordModel.valid)" [class.btn-primary]="emailModel.valid && passwordModel.valid"
+        class="btn-login" [class.btn-outline]="!(emailModel.valid && passwordModel.valid)" [class.btn-primary]="emailModel.valid && passwordModel.valid"
         [isEnabled]="emailModel.valid && passwordModel.valid" [isUserInteractionEnabled]="emailModel.valid && passwordModel.valid">
     </Button>
 

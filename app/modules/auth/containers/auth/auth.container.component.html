@@ -1,11 +1,19 @@
-<GridLayout rows="50, *">
-    <StackLayout row="0" orientation="horizontal">
-        <Button [nsRouterLink]="['/auth/login']" class="link" [text]="'modules.auth.pages.auth.login' | translate"></Button>
-        <Button [nsRouterLink]="['/auth/register']" class="link" [text]="'modules.auth.pages.auth.register' | translate"></Button>
+<GridLayout rows="auto, auto, 50" class="auth-container">
+
+    <StackLayout row="0" class="logo-container">
+        <Image src="res://rpslogo" stretch="aspectFit"></Image>
     </StackLayout>
+
+
 
     <StackLayout row="1">
         <router-outlet></router-outlet>
+    </StackLayout>
+
+
+    <StackLayout row="2" orientation="horizontal">
+        <Button [nsRouterLink]="['/auth/login']" [text]="'modules.auth.pages.auth.login' | translate"></Button>
+        <Button [nsRouterLink]="['/auth/register']" [text]="'modules.auth.pages.auth.register' | translate"></Button>
     </StackLayout>
 
 </GridLayout>

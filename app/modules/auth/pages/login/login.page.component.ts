@@ -6,9 +6,10 @@ import { PtLoginModel, PtUser } from '../../../../core/models/domain';
 @Component({
     moduleId: module.id,
     selector: 'pt-login-page',
-    templateUrl: 'login.page.component.html'
+    templateUrl: 'login.page.component.html',
+    styleUrls: ['login.page.component.css']
 })
-export class LoginPageComponent  {
+export class LoginPageComponent {
 
     constructor(
         private authService: AuthService,

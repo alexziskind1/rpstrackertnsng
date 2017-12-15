@@ -1,5 +1,7 @@
-<StackLayout>
-    <Label text="register page"></Label>
-
-    <pt-register-form (registerInitiated)="onRegister($event)"></pt-register-form>
-</StackLayout>
+<GridLayout rows="50, *, 50" class="register-page-wrapper">
+    <Label class="title" row="0" [text]="'modules.auth.pages.auth.register' | translate"></Label>
+    <StackLayout row="1">
+        <pt-register-form (registerInitiated)="onRegister($event)"></pt-register-form>
+    </StackLayout>
+    <Button [nsRouterLink]="['/auth/login']" [text]="'modules.auth.pages.auth.login' | translate" row="2"></Button>
+</GridLayout>
