@@ -17,12 +17,13 @@ import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData, DataFormEv
 import { PtItem, PtUser } from '../../../../../core/models/domain';
 import { PtItemType } from '../../../../../core/models/domain/types';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
-import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, PT_ITEM_TYPES, getPtTypeImage } from '../../../../../core/constants';
+import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../../core/constants';
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
 
 import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
+import { ItemType } from '../../../../../core/constants/pt-item-types';
 
 
 var colorLight = new Color("#CDDC39");
@@ -51,7 +52,7 @@ export class PtItemDetailsComponent implements OnInit {
     private reselectedAssignee: PtUser;
 
     public itemForm: PtItemDetailsEditFormModel;
-    public itemTypesProvider = PT_ITEM_TYPES;
+    public itemTypesProvider = ItemType.List.map((t) => t.PtItemType);
     public statusesProvider = PT_ITEM_STATUSES;
     public prioritiesProvider = PT_ITEM_PRIORITIES;
 
@@ -63,7 +64,7 @@ export class PtItemDetailsComponent implements OnInit {
     private itemTypeNativeView;
 
     public get itemTypeImage() {
-        return getPtTypeImage(this.selectedTypeValue);
+        return ItemType.imageResFromType(this.selectedTypeValue);
     }
 
     public get itemTypeEditorDisplayName() {

@@ -2,8 +2,8 @@ import { Component, Input, EventEmitter, OnInit, Output, ViewChild } from '@angu
 
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
 
-import { PT_ITEM_TYPES } from '../../../../core/constants';
 import { PtNewItemForm } from '../../../../shared/models/forms/pt-new-item-form.model';
+import { ItemType } from '../../../../core/constants/pt-item-types';
 
 
 @Component({
@@ -21,7 +21,7 @@ export class NewItemFormComponent implements OnInit {
     @ViewChild('itemDetailsDataForm') itemDetailsDataForm: RadDataFormComponent;
 
     public newItemForm: PtNewItemForm;
-    public itemTypesProvider = PT_ITEM_TYPES;
+    public itemTypesProvider = ItemType.List.map((t) => t.PtItemType);
 
     constructor() { }
 
