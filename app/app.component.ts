@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { TNSFontIconService } from 'nativescript-ngx-fonticon';
+import { device } from 'platform';
+import { Page } from 'ui/page';
 
 @Component({
     selector: 'ns-app',
@@ -10,10 +12,14 @@ import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 export class AppComponent {
 
     constructor(
-        translate: TranslateService,
+        private page: Page,
+        private translateService: TranslateService,
         fonticon: TNSFontIconService
     ) {
-        translate.setDefaultLang('en');
-        translate.use('en');
+        // page.actionBarHidden = true;
+        page.backgroundSpanUnderStatusBar = true;
+
+        translateService.setDefaultLang('en');
+        translateService.use(device.language);
     }
 }

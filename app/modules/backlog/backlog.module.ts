@@ -44,6 +44,5 @@ console.log('BacklogModule');
 export class BacklogModule {
     constructor() {
         console.log('BacklogModule constructor');
-    } 
-    
- }
+    }
+}

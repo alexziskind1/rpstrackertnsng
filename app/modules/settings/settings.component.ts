@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
     selector: 'pt-settings',
@@ -6,9 +6,4 @@ import { Component, OnInit } from '@angular/core';
         <Label text="Settings"></Label>
     `
 })
-
-export class SettingsComponent implements OnInit {
-    constructor() { }
-
-    ngOnInit() { }
-}
+export class SettingsComponent { }

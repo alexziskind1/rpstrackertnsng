@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { SettingsComponent } from './settings.component';
 import { SettingsRoutingModule } from './settings.routing';
 
+console.log('SettingsModule loaded');
+
 @NgModule({
     imports: [
         SettingsRoutingModule
@@ -13,6 +15,6 @@ import { SettingsRoutingModule } from './settings.routing';
 })
 export class SettingsModule {
     constructor() {
-        console.log('SettingsModule constructor');
+        console.log('SettingsModule constructed');
     }
 }

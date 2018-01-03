@@ -4,7 +4,7 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 import { SettingsComponent } from './settings.component';
 
-console.log('BacklogRoutingModule');
+console.log('BacklogRoutingModule loaded');
 
 const routes: Routes = [
     {
@@ -19,6 +19,6 @@ const routes: Routes = [
 })
 export class SettingsRoutingModule {
     constructor() {
-        console.log('SettingsRoutingModule constructor');
+        console.log('SettingsRoutingModule constructed');
     }
 }

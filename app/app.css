@@ -20,6 +20,9 @@ TextView {
 Button {
     color: #ffffff;
     border-radius: 0;
+    border-color: transparent;
+    border-width: 1;
+    background-color: transparent;
 }
 
 .hr {

@@ -11,11 +11,11 @@ const routes: Routes = [
         component: AuthContainerComponent,
         children: [
             {
-                path: "login",
+                path: 'login',
                 component: LoginPageComponent
             },
             {
-                path: "register",
+                path: 'register',
                 component: RegisterPageComponent
             }
         ]
@@ -26,8 +26,8 @@ const routes: Routes = [
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class AuthRoutingModule { 
+export class AuthRoutingModule {
     constructor() {
-        console.log('AuthRoutingModule constructor');
-    } 
+        console.log('AuthRoutingModule constructed');
+    }
 }

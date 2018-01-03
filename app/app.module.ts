@@ -4,7 +4,7 @@ import { Http } from '@angular/http';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
-import { NSModuleFactoryLoader } from "nativescript-angular/router";
+import { NSModuleFactoryLoader } from 'nativescript-angular/router';
 
 import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -23,10 +23,8 @@ import './utils/console-color';
 import './rxjs-imports';
 
 import { registerElement } from 'nativescript-angular/element-registry';
-//import { SettingsModule } from './modules/settings/settings.module';
 
 registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').PullToRefresh);
-
 
 @NgModule({
     bootstrap: [
@@ -54,7 +52,6 @@ registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').Pul
         CoreModule,
         AuthModule,
         BacklogModule,
-        //SettingsModule
     ],
     declarations: [
         AppComponent

@@ -2,6 +2,10 @@
     margin-top: 20;
 }
 
+.menu-container {
+    margin-left: 15;
+}
+
 .side-drawer-panel {
     background-color: #333333;
 }

@@ -25,7 +25,6 @@ const routes: Routes = [
 })
 export class BacklogRoutingModule {
     constructor() {
-
         console.log('BacklogRoutingModule constructor');
-    } 
- }
+    }
+}
