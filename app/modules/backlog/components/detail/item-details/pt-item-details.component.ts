@@ -1,4 +1,7 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone } from '@angular/core';
+import {
+    Component, OnInit, Input, ChangeDetectionStrategy, Output,
+    EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone
+} from '@angular/core';
 
 
 import { Observable } from 'rxjs/Observable';
@@ -11,7 +14,10 @@ import { Button } from 'ui/button';
 
 
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
-import { CustomPropertyEditor, DataFormCustomPropertyEditorEventData, DataFormEventData, EntityProperty, RadDataForm, PropertyEditor } from 'nativescript-pro-ui/dataform';
+import {
+    CustomPropertyEditor, DataFormCustomPropertyEditorEventData,
+    DataFormEventData, EntityProperty, RadDataForm, PropertyEditor
+} from 'nativescript-pro-ui/dataform';
 
 
 import { PtItem, PtUser } from '../../../../../core/models/domain';
@@ -26,9 +32,9 @@ import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-
 import { ItemType } from '../../../../../core/constants/pt-item-types';
 
 
-var colorLight = new Color("#CDDC39");
-var colorDark = new Color("#4CAF50");
-var colorGray = new Color("#F9F9F9");
+const COLOR_LIGHT = new Color('#CDDC39');
+const COLOR_DARK = new Color('#4CAF50');
+const COLOR_GRAY = new Color('#F9F9F9');
 
 
 @Component({
@@ -138,8 +144,10 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     private editorSetupDescriptionEditorIos(editor) {
-        const textViewDef = editor.gridLayout.definitionForView(editor.textView);
-        textViewDef.view.font = UIFont.fontWithNameSize(textViewDef.view.font.fontName, 17);
+        if (editor.textView && editor.textView.view) {
+            const textViewDef = editor.gridLayout.definitionForView(editor.textView);
+            textViewDef.view.font = UIFont.fontWithNameSize(textViewDef.view.font.fontName, 17);
+        }
     }
 
     private editorSetupTypeEditorIos(editor) {
@@ -164,16 +172,16 @@ export class PtItemDetailsComponent implements OnInit {
             labelDef.view.text = `${numVal} points`;
         }
 
-        //editor.valueLabel.textColor = colorDark.ios;
+        // editor.valueLabel.textColor = colorDark.ios;
 
 
-        var coreEditor = <UIStepper>editor.editor;
-        coreEditor.tintColor = colorLight.ios;
+        const coreEditor = <UIStepper>editor.editor;
+        coreEditor.tintColor = COLOR_LIGHT.ios;
 
 
-        for (var i = 0; i < coreEditor.subviews.count; i++) {
+        for (let i = 0; i < coreEditor.subviews.count; i++) {
             if (coreEditor.subviews[i] instanceof UIButton) {
-                (<any>coreEditor.subviews[i]).imageView.tintColor = colorDark.ios;
+                (<any>coreEditor.subviews[i]).imageView.tintColor = COLOR_DARK.ios;
             }
         }
 
@@ -215,12 +223,13 @@ export class PtItemDetailsComponent implements OnInit {
                 selectedItem: this.item ? this.ptUserToModalListDisplayItem(this.item.assignee) : undefined
             };
 
-            const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser> = this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(
-                this.vcRef,
-                'Select Assignee',
-                ptModalListModel,
-                this.item.assignee
-            );
+            const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser> =
+                this.ptModalService.createPtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(
+                    this.vcRef,
+                    'Select Assignee',
+                    ptModalListModel,
+                    this.item.assignee
+                );
 
             this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(ctx)
                 .then(result => {
@@ -287,7 +296,7 @@ export class PtItemDetailsComponent implements OnInit {
 
     public onAssigneeEditorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         const newBtn = new Button();
-        newBtn.style.color = colorDark;
+        newBtn.style.color = COLOR_DARK;
         this.itemTypeEditorBtnHelper = new ButtonEditorHelper();
         this.itemTypeEditorBtnHelper.editor = args.object;
 
@@ -319,8 +328,9 @@ export class PtItemDetailsComponent implements OnInit {
 
 
                 this.itemTypeNativeView = <UIButton>newBtn.nativeView;
-                this.itemTypeNativeView.setTitleColorForState(colorDark.ios, UIControlState.Normal);
-                this.itemTypeNativeView.addTargetActionForControlEvents(this.itemTypeEditorBtnHelper, "handleTap:", UIControlEvents.TouchUpInside);
+                this.itemTypeNativeView.setTitleColorForState(COLOR_DARK.ios, UIControlState.Normal);
+                this.itemTypeNativeView.addTargetActionForControlEvents(this.itemTypeEditorBtnHelper,
+                    'handleTap:', UIControlEvents.TouchUpInside);
                 this.itemTypeEditorViewConnected = true;
             }
             args.view = this.itemTypeNativeView;
@@ -331,14 +341,14 @@ export class PtItemDetailsComponent implements OnInit {
 
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
         this.itemTypeEditorBtnHelper.updateEditorValue(args.view, args.value);
-        //args.view.text
-        //return args.value.valueForKey('fullName');
-        //var a = 0;
+        // args.view.text
+        // return args.value.valueForKey('fullName');
+        // var a = 0;
     }
 
     public editorNeedsValue(args: DataFormCustomPropertyEditorEventData) {
-        //args.value = this.newView.text;
+        // args.value = this.newView.text;
         args.value = this.itemTypeEditorBtnHelper.buttonValue;
-        //var a = 0;
+        // var a = 0;
     }
 }

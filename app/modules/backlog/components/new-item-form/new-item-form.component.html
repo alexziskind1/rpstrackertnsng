@@ -1,9 +1,9 @@
 <GridLayout rows="50, *">
 
-    <StackLayout row="0">
-        <Button (tap)="onSaveTap($event)" class="btn" [text]="btnOkText"></Button>
+    <FlexboxLayout row="0" class="new-item-actions-container">
         <Button (tap)="onCancelTap($event)" class="btn" [text]="btnCancelText"></Button>
-    </StackLayout>
+        <Button (tap)="onSaveTap($event)" class="btn" [text]="btnOkText"></Button>
+    </FlexboxLayout>
 
     <RadDataForm #itemDetailsDataForm [source]="newItemForm" commitMode="Manual" row="1">
 
