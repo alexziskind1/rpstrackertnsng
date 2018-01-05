@@ -3,7 +3,7 @@
     <StackLayout row="1">
         <pt-register-form (registerInitiated)="onRegister($event)"></pt-register-form>
     </StackLayout>
-    <StackLayout row="2">
+    <StackLayout row="2" class="bottom-safe-nav">
         <Label text="Already have an account?" class="smaller"></Label>
         <Button [nsRouterLink]="['/auth/login']" [text]="'modules.auth.pages.auth.login' | translate"></Button>
     </StackLayout>

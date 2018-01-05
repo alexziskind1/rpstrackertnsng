@@ -5,12 +5,14 @@
 }
 
 Page {
-    background-color:  #4b5833;
+    /*background-color:  #4b5833;*/
+    background-color:  blue;
 }
 
 ActionBar {
-    background-color:  #4b5833;
-    color: white;
+    /*background-color:  #4b5833;*/
+    background-color: burlywood;
+    color: #ffffff;
 }
 
 TextView {

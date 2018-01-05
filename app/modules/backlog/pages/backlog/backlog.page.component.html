@@ -15,15 +15,15 @@
             <StackLayout row="1" class="menu-container">
                 <pt-menu></pt-menu>
             </StackLayout>
-            <StackLayout row="2">
-                <Button appLogout text="LOGOUT" class="slide-out-btn"></Button>
+            <StackLayout row="2" class="menu-container">
+                <Button appLogout text="LOGOUT"></Button>
             </StackLayout>
         </GridLayout>
     </StackLayout>
 
     <StackLayout tkMainContent>
 
-        <GridLayout class="backlog-container" rows="*, 60">
+        <GridLayout class="backlog-container" rows="*, auto">
 
             <GridLayout row="0" class="list-container">
                 <pt-list [items]="items$ | async" [isRefreshing]="isListRefreshing$ | async" (listItemSelected)="selectListItem($event)"
@@ -31,7 +31,7 @@
             </GridLayout>
 
             <StackLayout row="1" class="btn-add-wrapper">
-                <Button text="Add" class="btn-add" (tap)="onAddTap($event)"></Button>
+                <Button text="Add" class="btn-add bottom-safe-nav" (tap)="onAddTap($event)"></Button>
             </StackLayout>
 
         </GridLayout>

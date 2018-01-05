@@ -1,6 +1,6 @@
 {
     "appType": "Ns",
-    "apiEndpoint": "http://10.142.32.106:8080/api",
+    "apiEndpoint": "http://10.142.34.208:8080/api",
     "loggingEnabled": true,
     "loggingLevel": "Error"
 }
