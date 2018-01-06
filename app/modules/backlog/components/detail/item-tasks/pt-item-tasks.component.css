@@ -3,8 +3,11 @@
 }
 
 .pt-tasks-add-row {
-    border-width: 1;
-    border-color: green;
+    background-color: #ffffff;
+    border-top-width: 0.5;
+    border-top-color: #e4e4e6;
+    border-bottom-width: 0.5;
+    border-bottom-color: #e4e4e6;
     margin-top: 10;
 }
 
@@ -22,9 +25,7 @@
 }
 
 .pt-tasks-scroll {
-    border-width: 1;
-    border-color: red;
-    margin-top: 10;
+    background-color: #f9f9f9;
 }
 
 .pt-tasks-list-container {

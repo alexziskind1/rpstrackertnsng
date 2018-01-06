@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
+import { TextField } from 'ui/text-field';
+
 import { PtItem, PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
 import { DictType } from '../../../../../core/models/types';
@@ -30,7 +32,7 @@ export class PtItemTasksComponent implements OnInit {
 
     public ngOnInit() { }
 
-    public onAddTapped(args) {
+    public onAddTapped(newTaskTextField: TextField, args) {
         const newTitle = this.newTaskTitle.trim();
         if (newTitle.length === 0) {
             return;
@@ -41,7 +43,7 @@ export class PtItemTasksComponent implements OnInit {
         };
         this.addNewTask.emit(newTask);
         this.newTaskTitle = '';
-        // newTaskTV.dismissSoftInput();
+        newTaskTextField.dismissSoftInput();
     }
 
     public toggleTapped(task: PtTask) {

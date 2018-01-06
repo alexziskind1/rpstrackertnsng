@@ -1,6 +1,8 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { isIOS } from 'platform';
+import { TextField } from 'ui/text-field';
+
 
 import { PtItem, PtComment, PtUser } from '../../../../../core/models/domain';
 import { PtNewComment } from '../../../../../shared/models/dto';
@@ -37,7 +39,7 @@ export class PtItemChitchatComponent implements OnInit {
 
     public ngOnInit() { }
 
-    public onAddTapped(args) {
+    public onAddTapped(newCommentTextField: TextField, args) {
         const newTitle = this.newCommentText.trim();
         if (newTitle.length === 0) {
             return;
@@ -47,7 +49,7 @@ export class PtItemChitchatComponent implements OnInit {
         };
         this.addNewComment.emit(newComment);
         this.newCommentText = '';
-        // newTaskTV.dismissSoftInput();
+        newCommentTextField.dismissSoftInput();
     }
 
     public commentHeight(commentTitle: string) {
