@@ -1,7 +1,10 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
-import { PtItem, PtComment } from '../../../../../core/models/domain';
+import { isIOS } from 'platform';
+
+import { PtItem, PtComment, PtUser } from '../../../../../core/models/domain';
 import { PtNewComment } from '../../../../../shared/models/dto';
+
 
 @Component({
     moduleId: module.id,
@@ -12,10 +15,19 @@ import { PtNewComment } from '../../../../../shared/models/dto';
 })
 export class PtItemChitchatComponent implements OnInit {
 
+
+
     @Input() public set item(val: PtItem) {
         this.comments = val.comments;
     }
+    @Input() public currentUser: PtUser;
+
     @Output() addNewComment = new EventEmitter<PtNewComment>();
+
+
+    public get currentUserAvatar() {
+        return this.currentUser.avatar;
+    }
 
     public comments: PtComment[] = [];
 
@@ -36,6 +48,12 @@ export class PtItemChitchatComponent implements OnInit {
         this.addNewComment.emit(newComment);
         this.newCommentText = '';
         // newTaskTV.dismissSoftInput();
+    }
+
+    public commentHeight(commentTitle: string) {
+        const lineHeight = isIOS ? 20 : 30;
+        const numlines = Math.ceil(commentTitle.length / 22);
+        return ((numlines < 2 ? 2 : numlines) * lineHeight) + 10;
     }
 
 }

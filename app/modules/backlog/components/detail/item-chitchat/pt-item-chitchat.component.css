@@ -1,3 +1,24 @@
 .pt-item-chitchat-container {
     background-color: #ffffff;
 }
+
+.img-comment-avatar {
+    margin-top: 5;
+    border-width: 1;
+    border-color: red;
+}
+.comment-text-wrapper {
+    margin-left: 10;
+}
+.comment-name {
+    font-size: 10;
+    font-weight: bold;
+    color: #555a97;
+    margin-left: 5;
+}
+.comment-date {
+    font-size: 10;
+    font-weight: bold;
+    color: #555a97;
+    horizontal-align: right;
+}

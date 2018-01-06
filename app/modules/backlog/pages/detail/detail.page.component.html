@@ -28,7 +28,7 @@
             <pt-item-tasks [item]="currentSelectedItem$ | async" (addNewTask)="onAddNewTask($event)" (updateTask)="onUpdateTask($event)"></pt-item-tasks>
         </ng-template>
         <ng-template [ngSwitchCase]="'chitchat'">
-            <pt-item-chitchat [item]="currentSelectedItem$ | async" (addNewComment)="onAddNewComment($event)"></pt-item-chitchat>
+            <pt-item-chitchat [item]="currentSelectedItem$ | async" [currentUser]="currentUser$ | async" (addNewComment)="onAddNewComment($event)"></pt-item-chitchat>
         </ng-template>
     </StackLayout>
 

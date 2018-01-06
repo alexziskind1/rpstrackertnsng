@@ -10,6 +10,7 @@ import { StorageService } from './storage.service';
 import { ServerErrorHandlerService } from './server-error-handler.service';
 import { AuthTokenService } from './auth-token.service';
 import { PtUser, PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
+import { getUserAvatarUrl } from '../helpers/user-avatar-helper';
 
 
 
@@ -32,6 +33,7 @@ export class AuthService {
     }
 
     set currentUser(ptUser: PtUser) {
+        ptUser.avatar = getUserAvatarUrl(this.config.apiEndpoint, ptUser.id);
         this.storageService.setItem<PtUser>(CURRENT_USER_KEY, ptUser);
         this.store.set<PtUser>('currentUser', ptUser);
     }

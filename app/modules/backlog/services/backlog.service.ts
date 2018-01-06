@@ -12,6 +12,7 @@ import { PtItem, PtUser, PtTask, PtComment } from '../../../core/models/domain';
 import { PtNewItem, PtNewTask, PtNewComment } from '../../../shared/models/dto';
 import { PriorityEnum, StatusEnum } from '../../../core/models/domain/enums';
 import { BacklogRepository } from '../repositories/backlog.repository';
+import { getUserAvatarUrl } from '../../../core/helpers/user-avatar-helper';
 
 
 @Injectable()
@@ -50,8 +51,8 @@ export class BacklogService {
                 (ptItems: PtItem[]) => {
 
                     ptItems.forEach(i => {
-                        this.setUserAvatarUrl(i.assignee);
-                        i.comments.forEach(c => this.setUserAvatarUrl(c.user));
+                        this.setUserAvatar(i.assignee);
+                        i.comments.forEach(c => this.setUserAvatar(c.user));
                     });
 
                     this.zone.run(() => {
@@ -63,23 +64,22 @@ export class BacklogService {
         });
     }
 
-    private setUserAvatarUrl(user: PtUser) {
-        user.avatar = `${this.config.apiEndpoint}/photo/${user.id}`;
+    private setUserAvatar(user: PtUser) {
+        user.avatar = getUserAvatarUrl(this.config.apiEndpoint, user.id);
     }
-
 
     public getPtItem(id: number) {
         this.repo.getPtItem(id,
             this.errorHandlerService.handleHttpError,
             (ptItem: PtItem) => {
 
-                this.setUserAvatarUrl(ptItem.assignee);
-                ptItem.comments.forEach(c => this.setUserAvatarUrl(c.user));
+                this.setUserAvatar(ptItem.assignee);
+                ptItem.comments.forEach(c => this.setUserAvatar(c.user));
 
                 this.zone.run(() => {
                     this.store.set('currentSelectedItem', ptItem);
 
-                    //optimistically update the item list with the new item
+                    // optimistically update the item list with the new item
                     const updatedItems = this.store.value.backlogItems.map((item) => {
                         return item.id === id ? ptItem : item;
                     });
@@ -120,7 +120,7 @@ export class BacklogService {
             item,
             this.errorHandlerService.handleHttpError,
             (nextItem: PtItem) => {
-                this.setUserAvatarUrl(nextItem.assignee);
+                this.setUserAvatar(nextItem.assignee);
                 this.zone.run(() => {
                     this.store.set('backlogItems', [nextItem, ...this.store.value.backlogItems]);
                 });
