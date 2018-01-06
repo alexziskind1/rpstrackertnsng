@@ -169,11 +169,15 @@ export class BacklogService {
         );
     }
 
-    public togglePtTask(task: PtTask, currentItem: PtItem) {
+    /*public togglePtTask(task: PtTask, currentItem: PtItem) {
+        this.updatePtTask
+    }*/
+
+    public updatePtTask(currentItem: PtItem, task: PtTask, toggle: boolean, newTitle?: string) {
         const taskToUpdate: PtTask = {
             id: task.id,
-            title: task.title,
-            completed: !task.completed,
+            title: newTitle ? newTitle : task.title,
+            completed: toggle ? !task.completed : task.completed,
             dateCreated: task.dateCreated,
             dateModified: new Date()
         };

@@ -7,6 +7,7 @@ import { PtNewComment } from '../../../../../shared/models/dto';
     moduleId: module.id,
     selector: 'pt-item-chitchat',
     templateUrl: 'pt-item-chitchat.component.html',
+    styleUrls: ['pt-item-chitchat.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PtItemChitchatComponent implements OnInit {

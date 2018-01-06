@@ -175,15 +175,7 @@ Button:highlighted {
     margin-right: 0;
 }
 
-.pt-item-detail-header {
-    background-color: #333333;
-    color: #ffffff;
-    padding: 10;
-}
 
-.pt-item-detail-header.bold {
-    font-weight: bold;
-}
 
 .user-picker-row {
     margin: 0 15 0 15;

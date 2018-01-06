@@ -7,12 +7,17 @@
 
 <StackLayout>
 
-    <StackLayout class="pt-item-detail-header">
-        <Label [text]="(currentSelectedItem$ | async)?.title" class="pt-item-detail-header-title"></Label>
+    <GridLayout class="pt-item-detail-header" rows="*, 40">
 
-        <pt-detail-section-selector [selectedScreen]="selectedDetailsScreen" (screenSelected)="onScreenSelected($event)"></pt-detail-section-selector>
+        <GridLayout row="0" columns="auto, *" class="pt-item-detail-header-title-row">
+            <Image width="50" height="50" class="pt-item-detail-avatar" [src]="(currentSelectedItem$ | async)?.assignee.avatar" col="0"></Image>
+            <Label [text]="(currentSelectedItem$ | async)?.title" class="pt-item-detail-header-title" col="1"></Label>
+        </GridLayout>
 
-    </StackLayout>
+        <StackLayout row="1">
+            <pt-detail-section-selector [selectedScreen]="selectedDetailsScreen" (screenSelected)="onScreenSelected($event)"></pt-detail-section-selector>
+        </StackLayout>
+    </GridLayout>
 
 
     <StackLayout [ngSwitch]="selectedDetailsScreen">
@@ -20,7 +25,7 @@
             <pt-item-details [item]="currentSelectedItem$ | async" [users$]="users$" (itemSaved)="onItemSaved($event)" (usersRequested)="onUsersRequested($event)"></pt-item-details>
         </ng-template>
         <ng-template [ngSwitchCase]="'tasks'">
-            <pt-item-tasks [item]="currentSelectedItem$ | async" (addNewTask)="onAddNewTask($event)" (toggleTask)="onToggleTask($event)"></pt-item-tasks>
+            <pt-item-tasks [item]="currentSelectedItem$ | async" (addNewTask)="onAddNewTask($event)" (updateTask)="onUpdateTask($event)"></pt-item-tasks>
         </ng-template>
         <ng-template [ngSwitchCase]="'chitchat'">
             <pt-item-chitchat [item]="currentSelectedItem$ | async" (addNewComment)="onAddNewComment($event)"></pt-item-chitchat>

@@ -1,21 +1,15 @@
 import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { PtItem, PtTask } from '../../../../../core/models/domain';
-import { PtNewTask } from '../../../../../shared/models/dto';
+import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
+import { DictType } from '../../../../../core/models/types';
 
 
 @Component({
     moduleId: module.id,
     selector: 'pt-item-tasks',
     templateUrl: 'pt-item-tasks.component.html',
-    styles: [
-        `
-            .task-checkbox {
-                width: 20;
-                height: 20;
-            }
-        `
-    ],
+    styleUrls: ['pt-item-tasks.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
@@ -25,11 +19,12 @@ export class PtItemTasksComponent implements OnInit {
         this.tasks = val.tasks;
     }
     @Output() addNewTask = new EventEmitter<PtNewTask>();
-    @Output() toggleTask = new EventEmitter<PtTask>();
+    @Output() updateTask = new EventEmitter<PtTaskUpdate>();
 
     public tasks: PtTask[] = [];
-
     public newTaskTitle = '';
+
+    private lastUpdatedTitle = '';
 
     constructor() { }
 
@@ -50,7 +45,31 @@ export class PtItemTasksComponent implements OnInit {
     }
 
     public toggleTapped(task: PtTask) {
-        this.toggleTask.emit(task);
+        const taskUpdate: PtTaskUpdate = {
+            task: task,
+            toggle: true
+        };
+        this.updateTask.emit(taskUpdate);
+    }
+
+    public taskTitleChange(task: PtTask, newTitle: string) {
+        if (task.title === newTitle) {
+            return;
+        }
+        this.lastUpdatedTitle = newTitle;
+    }
+
+    public taskBlurred(task: PtTask) {
+        if (task.title === this.lastUpdatedTitle) {
+            return;
+        }
+        const taskUpdate: PtTaskUpdate = {
+            task: task,
+            toggle: false,
+            newTitle: this.lastUpdatedTitle
+        };
+        this.updateTask.emit(taskUpdate);
+        this.lastUpdatedTitle = '';
     }
 
 }

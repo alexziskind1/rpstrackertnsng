@@ -11,13 +11,15 @@ import { PtItem, PtTask, PtUser } from '../../../../core/models/domain';
 import { BacklogService } from '../../services/backlog.service';
 import { PtUserService, NavigationService } from '../../../../core/services';
 import { Store } from '../../../../core/state/app-store';
-import { PtNewTask, PtNewComment } from '../../../../shared/models/dto';
+import { PtNewTask, PtNewComment, PtTaskUpdate } from '../../../../shared/models/dto';
 import { DetailScreenType } from '../../../../shared/models/ui/types';
+
 
 @Component({
     moduleId: module.id,
     selector: 'pt-backlog-detail-page',
-    templateUrl: 'detail.page.component.html'
+    templateUrl: 'detail.page.component.html',
+    styleUrls: ['detail.page.component.css']
 })
 export class DetailPageComponent implements OnInit {
 
@@ -43,21 +45,21 @@ export class DetailPageComponent implements OnInit {
     }
 
     public onDeleteTap() {
-        //Simple approach
-        //if (confirm('Are you sure you want to delete this item?')) {
+        // Simple approach
+        // if (confirm('Are you sure you want to delete this item?')) {
 
-        //}
+        // }
 
-        //Better approach with promise
-        var options: ConfirmOptions = {
-            title: "Delete Item",
-            message: "Are you sure you want to delete this item?",
-            okButtonText: "Yes",
-            cancelButtonText: "Cancel"
+        // Better approach with promise
+        const options: ConfirmOptions = {
+            title: 'Delete Item',
+            message: 'Are you sure you want to delete this item?',
+            okButtonText: 'Yes',
+            cancelButtonText: 'Cancel'
         };
-        //confirm without options, with promise
-        //confirm('Are you sure you want to delete this item?')
-        //confirm with options, with promise
+        // confirm without options, with promise
+        // confirm('Are you sure you want to delete this item?')
+        // confirm with options, with promise
         confirm(options)
             .then((result: boolean) => {
                 // result can be true/false/undefined
@@ -80,15 +82,14 @@ export class DetailPageComponent implements OnInit {
 
     public onItemSaved(item: PtItem) {
         this.backlogService.updatePtItem(item);
-        //this.navigationService.backToPreviousPage();
     }
 
     public onAddNewTask(newTask: PtNewTask) {
         this.backlogService.addNewPtTask(newTask, this.store.value.currentSelectedItem);
     }
 
-    public onToggleTask(task: PtTask) {
-        this.backlogService.togglePtTask(task, this.store.value.currentSelectedItem);
+    public onUpdateTask(taskUpdate: PtTaskUpdate) {
+        this.backlogService.updatePtTask(this.store.value.currentSelectedItem, taskUpdate.task, taskUpdate.toggle, taskUpdate.newTitle);
     }
 
     public onAddNewComment(newComment: PtNewComment) {

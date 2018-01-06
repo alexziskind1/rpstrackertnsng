@@ -1,50 +1,42 @@
-<GridLayout rows="50, *">
+<GridLayout rows="*" class="pt-item-details-container">
 
-    <StackLayout row="0" orientation="horizontal">
-        <Image width="30" height="30" [src]="item.assignee.avatar"></Image>
-    </StackLayout>
+    <RadDataForm #itemDetailsDataForm [source]="itemForm" (propertyCommitted)="onPropertyCommitted($event)" (editorUpdate)="onEditorUpdate($event)">
 
-    <StackLayout row="1">
+        <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
+            <TKPropertyEditor tkEntityPropertyEditor type="Text">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+            <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
+        </TKEntityProperty>
 
-        <RadDataForm #itemDetailsDataForm [source]="itemForm" (propertyCommitted)="onPropertyCommitted($event)" (editorUpdate)="onEditorUpdate($event)">
+        <TKEntityProperty tkDataFormProperty name="description" displayName="Description" index="2" required="true" hintText="description">
+            <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+        </TKEntityProperty>
 
-            <TKEntityProperty tkDataFormProperty name="title" displayName="Title" index="1" hintText="Title">
-                <TKPropertyEditor tkEntityPropertyEditor type="Text">
-                    <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
-                </TKPropertyEditor>
-                <TKNonEmptyValidator tkEntityPropertyValidators errorMessage="Title can't be empty."></TKNonEmptyValidator>
-            </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="typeStr" [displayName]="itemTypeEditorDisplayName" index="3" [imageResource]="itemTypeImage"
+            [valuesProvider]="itemTypesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+        </TKEntityProperty>
 
-            <TKEntityProperty tkDataFormProperty name="description" displayName="Description" index="2" required="true" hintText="description">
-                <TKPropertyEditor tkEntityPropertyEditor type="MultilineText">
-                    <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
-                </TKPropertyEditor>
-            </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="statusStr" displayName="Status" index="4" [valuesProvider]="statusesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
+        </TKEntityProperty>
 
-            <TKEntityProperty tkDataFormProperty name="typeStr" [displayName]="itemTypeEditorDisplayName" index="3" [imageResource]="itemTypeImage"
-                [valuesProvider]="itemTypesProvider">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
-            </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="estimate" displayName="Estimate" index="5">
+            <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
+        </TKEntityProperty>
 
-            <TKEntityProperty tkDataFormProperty name="statusStr" displayName="Status" index="4" [valuesProvider]="statusesProvider">
-                <TKPropertyEditor tkEntityPropertyEditor type="Picker"></TKPropertyEditor>
-            </TKEntityProperty>
+        <TKEntityProperty tkDataFormProperty name="priorityStr" displayName="Priority" index="6" [valuesProvider]="prioritiesProvider">
+            <TKPropertyEditor tkEntityPropertyEditor type="SegmentedEditor">
+                <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
+            </TKPropertyEditor>
+        </TKEntityProperty>
 
-            <TKEntityProperty tkDataFormProperty name="estimate" displayName="Estimate" index="5">
-                <TKPropertyEditor tkEntityPropertyEditor type="Stepper"></TKPropertyEditor>
-            </TKEntityProperty>
-
-            <TKEntityProperty tkDataFormProperty name="priorityStr" displayName="Priority" index="6" [valuesProvider]="prioritiesProvider">
-                <TKPropertyEditor tkEntityPropertyEditor type="SegmentedEditor">
-                    <TKPropertyEditorStyle tkPropertyEditorStyle labelTextColor="green" labelPosition="top"></TKPropertyEditorStyle>
-                </TKPropertyEditor>
-            </TKEntityProperty>
-
-            <TKEntityProperty tkDataFormProperty name="assigneeName" displayName="Assignee" index="7">
-                <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="onAssigneeEditorNeedsView($event)"></TKCustomPropertyEditor>
-            </TKEntityProperty>
-        </RadDataForm>
-    </StackLayout>
-
+        <TKEntityProperty tkDataFormProperty name="assigneeName" displayName="Assignee" index="7">
+            <TKCustomPropertyEditor tkEntityPropertyEditor (editorNeedsView)="onAssigneeEditorNeedsView($event)"></TKCustomPropertyEditor>
+        </TKEntityProperty>
+    </RadDataForm>
 
 </GridLayout>

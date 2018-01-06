@@ -41,6 +41,7 @@ const COLOR_GRAY = new Color('#F9F9F9');
     moduleId: module.id,
     selector: 'pt-item-details',
     templateUrl: 'pt-item-details.component.html',
+    styleUrls: ['pt-item-details.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PtItemDetailsComponent implements OnInit {

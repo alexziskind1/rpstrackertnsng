@@ -5,13 +5,7 @@ import { DetailScreenType } from '../../../../../shared/models/ui/types';
 @Component({
     moduleId: module.id,
     selector: 'pt-detail-section-selector',
-    template: `
-    <FlexboxLayout class="selector">
-        <Button (tap)="onDetailsTap($event)" text="Details" class="selector-btn" [class.active]="selectedScreen === 'details'"></Button>
-        <Button (tap)="onTasksTap($event)" text="Tasks" class="selector-btn" [class.active]="selectedScreen === 'tasks'"></Button>
-        <Button (tap)="onChitchatTap($event)" text="Chitchat" class="selector-btn" [class.active]="selectedScreen === 'chitchat'"></Button>
-    </FlexboxLayout>
-    `,
+    templateUrl: 'detail-section-selector.component.html',
     styleUrls: ['detail-section-selector.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
