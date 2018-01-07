@@ -28,8 +28,8 @@ import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
 
 import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
-import { ButtonEditorHelper } from '../../../../../shared/helpers/button-editor-helper/button-editor-helper';
 import { ItemType } from '../../../../../core/constants/pt-item-types';
+import { ButtonEditorHelper, setMultiLineEditorFontSize } from '../../../../../shared/helpers/ui-data-form';
 
 
 const COLOR_LIGHT = new Color('#CDDC39');
@@ -145,12 +145,7 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     private editorSetupDescriptionEditorIos(editor) {
-        if (editor.textView) {
-            const textViewDef = editor.gridLayout.definitionForView(editor.textView);
-            if (textViewDef.view && textViewDef.view.font) {
-                textViewDef.view.font = UIFont.fontWithNameSize(textViewDef.view.font.fontName, 17);
-            }
-        }
+        setMultiLineEditorFontSize(editor, 17);
     }
 
     private editorSetupTypeEditorIos(editor) {
