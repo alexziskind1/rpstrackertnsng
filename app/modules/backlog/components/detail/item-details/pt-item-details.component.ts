@@ -145,9 +145,11 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     private editorSetupDescriptionEditorIos(editor) {
-        if (editor.textView && editor.textView.view) {
+        if (editor.textView) {
             const textViewDef = editor.gridLayout.definitionForView(editor.textView);
-            textViewDef.view.font = UIFont.fontWithNameSize(textViewDef.view.font.fontName, 17);
+            if (textViewDef.view) {
+                textViewDef.view.font = UIFont.fontWithNameSize(textViewDef.view.font.fontName, 17);
+            }
         }
     }
 
