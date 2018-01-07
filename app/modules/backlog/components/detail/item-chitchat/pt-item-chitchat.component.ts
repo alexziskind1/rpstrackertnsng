@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { isIOS } from 'platform';
 import { TextField } from 'ui/text-field';

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 
 import { TextField } from 'ui/text-field';
 
@@ -16,7 +16,7 @@ import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 
-export class PtItemTasksComponent implements OnInit {
+export class PtItemTasksComponent {
 
     @Input() public set item(val: PtItem) {
         this.tasks = val.tasks;
@@ -28,10 +28,6 @@ export class PtItemTasksComponent implements OnInit {
     public newTaskTitle = EMPTY_STRING;
 
     private lastUpdatedTitle = EMPTY_STRING;
-
-    constructor() { }
-
-    public ngOnInit() { }
 
     public onAddTapped(newTaskTextField: TextField, args) {
         const newTitle = this.newTaskTitle.trim();
