@@ -4,6 +4,7 @@ import { TextInputModalComponent } from './text-input/text-input.modal.component
 import { ListSelectorModalComponent } from './list-selector/list-selector.modal.component';
 import { PtModalContext } from '../models/ui/pt-modal-context.model';
 import { PtModalListDisplayItem } from '../models/ui/pt-modal-list-display-item.model';
+import { EMPTY_STRING } from '../../core/helpers/string-helpers';
 
 
 @Injectable()
@@ -25,7 +26,7 @@ export class PtModalService {
             const di: PtModalListDisplayItem<T | string> = {
                 key: enumMember,
                 value: theEnum[enumMember],
-                img: '',
+                img: EMPTY_STRING,
                 isSelected: false,
                 payload: enumMember
             };

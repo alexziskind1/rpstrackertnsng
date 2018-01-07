@@ -5,6 +5,7 @@ import { TextField } from 'ui/text-field';
 import { PtItem, PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
 import { DictType } from '../../../../../core/models/types';
+import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
 
 
 @Component({
@@ -24,9 +25,9 @@ export class PtItemTasksComponent implements OnInit {
     @Output() updateTask = new EventEmitter<PtTaskUpdate>();
 
     public tasks: PtTask[] = [];
-    public newTaskTitle = '';
+    public newTaskTitle = EMPTY_STRING;
 
-    private lastUpdatedTitle = '';
+    private lastUpdatedTitle = EMPTY_STRING;
 
     constructor() { }
 
@@ -42,7 +43,7 @@ export class PtItemTasksComponent implements OnInit {
             completed: false
         };
         this.addNewTask.emit(newTask);
-        this.newTaskTitle = '';
+        this.newTaskTitle = EMPTY_STRING;
         newTaskTextField.dismissSoftInput();
     }
 
@@ -71,7 +72,7 @@ export class PtItemTasksComponent implements OnInit {
             newTitle: this.lastUpdatedTitle
         };
         this.updateTask.emit(taskUpdate);
-        this.lastUpdatedTitle = '';
+        this.lastUpdatedTitle = EMPTY_STRING;
     }
 
 }

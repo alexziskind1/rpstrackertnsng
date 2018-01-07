@@ -1,4 +1,5 @@
-import { Color } from "tns-core-modules/color";
+import { Color } from 'tns-core-modules/color';
+import { EMPTY_STRING } from '../../../helpers/string-helpers';
 
 export enum PriorityEnum {
     Low = 'Low',
@@ -48,7 +49,7 @@ export namespace PriorityEnum {
             case PriorityEnum.Low:
                 return 'indicator-priority low';
             default:
-                return '';
+                return EMPTY_STRING;
         }
     }
     export function getColor(priority: PriorityEnum): Color {

@@ -11,6 +11,7 @@ import { ServerErrorHandlerService } from './server-error-handler.service';
 import { AuthTokenService } from './auth-token.service';
 import { PtUser, PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
 import { getUserAvatarUrl } from '../helpers/user-avatar-helper';
+import { EMPTY_STRING } from '../helpers/string-helpers';
 
 
 
@@ -66,9 +67,8 @@ export class AuthService {
     }
 
     public logout() {
-        this.authTokenService.token = { access_token: '', dateExpires: new Date() };
-        //this.storageService.setItem(AUTH_TOKEN_KEY, '');
-        this.storageService.setItem(CURRENT_USER_KEY, '');
+        this.authTokenService.token = { access_token: EMPTY_STRING, dateExpires: new Date() };
+        this.storageService.setItem(CURRENT_USER_KEY, EMPTY_STRING);
     }
 
     private loginInternal(loginModel: PtLoginModel) {
@@ -83,7 +83,6 @@ export class AuthService {
             .do((data: { authToken: PtAuthToken, user: PtUser }) => {
                 this.authTokenService.token = data.authToken;
                 this.currentUser = data.user;
-                //this.store.set<PtUser>('currentUser', data.user);
             })
             .catch(this.errorHandlerService.handleHttpError);
     }
@@ -99,7 +98,6 @@ export class AuthService {
             .do((data: { authToken: PtAuthToken, user: PtUser }) => {
                 this.authTokenService.token = data.authToken;
                 this.currentUser = data.user;
-                //this.store.set<PtUser>('currentUser', data.user);
             })
             .catch(this.errorHandlerService.handleHttpError);
     }

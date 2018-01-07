@@ -4,6 +4,7 @@ import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
 
 import { PtNewItemForm } from '../../../../shared/models/forms/pt-new-item-form.model';
 import { ItemType } from '../../../../core/constants/pt-item-types';
+import { EMPTY_STRING } from '../../../../core/helpers/string-helpers';
 
 
 @Component({
@@ -28,9 +29,9 @@ export class NewItemFormComponent implements OnInit {
 
     public ngOnInit() {
         this.newItemForm = {
-            title: '',
-            description: '',
-            typeStr: ''
+            title: EMPTY_STRING,
+            description: EMPTY_STRING,
+            typeStr: EMPTY_STRING
         };
     }
 

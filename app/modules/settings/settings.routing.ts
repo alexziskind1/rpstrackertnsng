@@ -3,12 +3,13 @@ import { Routes } from '@angular/router';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 import { SettingsComponent } from './settings.component';
+import { EMPTY_STRING } from '../../core/helpers/string-helpers';
 
 console.log('BacklogRoutingModule loaded');
 
 const routes: Routes = [
     {
-        path: '',
+        path: EMPTY_STRING,
         component: SettingsComponent
     }
 ];

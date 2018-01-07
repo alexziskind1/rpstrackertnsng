@@ -1,4 +1,5 @@
 import { PtItemType } from '../../core/models/domain/types';
+import { EMPTY_STRING } from '../../core/helpers/string-helpers';
 
 const PT_ITEM_TYPE_PBI: PtItemType = 'PBI';
 const PT_ITEM_TYPE_BUG: PtItemType = 'Bug';
@@ -43,7 +44,7 @@ export class ItemType {
             case PT_ITEM_TYPE_IMPEDIMENT:
                 return 'indicator-impediment';
             default:
-                return '';
+                return EMPTY_STRING;
         }
     }
 
@@ -58,7 +59,7 @@ export class ItemType {
             case PT_ITEM_TYPE_IMPEDIMENT:
                 return 'res://iimpediment';
             default:
-                return '';
+                return EMPTY_STRING;
         }
     }
 

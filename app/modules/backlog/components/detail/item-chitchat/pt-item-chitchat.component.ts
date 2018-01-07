@@ -6,6 +6,7 @@ import { TextField } from 'ui/text-field';
 
 import { PtItem, PtComment, PtUser } from '../../../../../core/models/domain';
 import { PtNewComment } from '../../../../../shared/models/dto';
+import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
 
 
 @Component({
@@ -15,10 +16,7 @@ import { PtNewComment } from '../../../../../shared/models/dto';
     styleUrls: ['pt-item-chitchat.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class PtItemChitchatComponent implements OnInit {
-
-
-
+export class PtItemChitchatComponent {
     @Input() public set item(val: PtItem) {
         this.comments = val.comments;
     }
@@ -32,12 +30,7 @@ export class PtItemChitchatComponent implements OnInit {
     }
 
     public comments: PtComment[] = [];
-
-    public newCommentText = '';
-
-    constructor() { }
-
-    public ngOnInit() { }
+    public newCommentText = EMPTY_STRING;
 
     public onAddTapped(newCommentTextField: TextField, args) {
         const newTitle = this.newCommentText.trim();
@@ -48,7 +41,7 @@ export class PtItemChitchatComponent implements OnInit {
             title: newTitle
         };
         this.addNewComment.emit(newComment);
-        this.newCommentText = '';
+        this.newCommentText = EMPTY_STRING;
         newCommentTextField.dismissSoftInput();
     }
 
