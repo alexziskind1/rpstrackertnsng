@@ -3,8 +3,8 @@
         "auth": {
             "pages": {
                 "auth": {
-                    "login": "Login_",
-                    "register": "Register_"
+                    "login": "Login",
+                    "register": "Register"
                 }
             }
         }
