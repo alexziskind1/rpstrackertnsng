@@ -125,10 +125,7 @@ export class PtItemDetailsComponent implements OnInit {
         if (androidApplication) {
             /*
             switch (args.propertyName) {
-                case "appVolume": this.editorSetupSliderAndroid(args.editor); break;
-                case "onlyOnWiFi": this.editorSetupSwitchAndroid(args.editor); break;
-                case "networkLimit": this.editorSetupStepperAndroid(args.editor); break;
-                case "networkPreference": this.editorSetupSegmentedEditorAndroid(args.editor); break;
+
             }
             */
         } else {
@@ -137,11 +134,6 @@ export class PtItemDetailsComponent implements OnInit {
                 case 'typeStr': this.editorSetupTypeEditorIos(args.editor); break;
                 case 'estimate': this.editorSetupEstimateEditorIos(args.editor); break;
                 case 'priorityStr': this.editorSetupPriorityEditorIOS(args.editor); break;
-                /*
-                case "onlyOnWiFi": this.editorSetupSwitchAndroid(args.editor); break;
-                case "networkLimit": this.editorSetupStepperAndroid(args.editor); break;
-                case "networkPreference": this.editorSetupSegmentedEditorAndroid(args.editor); break;
-                */
             }
         }
     }
