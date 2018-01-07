@@ -1,7 +1,12 @@
-import { CustomPropertyEditor } from "nativescript-pro-ui/dataform";
+import { CustomPropertyEditor } from 'nativescript-pro-ui/dataform';
 
 
 export class ButtonEditorHelper extends NSObject {
+
+    public static ObjCExposedMethods = {
+        'handleTap:': { returns: interop.types.void, params: [UIView.class()] }
+    };
+
     public buttonValue: number;
     public editor: CustomPropertyEditor;
     public iosTapHandler;
@@ -11,12 +16,10 @@ export class ButtonEditorHelper extends NSObject {
         editorView.setTitleForState(this.buttonValue, UIControlState.Normal);
     }
 
-    public "handleTap:"(sender) {
+    public 'handleTap:'(sender) {
         this.iosTapHandler();
     }
 
-    public static ObjCExposedMethods = {
-        "handleTap:": { returns: interop.types.void, params: [UIView.class()] }
-    };
+
 }
 
