@@ -1,1 +1,16 @@
-.list-modal-view{color:#022734;background-color:rgba(2,39,52,0.1)}.list-modal-view .list-modal-item{vertical-align:center;margin-bottom:10}.list-modal-view{height:100%;padding-top:20}.list-modal-view .list-modal-item{padding:10 15;margin:0;border-bottom-width:1;border-color:rgba(2,39,52,0.2);background-color:#fff}.list-modal-view .list-modal-list{border-top-width:1;border-color:rgba(2,39,52,0.2)}.list-modal-view .list-modal-view-check{color:#06CE6A}
+.modal-actions-container {
+    background-color: #efefef;
+    justify-content: space-between;
+}
+
+.modal-close-img {
+    margin-left: 10;
+}
+
+.list-modal-item-wrapper {
+    margin: 5;
+}
+
+.list-modal-label {
+    margin-left: 5;
+}

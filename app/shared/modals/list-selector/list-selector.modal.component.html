@@ -2,20 +2,19 @@
     <!-- https://github.com/NativeScript/NativeScript/issues/1130 -->
 </ActionBar>
 
-<GridLayout rows="60, *, 60" verticalAlignment="top" class="list-modal-view">
-    <StackLayout orientation="horizontal" row="0">
+<GridLayout rows="60, *" verticalAlignment="top">
 
-        <Button class="btn btn-outline" text="X" horizontalAlignment="right" (tap)="onCancelButtonTap()"></Button>
-    </StackLayout>
+    <FlexboxLayout row="0" class="modal-actions-container">
+        <Image src="res://iconcloseblack" (tap)="onCancelButtonTap($event)" class="modal-close-img"></Image>
+    </FlexboxLayout>
 
     <ListView row="1" [items]="items" (itemTap)="onItemSelected($event)" class="list-modal-list">
         <ng-template let-item="item">
-            <StackLayout orientation="horizontal">
-                <Image width="30" height="30" [src]="item.img"></Image>
-                <Label [text]="item.value"></Label>
+            <StackLayout orientation="horizontal" class="list-modal-item-wrapper">
+                <Image width="50" height="50" [src]="item.img"></Image>
+                <Label [text]="item.value" class="list-modal-label"></Label>
             </StackLayout>
         </ng-template>
     </ListView>
 
-    <Button class="btn btn-outline" row="3" text="CANCEL" ios:visibility="collapsed" horizontalAlignment="right" (tap)="onCancelButtonTap()"></Button>
 </GridLayout>
