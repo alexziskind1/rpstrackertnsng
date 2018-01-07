@@ -5,13 +5,11 @@
 }
 
 Page {
-    /*background-color:  #4b5833;*/
-    background-color:  blue;
+    background-color:  #ffffff;
 }
 
 ActionBar {
-    /*background-color:  #4b5833;*/
-    background-color: burlywood;
+    background-color:  #4b5833;
     color: #ffffff;
 }
 
