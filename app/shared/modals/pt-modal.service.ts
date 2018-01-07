@@ -20,7 +20,7 @@ export class PtModalService {
     ) { }
 
     public enumToModalListDisplayItemArray<T>(theEnum): PtModalListDisplayItem<T | string>[] {
-        let retArray: PtModalListDisplayItem<T | string>[] = [];
+        const retArray: PtModalListDisplayItem<T | string>[] = [];
         for (let enumMember in theEnum) {
             const di: PtModalListDisplayItem<T | string> = {
                 key: enumMember,

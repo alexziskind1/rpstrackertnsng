@@ -40,7 +40,7 @@ export class NewItemFormComponent implements OnInit {
                 if (ok) {
                     this.formSaved.emit(this.newItemForm);
                 }
-            })
+            });
     }
 
     public onCancelTap() {
