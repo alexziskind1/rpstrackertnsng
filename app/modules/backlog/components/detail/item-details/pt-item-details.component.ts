@@ -23,19 +23,21 @@ import {
 import { PtItem, PtUser } from '../../../../../core/models/domain';
 import { PtItemType } from '../../../../../core/models/domain/types';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
-import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES } from '../../../../../core/constants';
+import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, COLOR_LIGHT, COLOR_DARK } from '../../../../../core/constants';
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
 
 import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
 import { ItemType } from '../../../../../core/constants/pt-item-types';
-import { ButtonEditorHelper, setMultiLineEditorFontSize } from '../../../../../shared/helpers/ui-data-form';
-
-
-const COLOR_LIGHT = new Color('#CDDC39');
-const COLOR_DARK = new Color('#4CAF50');
-const COLOR_GRAY = new Color('#F9F9F9');
-
+import {
+    ButtonEditorHelper,
+    setMultiLineEditorFontSize,
+    setPickerEditorImageLocation,
+    setStepperEditorTextPostfix,
+    setStepperEditorContentOffset,
+    setStepperEditorColors,
+    setSegmentedEditorColor
+} from '../../../../../shared/helpers/ui-data-form';
 
 @Component({
     moduleId: module.id,
@@ -149,53 +151,26 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     private editorSetupTypeEditorIos(editor) {
-        const labelDef = editor.gridLayout.definitionForView(editor.textLabel);
-        const imageDef = editor.gridLayout.definitionForView(editor.imageView);
-        labelDef.column = 0;
-        imageDef.column = 1;
-
+        setPickerEditorImageLocation(editor);
         this.selectedTypeValue = editor.editorValueLabel.text;
     }
 
     private editorSetupEstimateEditorIos(editor) {
-        const labelDef = editor.gridLayout.definitionForView(editor.valueLabel);
-        labelDef.contentOffset = {
-            horizontal: -25,
-            vertical: 0
-        };
-        const numVal = parseInt(labelDef.view.text);
-        if (numVal === 1) {
-            labelDef.view.text = '1 point';
-        } else {
-            labelDef.view.text = `${numVal} points`;
-        }
-
-        // editor.valueLabel.textColor = colorDark.ios;
-
-
-        const coreEditor = <UIStepper>editor.editor;
-        coreEditor.tintColor = COLOR_LIGHT.ios;
-
-
-        for (let i = 0; i < coreEditor.subviews.count; i++) {
-            if (coreEditor.subviews[i] instanceof UIButton) {
-                (<any>coreEditor.subviews[i]).imageView.tintColor = COLOR_DARK.ios;
-            }
-        }
-
-    }
-
-    private editorSetupEstimateEditorAndroid(editor) {
-        editor.getHeaderView().setPadding(12, 12, 12, 48);
+        setStepperEditorContentOffset(editor, -25, 0);
+        setStepperEditorTextPostfix(editor, 'point', 'points');
+        setStepperEditorColors(editor, COLOR_LIGHT, COLOR_DARK);
     }
 
     private editorSetupPriorityEditorIOS(editor) {
         const editorPriority = <PriorityEnum>editor.value;
         this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
-        const coreEditor = <UISegmentedControl>editor.editor;
-        coreEditor.tintColor = PriorityEnum.getColor(this.selectedPriorityValue).ios;
+        setSegmentedEditorColor(editor, PriorityEnum.getColor(this.selectedPriorityValue));
     }
 
+
+    private editorSetupEstimateEditorAndroid(editor) {
+        editor.getHeaderView().setPadding(12, 12, 12, 48);
+    }
 
 
     private ptUserToModalListDisplayItem(u: PtUser): PtModalListDisplayItem<PtUser> {
@@ -211,6 +186,33 @@ export class PtItemDetailsComponent implements OnInit {
             };
             return di;
         }
+    }
+
+    private notifyUpdateItem() {
+        this.itemDetailsDataForm.dataForm.validateAll()
+            .then(ok => {
+                if (ok) {
+                    const updatedItem = this.getUpdatedItem();
+                    this.itemSaved.emit(updatedItem);
+                }
+            })
+            .catch(err => {
+                console.error(err);
+            });
+    }
+
+    private getUpdatedItem(): PtItem {
+        const updatedAssignee = this.reselectedAssignee ? this.reselectedAssignee : this.item.assignee;
+        const updatedItem = Object.assign({}, this.item, {
+            title: this.itemForm.title,
+            description: this.itemForm.description,
+            type: this.itemForm.typeStr,
+            status: this.itemForm.statusStr,
+            priority: this.itemForm.priorityStr,
+            estimate: this.itemForm.estimate,
+            assignee: updatedAssignee
+        });
+        return updatedItem;
     }
 
     public onItemTypeEditorBtnTap(): void {
@@ -247,50 +249,6 @@ export class PtItemDetailsComponent implements OnInit {
             this.usersRequested.emit();
         }
     }
-
-
-    private notifyUpdateItem() {
-        this.itemDetailsDataForm.dataForm.validateAll()
-            .then(ok => {
-                if (ok) {
-                    const updatedItem = this.getUpdatedItem();
-                    this.itemSaved.emit(updatedItem);
-                }
-            })
-            .catch(err => {
-                console.error(err);
-            });
-    }
-
-    private getUpdatedItem(): PtItem {
-        const updatedAssignee = this.reselectedAssignee ? this.reselectedAssignee : this.item.assignee;
-        const updatedItem = Object.assign({}, this.item, {
-            title: this.itemForm.title,
-            description: this.itemForm.description,
-            type: this.itemForm.typeStr,
-            status: this.itemForm.statusStr,
-            priority: this.itemForm.priorityStr,
-            estimate: this.itemForm.estimate,
-            assignee: updatedAssignee
-        });
-        return updatedItem;
-    }
-
-
-    public onDescriptionTap(args) {
-        const ctx = this.ptModalService.createPtModalContext<string, string>(
-            this.vcRef,
-            'Edit description',
-            this.item.description,
-            this.item.description
-        );
-        this.ptModalService.createTextInputModal<string, string>(ctx)
-            .then(result => {
-                this.item.description = result;
-                this.itemSaved.emit(this.item);
-            }).catch(error => console.error(error));
-    }
-
 
     public onAssigneeEditorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         const newBtn = new Button();
@@ -337,16 +295,25 @@ export class PtItemDetailsComponent implements OnInit {
         }
     }
 
+    public onDescriptionTap(args) {
+        const ctx = this.ptModalService.createPtModalContext<string, string>(
+            this.vcRef,
+            'Edit description',
+            this.item.description,
+            this.item.description
+        );
+        this.ptModalService.createTextInputModal<string, string>(ctx)
+            .then(result => {
+                this.item.description = result;
+                this.itemSaved.emit(this.item);
+            }).catch(error => console.error(error));
+    }
+
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
         this.itemTypeEditorBtnHelper.updateEditorValue(args.view, args.value);
-        // args.view.text
-        // return args.value.valueForKey('fullName');
-        // var a = 0;
     }
 
     public editorNeedsValue(args: DataFormCustomPropertyEditorEventData) {
-        // args.value = this.newView.text;
         args.value = this.itemTypeEditorBtnHelper.buttonValue;
-        // var a = 0;
     }
 }
