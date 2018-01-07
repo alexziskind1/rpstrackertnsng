@@ -25,9 +25,9 @@ import { PtItemType } from '../../../../../core/models/domain/types';
 import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
 import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, COLOR_LIGHT, COLOR_DARK } from '../../../../../core/constants';
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
-import { PtModalContext, PtModalListModel, PtModalListDisplayItem } from '../../../../../shared/models/ui';
+import { PtModalContext, PtModalListModel, PtModalListDisplayItem, ptUserToModalListDisplayItem } from '../../../../../shared/models/ui';
 
-import { PtItemDetailsEditFormModel } from '../../../../../shared/models/forms';
+import { PtItemDetailsEditFormModel, ptItemToFormModel } from '../../../../../shared/models/forms';
 import { ItemType } from '../../../../../core/constants/pt-item-types';
 import {
     ButtonEditorHelper,
@@ -38,6 +38,7 @@ import {
     setStepperEditorColors,
     setSegmentedEditorColor
 } from '../../../../../shared/helpers/ui-data-form';
+
 
 @Component({
     moduleId: module.id,
@@ -87,15 +88,7 @@ export class PtItemDetailsComponent implements OnInit {
     ) { }
 
     public ngOnInit() {
-        this.itemForm = {
-            title: this.item.title,
-            description: this.item.description,
-            typeStr: this.item.type,
-            statusStr: this.item.status,
-            estimate: this.item.estimate,
-            priorityStr: this.item.priority,
-            assigneeName: this.item.assignee ? this.item.assignee.fullName : 'unassigned'
-        };
+        this.itemForm = ptItemToFormModel(this.item);
 
         this.usersLocal$ = this.users$
             .filter(users => users.length > 0)
@@ -107,17 +100,6 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     public onPropertyCommitted(args: DataFormEventData) {
-        switch (args.propertyName) {
-            case 'typeStr':
-
-                break;
-            case 'estimate':
-
-                break;
-            case 'priorityStr':
-
-                break;
-        }
         this.notifyUpdateItem();
     }
 
@@ -159,25 +141,8 @@ export class PtItemDetailsComponent implements OnInit {
         setSegmentedEditorColor(editor, PriorityEnum.getColor(this.selectedPriorityValue));
     }
 
-
     private editorSetupEstimateEditorAndroid(editor) {
         editor.getHeaderView().setPadding(12, 12, 12, 48);
-    }
-
-
-    private ptUserToModalListDisplayItem(u: PtUser): PtModalListDisplayItem<PtUser> {
-        if (!u) {
-            return undefined;
-        } else {
-            const di: PtModalListDisplayItem<PtUser> = {
-                key: u.id.toString(),
-                value: u.fullName,
-                img: u.avatar,
-                isSelected: false,
-                payload: u
-            };
-            return di;
-        }
     }
 
     private notifyUpdateItem() {
@@ -211,8 +176,8 @@ export class PtItemDetailsComponent implements OnInit {
         this.assigneesSub = this.usersLocal$.subscribe((users) => {
             this.users = users;
             const ptModalListModel: PtModalListModel<PtModalListDisplayItem<PtUser>> = {
-                items: users.map(this.ptUserToModalListDisplayItem),
-                selectedItem: this.item ? this.ptUserToModalListDisplayItem(this.item.assignee) : undefined
+                items: users.map(ptUserToModalListDisplayItem),
+                selectedItem: this.item ? ptUserToModalListDisplayItem(this.item.assignee) : undefined
             };
 
             const ctx: PtModalContext<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser> =
@@ -287,6 +252,8 @@ export class PtItemDetailsComponent implements OnInit {
         }
     }
 
+    /*
+    /// If we are using a modal to edit description
     public onDescriptionTap(args) {
         const ctx = this.ptModalService.createPtModalContext<string, string>(
             this.vcRef,
@@ -300,6 +267,7 @@ export class PtItemDetailsComponent implements OnInit {
                 this.itemSaved.emit(this.item);
             }).catch(error => console.error(error));
     }
+    */
 
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
         this.itemTypeEditorBtnHelper.updateEditorValue(args.view, args.value);
