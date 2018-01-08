@@ -4,3 +4,7 @@ export function setPickerEditorImageLocation(editor) {
     labelDef.column = 0;
     imageDef.column = 1;
 }
+
+export function getPickerEditorValueText(editor): string {
+    return editor.editorValueLabel.text;
+}

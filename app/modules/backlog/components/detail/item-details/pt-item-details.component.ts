@@ -36,7 +36,8 @@ import {
     setStepperEditorTextPostfix,
     setStepperEditorContentOffset,
     setStepperEditorColors,
-    setSegmentedEditorColor
+    setSegmentedEditorColor,
+    getPickerEditorValueText
 } from '../../../../../shared/helpers/ui-data-form';
 
 
@@ -104,12 +105,15 @@ export class PtItemDetailsComponent implements OnInit {
     }
 
     public onEditorUpdate(args: DataFormEventData) {
-        if (androidApplication) {
-            /*
-            switch (args.propertyName) {
+        switch (args.propertyName) {
+            case 'description': this.editorSetupDescription(args.editor); break;
+            case 'typeStr': this.editorSetupType(args.editor); break;
+            case 'estimate': this.editorSetupEstimate(args.editor); break;
+            case 'priorityStr': this.editorSetupPriority(args.editor); break;
+        }
 
-            }
-            */
+        /*
+        if (androidApplication) {
         } else {
             switch (args.propertyName) {
                 case 'description': this.editorSetupDescriptionEditorIos(args.editor); break;
@@ -118,24 +122,25 @@ export class PtItemDetailsComponent implements OnInit {
                 case 'priorityStr': this.editorSetupPriorityEditorIOS(args.editor); break;
             }
         }
+        */
     }
 
-    private editorSetupDescriptionEditorIos(editor) {
+    private editorSetupDescription(editor) {
         setMultiLineEditorFontSize(editor, 17);
     }
 
-    private editorSetupTypeEditorIos(editor) {
+    private editorSetupType(editor) {
         setPickerEditorImageLocation(editor);
-        this.selectedTypeValue = editor.editorValueLabel.text;
+        this.selectedTypeValue = <PtItemType>getPickerEditorValueText(editor);
     }
 
-    private editorSetupEstimateEditorIos(editor) {
+    private editorSetupEstimate(editor) {
         setStepperEditorContentOffset(editor, -25, 0);
         setStepperEditorTextPostfix(editor, 'point', 'points');
         setStepperEditorColors(editor, COLOR_LIGHT, COLOR_DARK);
     }
 
-    private editorSetupPriorityEditorIOS(editor) {
+    private editorSetupPriority(editor) {
         const editorPriority = <PriorityEnum>editor.value;
         this.selectedPriorityValue = editorPriority ? editorPriority : <PriorityEnum>this.itemForm.priorityStr;
         setSegmentedEditorColor(editor, PriorityEnum.getColor(this.selectedPriorityValue));
