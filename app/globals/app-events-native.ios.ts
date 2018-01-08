@@ -3,33 +3,33 @@ import * as app from 'application';
 class MyDelegate extends UIResponder implements UIApplicationDelegate {
     public static ObjCProtocols = [UIApplicationDelegate];
 
-    applicationWillFinishLaunchingWithOptions(application: UIApplication, launchOptions: NSDictionary<any, any>): boolean {
+    applicationWillFinishLaunchingWithOptions(_application: UIApplication, _launchOptions: NSDictionary<any, any>): boolean {
         console.logIos('applicationWillFinishLaunchingWithOptions');
         return true;
     }
 
-    applicationDidFinishLaunchingWithOptions(application: UIApplication, launchOptions: NSDictionary<any, any>): boolean {
+    applicationDidFinishLaunchingWithOptions(_application: UIApplication, _launchOptions: NSDictionary<any, any>): boolean {
         console.logIos('applicationDidFinishLaunchingWithOptions');
         return true;
     }
 
-    applicationDidBecomeActive(application: UIApplication): void {
+    applicationDidBecomeActive(_application: UIApplication): void {
         console.logIos('applicationDidBecomeActive');
     }
 
-    applicationDidEnterBackground(application: UIApplication): void {
+    applicationDidEnterBackground(_application: UIApplication): void {
         console.logIos('applicationDidEnterBackground');
     }
 
-    applicationWillResignActive(application: UIApplication) {
+    applicationWillResignActive(_application: UIApplication) {
         console.logIos('applicationWillResignActive');
     }
 
-    applicationWillEnterForeground(application: UIApplication) {
+    applicationWillEnterForeground(_application: UIApplication) {
         console.logIos('applicationWillEnterForeground');
     }
 
-    applicationWillTerminate(application: UIApplication) {
+    applicationWillTerminate(_application: UIApplication) {
         console.logIos('applicationWillTerminate');
     }
 }

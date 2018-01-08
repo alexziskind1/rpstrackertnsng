@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output, ChangeDetectionStrategy, Input } from '@angular/core';
+import { Component, EventEmitter, Output, ChangeDetectionStrategy, Input } from '@angular/core';
 
 import { DetailScreenType } from '../../../../../shared/models/ui/types';
 
@@ -9,22 +9,18 @@ import { DetailScreenType } from '../../../../../shared/models/ui/types';
     styleUrls: ['detail-section-selector.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DetailSectionSelectorComponent implements OnInit {
+export class DetailSectionSelectorComponent {
 
     @Input() selectedScreen: DetailScreenType = 'details';
     @Output() screenSelected = new EventEmitter<DetailScreenType>();
 
-    constructor() { }
-
-    ngOnInit() { }
-
-    public onDetailsTap(args) {
+    public onDetailsTap(_args) {
         this.screenSelected.emit('details');
     }
-    public onTasksTap(args) {
+    public onTasksTap(_args) {
         this.screenSelected.emit('tasks');
     }
-    public onChitchatTap(args) {
+    public onChitchatTap(_args) {
         this.screenSelected.emit('chitchat');
     }
 }

@@ -5,7 +5,7 @@
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "noUnusedLocals": true,
-        "noUnusedParameters": false,
+        "noUnusedParameters": true,
         "noImplicitReturns": false,
         "noEmitHelpers": false, //AZ: This is true by default - need to change.
         "noEmitOnError": true,

@@ -1,6 +1,6 @@
 import { Color } from 'color';
 
-export function setStepperEditorContentOffset(editor, horizontalOffset: number, verticalOffset: number) {
+export function setStepperEditorContentOffset(editor, horizontalOffset: number, verticalOffset: number): void {
     const labelDef = editor.gridLayout.definitionForView(editor.valueLabel);
     labelDef.contentOffset = {
         horizontal: horizontalOffset,
@@ -8,7 +8,7 @@ export function setStepperEditorContentOffset(editor, horizontalOffset: number, 
     };
 }
 
-export function setStepperEditorTextPostfix(editor, singularPostfix: string, pluralPostfix: string) {
+export function setStepperEditorTextPostfix(editor, singularPostfix: string, pluralPostfix: string): void {
     const labelDef = editor.gridLayout.definitionForView(editor.valueLabel);
     const numVal = parseInt(labelDef.view.text);
     if (numVal === 1) {
@@ -18,7 +18,7 @@ export function setStepperEditorTextPostfix(editor, singularPostfix: string, plu
     }
 }
 
-export function setStepperEditorColors(editor, lightColor: Color, darkColor: Color) {
+export function setStepperEditorColors(editor, lightColor: Color, darkColor: Color): void {
     const coreEditor = <UIStepper>editor.editor;
     coreEditor.tintColor = lightColor.ios;
 

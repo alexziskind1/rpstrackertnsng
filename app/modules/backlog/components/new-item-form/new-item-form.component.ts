@@ -6,7 +6,7 @@ import { DataFormEventData } from 'nativescript-pro-ui/dataform';
 import { PtItemType } from '../../../../core/models/domain/types';
 import { PtNewItemForm, initializeNewItemForm } from '../../../../shared/models/forms/pt-new-item-form.model';
 import { ItemType } from '../../../../core/constants/pt-item-types';
-import { setMultiLineEditorFontSize, setPickerEditorImageLocation } from '../../../../shared/helpers/ui-data-form';
+import { setMultiLineEditorFontSize, setPickerEditorImageLocation, getPickerEditorValueText } from '../../../../shared/helpers/ui-data-form';
 
 @Component({
     moduleId: module.id,
@@ -55,7 +55,7 @@ export class NewItemFormComponent implements OnInit {
 
     private editorSetupType(editor) {
         setPickerEditorImageLocation(editor);
-        this.selectedTypeValue = editor.editorValueLabel.text;
+        this.selectedTypeValue = <PtItemType>getPickerEditorValueText(editor);
     }
 
     public onSaveTap() {

@@ -17,7 +17,7 @@ export class RegisterPageComponent {
 
     public onRegister(registerModel: PtRegisterModel) {
         this.authService.register(registerModel)
-            .subscribe((user: PtUser) => {
+            .subscribe((_user: PtUser) => {
                 this.navigationService.navigate(['/backlog'], { clearHistory: true });
             });
     }

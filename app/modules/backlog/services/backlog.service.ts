@@ -128,7 +128,7 @@ export class BacklogService {
         this.repo.updatePtItem(item,
             this.errorHandlerService.handleHttpError,
             (updatedItem: PtItem) => {
-                this.getPtItem(item.id);
+                this.getPtItem(updatedItem.id);
             }
         );
     }
@@ -159,7 +159,7 @@ export class BacklogService {
             task,
             currentItem.id,
             this.errorHandlerService.handleHttpError,
-            (nextTask: PtTask) => {
+            (_nextTask: PtTask) => {
                 this.getPtItem(currentItem.id);
             }
         );
@@ -191,7 +191,7 @@ export class BacklogService {
 
         this.repo.updatePtTask(taskToUpdate, currentItem.id,
             this.errorHandlerService.handleHttpError,
-            (updatedTask: PtTask) => {
+            (_updatedTask: PtTask) => {
                 this.getPtItem(currentItem.id);
             }
         );
@@ -209,7 +209,7 @@ export class BacklogService {
             comment,
             currentItem.id,
             this.errorHandlerService.handleHttpError,
-            (nextComment: PtComment) => {
+            (_nextComment: PtComment) => {
                 this.getPtItem(currentItem.id);
             }
         );

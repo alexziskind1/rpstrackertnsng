@@ -32,7 +32,7 @@ export class PtItemChitchatComponent {
     public comments: PtComment[] = [];
     public newCommentText = EMPTY_STRING;
 
-    public onAddTapped(newCommentTextField: TextField, args) {
+    public onAddTapped(newCommentTextField: TextField, _args) {
         const newTitle = this.newCommentText.trim();
         if (newTitle.length === 0) {
             return;

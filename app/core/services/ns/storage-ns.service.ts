@@ -24,7 +24,7 @@ export class StorageNsService extends StorageService {
     removeItem(key: string): void {
         remove(key);
     }
-    key(keyIndex: number): string {
+    key(_keyIndex: number): string {
         throw new Error('Method not implemented.');
     }
     clear(): void {

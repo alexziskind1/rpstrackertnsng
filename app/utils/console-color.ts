@@ -28,21 +28,21 @@ interface Console {
 }
 
 console.logNativeScript = (message?: any, ...optionalParams: any[]) => {
-    console.log(colorBlue, 'NATIVESCRIPT EVENT: ' + message, colorReset);
+    console.log(colorBlue, 'NATIVESCRIPT EVENT: ' + message, colorReset, optionalParams);
 };
 console.logIos = (message?: any, ...optionalParams: any[]) => {
-    console.log(colorDim, 'IOS EVENT:           ' + message, colorReset);
+    console.log(colorDim, 'IOS EVENT:           ' + message, colorReset, optionalParams);
 };
 console.logAndroid = (message?: any, ...optionalParams: any[]) => {
-    console.log(colorGreen, 'ANDROID EVENT:     ' + message, colorReset);
+    console.log(colorGreen, 'ANDROID EVENT:     ' + message, colorReset, optionalParams);
 };
 
 console.logColor = (message?: any, ...optionalParams: any[]) => {
-    console.log(colorCyan, message, colorReset);
+    console.log(colorCyan, message, colorReset, optionalParams);
 };
 console.errorColor = (message?: any, ...optionalParams: any[]) => {
-    console.error(colorRed, message, colorReset);
+    console.error(colorRed, message, colorReset, optionalParams);
 };
 console.warnColor = (message?: any, ...optionalParams: any[]) => {
-    console.warn(colorMagenta, message, colorReset);
+    console.warn(colorMagenta, message, colorReset, optionalParams);
 };

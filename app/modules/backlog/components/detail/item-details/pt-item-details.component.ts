@@ -91,7 +91,7 @@ export class PtItemDetailsComponent implements OnInit {
         this.selectedPriorityValue = <PriorityEnum>this.itemForm.priorityStr;
     }
 
-    public onPropertyCommitted(args: DataFormEventData) {
+    public onPropertyCommitted(_args: DataFormEventData) {
         this.notifyUpdateItem();
     }
 

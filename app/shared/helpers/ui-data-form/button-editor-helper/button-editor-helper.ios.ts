@@ -11,12 +11,12 @@ export class ButtonEditorHelper extends NSObject {
     public editor: CustomPropertyEditor;
     public iosTapHandler;
 
-    public updateEditorValue(editorView, newValue) {
+    public updateEditorValue(editorView, newValue): void {
         this.buttonValue = newValue;
         editorView.setTitleForState(this.buttonValue, UIControlState.Normal);
     }
 
-    public 'handleTap:'(sender) {
+    public 'handleTap:'(_sender): void {
         this.iosTapHandler();
     }
 

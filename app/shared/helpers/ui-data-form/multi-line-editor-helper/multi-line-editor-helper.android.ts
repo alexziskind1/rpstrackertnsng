@@ -1,3 +1,3 @@
-export function setMultiLineEditorFontSize(editor, size: number) {
+export function setMultiLineEditorFontSize(_editor, _size: number): void {
 
 }

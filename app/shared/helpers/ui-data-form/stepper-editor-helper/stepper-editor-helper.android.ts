@@ -1,9 +1,9 @@
 import { Color } from 'color';
 import { com } from '../../ui-data-form';
 
-export function setStepperEditorContentOffset(editor, horizontalOffset: number, verticalOffset: number) { }
+export function setStepperEditorContentOffset(_editor, _horizontalOffset: number, _verticalOffset: number): void { }
 
-export function setStepperEditorTextPostfix(editor, singularPostfix: string, pluralPostfix: string) {
+export function setStepperEditorTextPostfix(editor, singularPostfix: string, pluralPostfix: string): void {
     const numberPicker: com.telerik.widget.numberpicker.RadNumberPicker =
         <com.telerik.widget.numberpicker.RadNumberPicker>editor.getEditorView();
 
@@ -16,7 +16,7 @@ export function setStepperEditorTextPostfix(editor, singularPostfix: string, plu
     }
 }
 
-export function setStepperEditorColors(editor, lightColor: Color, darkColor: Color) {
+export function setStepperEditorColors(editor, lightColor: Color, darkColor: Color): void {
 
     const numberPicker: com.telerik.widget.numberpicker.RadNumberPicker =
         <com.telerik.widget.numberpicker.RadNumberPicker>editor.getEditorView();

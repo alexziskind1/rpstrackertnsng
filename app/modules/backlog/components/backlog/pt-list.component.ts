@@ -26,7 +26,7 @@ export class PtListComponent {
         this.listItemSelected.emit(item);
     }
 
-    public refreshList(args) {
+    public refreshList(_args) {
         this.listRefreshRequested.emit();
     }
 }

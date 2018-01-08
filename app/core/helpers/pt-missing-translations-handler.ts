@@ -1,7 +1,7 @@
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
 export class PtMissingTranslationHandler implements MissingTranslationHandler {
-    handle(params: MissingTranslationHandlerParams) {
+    handle(_params: MissingTranslationHandlerParams) {
         return 'missing translation';
     }
 }

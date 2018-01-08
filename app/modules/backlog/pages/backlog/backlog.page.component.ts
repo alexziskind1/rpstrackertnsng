@@ -56,7 +56,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
             }
         });
 
-        this.selectedPreset$.subscribe(next => {
+        this.selectedPreset$.subscribe(_next => {
             this.backlogService.fetchItems();
         });
     }
@@ -66,7 +66,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
         this.drawer.showDrawer();
     }
 
-    public onDrawerClosing(args) {
+    public onDrawerClosing(_args) {
         this.drawer.mainContent.className = 'drawer-content-out';
     }
 
@@ -74,7 +74,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
         this.drawer.closeDrawer();
     }
 
-    public onListRefreshRequested(notifyRefreshComplete: () => void) {
+    public onListRefreshRequested() {
         this.isListRefreshing$.next(true);
         this.backlogService.fetchItems()
             .then(() => {
@@ -89,7 +89,7 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
         this.navigationService.navigate(['detail', item.id]);
     }
 
-    public onAddTap(args) {
+    public onAddTap(_args) {
         const ctx = this.ptModalService.createPtModalContext<any, PtNewItem>(this.vcRef, 'Add New Item', null, null, 'Save');
         this.ptModalService.createModal(NewItemModalComponent, ctx)
             .then(result => {
