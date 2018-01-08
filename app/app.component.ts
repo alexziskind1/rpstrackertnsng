@@ -14,9 +14,9 @@ import { Page } from 'ui/page';
 export class AppComponent implements OnInit {
 
     constructor(
-        private page: Page,
-        private translateService: TranslateService,
-        fonticon: TNSFontIconService
+        page: Page,
+        translateService: TranslateService,
+        _fonticon: TNSFontIconService
     ) {
         // page.actionBarHidden = true;
         page.backgroundSpanUnderStatusBar = true;

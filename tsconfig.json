@@ -4,6 +4,9 @@
         "target": "es5",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "noUnusedLocals": false,
+        "noUnusedParameters": false,
+        "noImplicitReturns": false,
         "noEmitHelpers": false, //AZ: This is true by default - need to change.
         "noEmitOnError": true,
         "skipLibCheck": true, //AZ: Added this to skip checking the huge tns-platform-declarations

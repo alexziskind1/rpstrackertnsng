@@ -1,4 +1,4 @@
-import { ViewContainerRef } from "@angular/core";
+import { ViewContainerRef } from '@angular/core';
 
 export interface PtModalContext<T, R> {
     vcRef: ViewContainerRef;

@@ -22,32 +22,21 @@ export class PtModalService {
 
     public enumToModalListDisplayItemArray<T>(theEnum): PtModalListDisplayItem<T | string>[] {
         const retArray: PtModalListDisplayItem<T | string>[] = [];
-        for (let enumMember in theEnum) {
-            const di: PtModalListDisplayItem<T | string> = {
-                key: enumMember,
-                value: theEnum[enumMember],
-                img: EMPTY_STRING,
-                isSelected: false,
-                payload: enumMember
-            };
-            retArray.push(di);
-        }
-        return retArray;
-    }
 
-    /*
-    public enumToModalListDisplayItemArray(theEnum): PtModalListDisplayItem[] {
-        let retArray: PtModalListDisplayItem[] = [];
-        for (var enumMember in theEnum) {
-            const intVal = parseInt(enumMember, 10);
-            const isValueProperty = intVal >= 0;
-            if (isValueProperty) {
-                retArray.push({ value: intVal, title: theEnum[enumMember], img: theEnum.getImage(intVal), isSelected: false });
+        for (const enumMember in theEnum) {
+            if (theEnum.hasOwnProperty(enumMember)) {
+                const di: PtModalListDisplayItem<T | string> = {
+                    key: enumMember,
+                    value: theEnum[enumMember],
+                    img: EMPTY_STRING,
+                    isSelected: false,
+                    payload: enumMember
+                };
+                retArray.push(di);
             }
         }
         return retArray;
     }
-    */
 
     public createPtModalContext<T, R>(
         vcRef: ViewContainerRef,

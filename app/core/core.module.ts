@@ -24,12 +24,12 @@ import { RpsErrorHandler } from './helpers/rps-error-handler';
         ...SERVICES,
         Store,
         { provide: ErrorHandler, useClass: RpsErrorHandler },
-        //{ provide: HTTP_INTERCEPTORS, useClass: PtApiHttpInterceptor, multi: true }
+        // { provide: HTTP_INTERCEPTORS, useClass: PtApiHttpInterceptor, multi: true }
     ]
 })
 export class CoreModule {
     constructor(
-        //@Inject(APP_CONFIG) config: AppConfig,
+        // @Inject(APP_CONFIG) config: AppConfig,
         @Optional() @SkipSelf() parentModule: CoreModule
     ) {
         if (parentModule) {

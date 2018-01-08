@@ -9,26 +9,8 @@ export class RpsErrorHandler implements ErrorHandler {
 
     public handleError(error) {
         const loggerService = this.injector.get(LoggerService);
-        //const zone = this.injector.get(NgZone);
-
         const message = error.message ? error.message : error.toString();
-
-
-
-        /*
-        if (confirm('There was an error and we have to close the app')) {
-            throw error;
-        }
-        */
-
-        //zone.run(() => {
-        //alert('there was an error : ' + message);
-        //});
-
         loggerService.error(message);
         throw error;
     }
-
 }
-
-

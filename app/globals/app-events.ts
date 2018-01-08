@@ -38,5 +38,4 @@ export const setAppEvents = () => {
     app.on(app.orientationChangedEvent, function (args: app.ApplicationEventData) {
         console.logNativeScript('orientationChangedEvent');
     });
-}
-
+};

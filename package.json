@@ -12,6 +12,9 @@
       "version": "3.3.0"
     }
   },
+  "scripts": {
+    "lint": "tslint 'app/**/*.ts' -t verbose"
+  },
   "dependencies": {
     "@angular/animations": "~4.4.1",
     "@angular/common": "~4.4.1",
@@ -45,7 +48,7 @@
     "nativescript-dev-typescript": "~0.5.0",
     "tns-platform-declarations": "3.3.0",
     "ts-node": "~3.2.0",
-    "tslint": "~5.7.0",
+    "tslint": "^5.8.0",
     "typescript": "~2.5.3"
   }
 }

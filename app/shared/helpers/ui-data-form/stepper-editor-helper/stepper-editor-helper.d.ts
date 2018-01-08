@@ -8,7 +8,7 @@ declare module com {
     module telerik {
         module android {
             module common {
-                class Procedure<T>{
+                class Procedure<T> {
                     constructor(imp);
                 }
             }
@@ -21,10 +21,10 @@ declare module com {
 
             module numberpicker {
                 class RadNumberPicker {
+                    rootView;
                     labelView();
                     decreaseView();
                     increaseView();
-                    rootView;
                 }
             }
         }
