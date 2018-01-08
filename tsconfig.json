@@ -4,7 +4,7 @@
         "target": "es5",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
-        "noUnusedLocals": false,
+        "noUnusedLocals": true,
         "noUnusedParameters": false,
         "noImplicitReturns": false,
         "noEmitHelpers": false, //AZ: This is true by default - need to change.

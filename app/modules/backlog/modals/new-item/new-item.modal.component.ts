@@ -2,12 +2,11 @@ import { Component } from '@angular/core';
 
 import { ModalDialogParams } from 'nativescript-angular';
 import { Page } from 'ui/page';
-import { DatePicker } from 'ui/date-picker';
+
 import { PtModalComponentBase } from '../../../../shared/modals/pt-modal-component-base';
 import { PtNewItemForm } from '../../../../shared/models/forms';
 import { PtNewItem } from '../../../../shared/models/dto';
 import { PtItemType } from '../../../../core/models/domain/types';
-
 
 @Component({
     moduleId: module.id,

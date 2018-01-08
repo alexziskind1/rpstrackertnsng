@@ -7,7 +7,7 @@ import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NSModuleFactoryLoader } from 'nativescript-angular/router';
 
 import { TranslateModule, TranslateLoader, MissingTranslationHandler } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+// import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
 
 import { AppRoutingModule } from './app.routing';

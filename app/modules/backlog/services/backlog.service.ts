@@ -1,9 +1,6 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
 import * as _ from 'lodash';
 
-
-import { Observable, ObservableInput } from 'rxjs/Observable';
-
 import { AppConfig } from '../../../core/models/core';
 import { APP_CONFIG } from '../../../config/app-config.module';
 import { Store } from '../../../core/state/app-store';
@@ -13,7 +10,6 @@ import { PtNewItem, PtNewTask, PtNewComment } from '../../../shared/models/dto';
 import { PriorityEnum, StatusEnum } from '../../../core/models/domain/enums';
 import { BacklogRepository } from '../repositories/backlog.repository';
 import { getUserAvatarUrl } from '../../../core/helpers/user-avatar-helper';
-
 
 @Injectable()
 export class BacklogService {
@@ -218,5 +214,4 @@ export class BacklogService {
             }
         );
     }
-
 }

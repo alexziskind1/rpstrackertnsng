@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { RadSideDrawerComponent, SideDrawerType } from 'nativescript-pro-ui/sidedrawer/angular';
+import { RadSideDrawerComponent } from 'nativescript-pro-ui/sidedrawer/angular';
 import { RadSideDrawer, SideDrawerLocation } from 'nativescript-pro-ui/sidedrawer';
 
 import { NavigationService } from '../../../../core/services';
@@ -68,8 +68,6 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
 
     public onDrawerClosing(args) {
         this.drawer.mainContent.className = 'drawer-content-out';
-        // const mainContentLayout = (<LayoutBase>this._drawer.mainContent);
-        // mainContentLayout.className = 'drawer-content-out';
     }
 
     public onCloseDrawerTap() {
@@ -89,20 +87,6 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
 
     public selectListItem(item: PtItem) {
         this.navigationService.navigate(['detail', item.id]);
-
-        // this.router.navigate(['detail', item.id]);
-        // this.routerExtensions.navigate()
-        /*const transition: NavigationTransition = {
-            duration: 5000,
-            name: 'flipRight'
-        };
-        const options: NavigationOptions = {
-            animated: true,
-            transition: transition
-        };
-
-        this.routerExtensions.navigate(['detail', item.id], options);
-        */
     }
 
     public onAddTap(args) {

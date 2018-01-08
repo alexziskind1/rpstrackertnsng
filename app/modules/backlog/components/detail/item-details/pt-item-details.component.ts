@@ -1,32 +1,23 @@
 import {
     Component, OnInit, Input, ChangeDetectionStrategy, Output,
-    EventEmitter, ViewContainerRef, ViewChild, ElementRef, NgZone
+    EventEmitter, ViewContainerRef, ViewChild, NgZone
 } from '@angular/core';
-
 
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
 
-
 import { android as androidApplication } from 'application';
-import { Color } from 'color';
 import { Button } from 'ui/button';
 
-
 import { RadDataFormComponent } from 'nativescript-pro-ui/dataform/angular';
-import {
-    CustomPropertyEditor, DataFormCustomPropertyEditorEventData,
-    DataFormEventData, EntityProperty, RadDataForm, PropertyEditor
-} from 'nativescript-pro-ui/dataform';
-
+import { DataFormCustomPropertyEditorEventData, DataFormEventData } from 'nativescript-pro-ui/dataform';
 
 import { PtItem, PtUser } from '../../../../../core/models/domain';
 import { PtItemType } from '../../../../../core/models/domain/types';
-import { PriorityEnum, StatusEnum, ItemTypeEnum } from '../../../../../core/models/domain/enums';
+import { PriorityEnum } from '../../../../../core/models/domain/enums';
 import { PT_ITEM_STATUSES, PT_ITEM_PRIORITIES, COLOR_LIGHT, COLOR_DARK } from '../../../../../core/constants';
 import { PtModalService } from '../../../../../shared/modals/pt-modal.service';
 import { PtModalContext, PtModalListModel, PtModalListDisplayItem, ptUserToModalListDisplayItem } from '../../../../../shared/models/ui';
-
 import { PtItemDetailsEditFormModel, ptItemToFormModel } from '../../../../../shared/models/forms';
 import { ItemType } from '../../../../../core/constants/pt-item-types';
 import {
@@ -146,9 +137,11 @@ export class PtItemDetailsComponent implements OnInit {
         setSegmentedEditorColor(editor, PriorityEnum.getColor(this.selectedPriorityValue));
     }
 
+    /*
     private editorSetupEstimateEditorAndroid(editor) {
         editor.getHeaderView().setPadding(12, 12, 12, 48);
     }
+    */
 
     private notifyUpdateItem() {
         this.itemDetailsDataForm.dataForm.validateAll()

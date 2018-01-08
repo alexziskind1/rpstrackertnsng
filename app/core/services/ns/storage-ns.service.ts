@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from '../storage.service';
-import { getString, setString, hasKey, clear, remove } from 'application-settings';
+import { getString, setString, clear, remove } from 'application-settings';
 
 @Injectable()
 export class StorageNsService extends StorageService {

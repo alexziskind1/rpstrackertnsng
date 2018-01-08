@@ -88,8 +88,6 @@ export class AuthService {
     }
 
     private registerInternal(registerModel: PtRegisterModel) {
-        const headers = new Headers();
-
         return this.http.post(
             this.registerUrl,
             { registerModel: registerModel }

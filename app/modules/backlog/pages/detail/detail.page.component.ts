@@ -1,19 +1,16 @@
-import { Component, OnInit, ViewContainerRef } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
-import { SegmentedBar, SegmentedBarItem } from 'ui/segmented-bar';
-import { confirm, action, ActionOptions, ConfirmOptions } from 'ui/dialogs';
+import { confirm, ConfirmOptions } from 'ui/dialogs';
 
-import { PtItem, PtTask, PtUser } from '../../../../core/models/domain';
+import { PtItem, PtUser } from '../../../../core/models/domain';
 import { BacklogService } from '../../services/backlog.service';
 import { PtUserService, NavigationService } from '../../../../core/services';
 import { Store } from '../../../../core/state/app-store';
 import { PtNewTask, PtNewComment, PtTaskUpdate } from '../../../../shared/models/dto';
 import { DetailScreenType } from '../../../../shared/models/ui/types';
-
 
 @Component({
     moduleId: module.id,
@@ -35,7 +32,6 @@ export class DetailPageComponent implements OnInit {
         private navigationService: NavigationService,
         private store: Store
     ) { }
-
 
     public ngOnInit() {
         this.backlogService.getItemFromCacheOrServer(parseInt(this.activatedRoute.snapshot.params['id']));

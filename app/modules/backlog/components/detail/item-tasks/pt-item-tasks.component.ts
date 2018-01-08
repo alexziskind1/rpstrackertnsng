@@ -4,9 +4,7 @@ import { TextField } from 'ui/text-field';
 
 import { PtItem, PtTask } from '../../../../../core/models/domain';
 import { PtNewTask, PtTaskUpdate } from '../../../../../shared/models/dto';
-import { DictType } from '../../../../../core/models/types';
 import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
-
 
 @Component({
     moduleId: module.id,
@@ -15,7 +13,6 @@ import { EMPTY_STRING } from '../../../../../core/helpers/string-helpers';
     styleUrls: ['pt-item-tasks.component.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-
 export class PtItemTasksComponent {
 
     @Input() public set item(val: PtItem) {
@@ -70,5 +67,4 @@ export class PtItemTasksComponent {
         this.updateTask.emit(taskUpdate);
         this.lastUpdatedTitle = EMPTY_STRING;
     }
-
 }

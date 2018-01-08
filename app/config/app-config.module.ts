@@ -1,4 +1,4 @@
-import { NgModule, InjectionToken, TypeProvider } from '@angular/core';
+import { NgModule, InjectionToken } from '@angular/core';
 import { StorageService } from '../core/services/storage.service';
 import { StorageWebService } from '../core/services/web/storage-web.service';
 import { StorageNsService } from '../core/services/ns/storage-ns.service';
