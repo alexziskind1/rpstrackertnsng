@@ -90,10 +90,10 @@ export class BacklogPageComponent implements AfterViewInit, OnInit {
     }
 
     public onAddTap(_args) {
-        const ctx = this.ptModalService.createPtModalContext<any, PtNewItem>(this.vcRef, 'Add New Item', null, null, 'Save');
+        const ctx = this.ptModalService.createPtModalContext<null, PtNewItem>(this.vcRef, 'Add New Item', null, null, 'Save');
         this.ptModalService.createModal(NewItemModalComponent, ctx)
             .then(result => {
-                if (result != null) {
+                if (result) {
                     this.backlogService.addNewPtItem(result, this.store.value.currentUser);
                 }
             });

@@ -13,7 +13,7 @@ import { PtItemType } from '../../../../core/models/domain/types';
     selector: 'pt-new-item-modal',
     templateUrl: 'new-item.modal.component.html'
 })
-export class NewItemModalComponent extends PtModalComponentBase<string, PtNewItem> {
+export class NewItemModalComponent extends PtModalComponentBase<null, PtNewItem> {
 
     constructor(
         params: ModalDialogParams,

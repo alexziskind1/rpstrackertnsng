@@ -30,6 +30,7 @@ import {
     setSegmentedEditorColor,
     getPickerEditorValueText
 } from '../../../../../shared/helpers/ui-data-form';
+import { ListSelectorModalComponent } from '../../../../../shared/modals/list-selector/list-selector.modal.component';
 
 
 @Component({
@@ -186,7 +187,7 @@ export class PtItemDetailsComponent implements OnInit {
                     this.item.assignee
                 );
 
-            this.ptModalService.createListSelectorModal<PtModalListModel<PtModalListDisplayItem<PtUser>>, PtUser>(ctx)
+            this.ptModalService.createModal(ListSelectorModalComponent, ctx)
                 .then(result => {
                     this.reselectedAssignee = result;
                     this.itemForm.assigneeName = result.fullName;

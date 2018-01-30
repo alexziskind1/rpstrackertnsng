@@ -8,26 +8,30 @@ import { PtModalComponentBase } from '../pt-modal-component-base';
 @Component({
     moduleId: module.id,
     selector: 'pt-text-input-modal',
-    templateUrl: 'text-input.modal.component.html'
+    templateUrl: 'text-input.modal.component.html',
+    styleUrls: ['text-input.modal.component.css']
 })
 export class TextInputModalComponent extends PtModalComponentBase<string, string> {
-    private originalText: string;
+
+    public modalTitle: string;
     public theText: string;
+    public okText: string;
 
     constructor(
         params: ModalDialogParams,
         page: Page
     ) {
         super(params, page);
-        this.originalText = this.modalContext.payload;
+        this.modalTitle = this.modalContext.title;
         this.theText = this.modalContext.payload;
+        this.okText = this.modalContext.btnOkText;
     }
 
-    public onModalSubmit() {
+    public onOkButtonTap() {
         this.closeCallback(this.theText);
     }
 
     public onCancelButtonTap(): void {
-        this.closeCallback(this.originalText);
+        this.closeCallback(this.modalContext.payload);
     }
 }
