@@ -7,6 +7,11 @@ export enum PriorityEnum {
     High = 'High',
     Critical = 'Critical'
 }
+
+function impossiblePriority(priority: never): never {
+    throw new Error(`Impossible priority: ${priority}`);
+}
+
 export namespace PriorityEnum {
     export function isMax(priority: PriorityEnum): boolean {
         return priority === PriorityEnum.Critical;
@@ -24,6 +29,8 @@ export namespace PriorityEnum {
                 return PriorityEnum.High;
             case PriorityEnum.Low:
                 return PriorityEnum.Medium;
+            default:
+                return impossiblePriority(priority);
         }
     }
     export function previousPriority(priority: PriorityEnum): PriorityEnum {
@@ -36,6 +43,8 @@ export namespace PriorityEnum {
                 return PriorityEnum.Low;
             case PriorityEnum.Low:
                 return undefined;
+            default:
+                return impossiblePriority(priority);
         }
     }
     export function getIndicatorClass(priority: PriorityEnum): string {
@@ -49,7 +58,7 @@ export namespace PriorityEnum {
             case PriorityEnum.Low:
                 return 'indicator-priority low';
             default:
-                return EMPTY_STRING;
+                return impossiblePriority(priority);
         }
     }
     export function getColor(priority: PriorityEnum): Color {
@@ -62,6 +71,8 @@ export namespace PriorityEnum {
                 return new Color('#0c6d00');
             case PriorityEnum.Low:
                 return new Color('#002b6d');
+            default:
+                return impossiblePriority(priority);
         }
     }
 }
