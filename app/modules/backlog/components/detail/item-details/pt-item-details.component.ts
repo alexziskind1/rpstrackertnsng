@@ -51,7 +51,6 @@ export class PtItemDetailsComponent implements OnInit {
 
     private users: PtUser[] = [];
     private usersLocal$: Observable<PtUser[]>;
-    private assigneesSub: Subscription;
     private reselectedAssignee: PtUser;
 
     public itemForm: PtItemDetailsEditFormModel;
@@ -62,9 +61,10 @@ export class PtItemDetailsComponent implements OnInit {
     private selectedTypeValue: PtItemType;
     private selectedPriorityValue: PriorityEnum;
 
-    private itemTypeEditorBtnHelper: ButtonEditorHelper;
-    private itemTypeEditorViewConnected = false;
-    private itemTypeNativeView;
+    private assigneesSub: Subscription;
+    private assigneeEditorBtnHelper: ButtonEditorHelper;
+    private assigneeEditorViewConnected = false;
+    private assigneeNativeView;
 
     public get itemTypeImage() {
         return ItemType.imageResFromType(this.selectedTypeValue);
@@ -171,7 +171,7 @@ export class PtItemDetailsComponent implements OnInit {
         return updatedItem;
     }
 
-    public onItemTypeEditorBtnTap(): void {
+    public onAssigneeEditorBtnTap(): void {
         this.assigneesSub = this.usersLocal$.subscribe((users) => {
             this.users = users;
             const ptModalListModel: PtModalListModel<PtModalListDisplayItem<PtUser>> = {
@@ -192,8 +192,8 @@ export class PtItemDetailsComponent implements OnInit {
                     this.reselectedAssignee = result;
                     this.itemForm.assigneeName = result.fullName;
 
-                    this.itemTypeEditorBtnHelper.updateEditorValue(this.itemTypeNativeView, this.itemForm.assigneeName);
-                    this.itemTypeEditorBtnHelper.editor.notifyValueChanged();
+                    this.assigneeEditorBtnHelper.updateEditorValue(this.assigneeNativeView, this.itemForm.assigneeName);
+                    this.assigneeEditorBtnHelper.editor.notifyValueChanged();
                     this.assigneesSub.unsubscribe();
                 }).catch(error => {
                     console.error(error);
@@ -209,44 +209,44 @@ export class PtItemDetailsComponent implements OnInit {
     public onAssigneeEditorNeedsView(args: DataFormCustomPropertyEditorEventData) {
         const newBtn = new Button();
         newBtn.style.color = COLOR_DARK;
-        this.itemTypeEditorBtnHelper = new ButtonEditorHelper();
-        this.itemTypeEditorBtnHelper.editor = args.object;
+        this.assigneeEditorBtnHelper = new ButtonEditorHelper();
+        this.assigneeEditorBtnHelper.editor = args.object;
 
         if (androidApplication) {
-            if (!this.itemTypeEditorViewConnected) {
+            if (!this.assigneeEditorViewConnected) {
 
                 newBtn._context = args.context;
 
-                this.itemTypeNativeView = newBtn.createNativeView();
+                this.assigneeNativeView = newBtn.createNativeView();
 
                 newBtn.on('tap', () => {
                     this.zone.run(() => {
-                        this.onItemTypeEditorBtnTap.apply(this);
+                        this.onAssigneeEditorBtnTap.apply(this);
                     });
                 });
-                this.itemTypeEditorViewConnected = true;
+                this.assigneeEditorViewConnected = true;
             }
 
-            args.view = this.itemTypeNativeView;
-            this.itemTypeEditorBtnHelper.updateEditorValue(this.itemTypeNativeView, this.itemForm.assigneeName);
+            args.view = this.assigneeNativeView;
+            this.assigneeEditorBtnHelper.updateEditorValue(this.assigneeNativeView, this.itemForm.assigneeName);
 
         } else {
-            if (!this.itemTypeEditorViewConnected) {
-                this.itemTypeEditorBtnHelper.iosTapHandler = () => {
+            if (!this.assigneeEditorViewConnected) {
+                this.assigneeEditorBtnHelper.iosTapHandler = () => {
                     this.zone.run(() => {
-                        this.onItemTypeEditorBtnTap.apply(this);
+                        this.onAssigneeEditorBtnTap.apply(this);
                     });
                 };
 
 
-                this.itemTypeNativeView = <UIButton>newBtn.nativeView;
-                this.itemTypeNativeView.setTitleColorForState(COLOR_DARK.ios, UIControlState.Normal);
-                this.itemTypeNativeView.addTargetActionForControlEvents(this.itemTypeEditorBtnHelper,
+                this.assigneeNativeView = <UIButton>newBtn.nativeView;
+                this.assigneeNativeView.setTitleColorForState(COLOR_DARK.ios, UIControlState.Normal);
+                this.assigneeNativeView.addTargetActionForControlEvents(this.assigneeEditorBtnHelper,
                     'handleTap:', UIControlEvents.TouchUpInside);
-                this.itemTypeEditorViewConnected = true;
+                this.assigneeEditorViewConnected = true;
             }
-            args.view = this.itemTypeNativeView;
-            this.itemTypeEditorBtnHelper.updateEditorValue(this.itemTypeNativeView, this.itemForm.assigneeName);
+            args.view = this.assigneeNativeView;
+            this.assigneeEditorBtnHelper.updateEditorValue(this.assigneeNativeView, this.itemForm.assigneeName);
 
         }
     }
@@ -269,10 +269,10 @@ export class PtItemDetailsComponent implements OnInit {
     */
 
     public editorHasToApplyValue(args: DataFormCustomPropertyEditorEventData) {
-        this.itemTypeEditorBtnHelper.updateEditorValue(args.view, args.value);
+        this.assigneeEditorBtnHelper.updateEditorValue(args.view, args.value);
     }
 
     public editorNeedsValue(args: DataFormCustomPropertyEditorEventData) {
-        args.value = this.itemTypeEditorBtnHelper.buttonValue;
+        args.value = this.assigneeEditorBtnHelper.buttonValue;
     }
 }

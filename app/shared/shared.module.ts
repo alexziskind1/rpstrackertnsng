@@ -25,6 +25,7 @@ import { LogoutDirective } from './directives/app-logout-attribute.directive';
         NativeScriptUIDataFormModule
     ],
     exports: [
+        NativeScriptFormsModule,
         NativeScriptUISideDrawerModule,
         NativeScriptUIDataFormModule,
         MenuComponent,
