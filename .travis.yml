@@ -39,4 +39,4 @@ install:
 script:
     - npm run lint
     - tns build android
-    - tns test android --emulator --justlaunch
+    - tns test android
