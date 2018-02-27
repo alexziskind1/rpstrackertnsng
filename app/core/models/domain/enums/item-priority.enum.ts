@@ -1,5 +1,4 @@
 import { Color } from 'tns-core-modules/color';
-import { EMPTY_STRING } from '../../../helpers/string-helpers';
 
 export enum PriorityEnum {
     Low = 'Low',
