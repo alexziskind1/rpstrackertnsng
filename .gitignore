@@ -7,3 +7,4 @@ dist
 *.js
 *.map
 *.log
+!karma.conf.js
