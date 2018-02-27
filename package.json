@@ -13,7 +13,8 @@
     }
   },
   "scripts": {
-    "lint": "tslint 'app/**/*.ts' -t verbose"
+    "lint": "tslint 'app/**/*.ts' -t verbose",
+    "test": "tns test android"
   },
   "dependencies": {
     "@angular/animations": "~4.4.1",
