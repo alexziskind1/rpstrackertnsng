@@ -14,6 +14,7 @@
   },
   "scripts": {
     "lint": "tslint 'app/**/*.ts' -t verbose",
+    "pretest": "npm i && tns platform add android && tns build android",
     "test": "tns test android"
   },
   "dependencies": {

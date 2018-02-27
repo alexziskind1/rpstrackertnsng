@@ -38,5 +38,4 @@ install:
 
 script:
     - npm run lint
-    - tns build android
-    - tns test android
+    - npm run test
