@@ -1,6 +1,6 @@
 import 'reflect-metadata';
 
-import { Store } from '../../core/state/app-store';
+import { Store } from '../../../core/state/app-store';
 
 
 describe('Make sure store works', () => {
@@ -8,5 +8,11 @@ describe('Make sure store works', () => {
         const store = new Store();
         store.set('selectedPreset', 'open');
         expect(store.value.selectedPreset).toBe('open');
+    });
+
+    it('must work 2', () => {
+        const store = new Store();
+        store.set('selectedPreset', 'open');
+        expect(store.value.selectedPreset).toBe('closed');
     });
 });
