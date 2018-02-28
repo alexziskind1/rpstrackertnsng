@@ -15,7 +15,7 @@
   "scripts": {
     "lint": "tslint 'app/**/*.ts' -t verbose",
     "cisetup": "npm i && tns platform add android && tns build android",
-    "citest": "tns test android --justlaunch"
+    "cites": "tns test android --justlaunch"
   },
   "dependencies": {
     "@angular/animations": "~4.4.1",
