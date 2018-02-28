@@ -9,10 +9,4 @@ describe('Make sure store works', () => {
         store.set('selectedPreset', 'open');
         expect(store.value.selectedPreset).toBe('open');
     });
-
-    it('must work 2', () => {
-        const store = new Store();
-        store.set('selectedPreset', 'open');
-        expect(store.value.selectedPreset).toBe('closed');
-    });
 });
