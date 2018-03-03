@@ -1,6 +1,6 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
-import { TranslateModule } from '@ngx-translate/core';
+// import { TranslateModule } from '@ngx-translate/core';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 
@@ -20,7 +20,7 @@ console.log('BacklogModule');
         NativeScriptModule,
         BacklogRoutingModule,
         SharedModule,
-        TranslateModule.forChild()
+        // TranslateModule.forChild()
     ],
     exports: [],
     declarations: [

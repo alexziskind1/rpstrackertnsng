@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { TNSFontIconService } from 'nativescript-ngx-fonticon';
+// import { TranslateService } from '@ngx-translate/core';
+// import { TNSFontIconService } from 'nativescript-ngx-fonticon';
 
-import * as application from 'application';
-import { device, isIOS } from 'platform';
+// import * as application from 'application';
+// import { device, isIOS } from 'platform';
 import { Page } from 'ui/page';
 
 @Component({
@@ -15,17 +15,19 @@ export class AppComponent implements OnInit {
 
     constructor(
         page: Page,
-        translateService: TranslateService,
-        _fonticon: TNSFontIconService
+        // translateService: TranslateService,
+        // _fonticon: TNSFontIconService
     ) {
         // page.actionBarHidden = true;
         page.backgroundSpanUnderStatusBar = true;
 
-        translateService.setDefaultLang('en');
-        translateService.use(device.language);
+        // translateService.setDefaultLang('en');
+        // translateService.use(device.language);
     }
 
+
     public ngOnInit() {
+        /*
         if (isIOS && application.ios.window.safeAreaInsets) {
             const topSafeArea: number = application.ios.window.safeAreaInsets.top;
             const bottomSafeArea: number = application.ios.window.safeAreaInsets.bottom;
@@ -47,5 +49,7 @@ export class AppComponent implements OnInit {
               `);
             }
         }
+        */
     }
+
 }
