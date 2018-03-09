@@ -5,6 +5,7 @@ lib
 hooks
 dist
 *.js
+!webpack.config.js
 *.map
 *.log
 !karma.conf.js

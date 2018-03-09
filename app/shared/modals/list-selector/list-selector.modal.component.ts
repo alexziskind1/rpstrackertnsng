@@ -16,8 +16,10 @@ import { PtModalListDisplayItem } from '../../models/ui/pt-modal-list-display-it
 export class ListSelectorModalComponent<T>
     extends PtModalComponentBase<PtModalListModel<PtModalListDisplayItem<T>>, PtModalListDisplayItem<T>> {
     public items: PtModalListDisplayItem<T>[] = [];
-    private originalSelectedItem: PtModalListDisplayItem<T>;
-    private selectedItem: PtModalListDisplayItem<T>;
+    // Angular compiler was complaining about these as unused variables.
+    // You may want to remove them.
+    // private originalSelectedItem: PtModalListDisplayItem<T>;
+    // private selectedItem: PtModalListDisplayItem<T>;
 
     constructor(
         params: ModalDialogParams,
@@ -25,8 +27,8 @@ export class ListSelectorModalComponent<T>
     ) {
         super(params, page);
         if (this.payload.selectedItem) {
-            this.originalSelectedItem = this.payload.selectedItem;
-            this.selectedItem = this.payload.selectedItem;
+            // this.originalSelectedItem = this.payload.selectedItem;
+            // this.selectedItem = this.payload.selectedItem;
         }
         this.items = this.payload.items;
     }
