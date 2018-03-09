@@ -1,7 +1,3 @@
-@import url("backlog.page.component.common.css");
-
-
-
 .drawer-content-in {
     animation-name: openDrawer;
     animation-direction: normal;
