@@ -100,6 +100,7 @@ module.exports = env => {
             new CopyWebpackPlugin([
                 { from: "App_Resources/**" },
                 { from: "fonts/**" },
+                { from: "assets/**" },
                 { from: "**/*.jpg" },
                 { from: "**/*.png" },
                 { from: "**/*.xml" },
