@@ -1,5 +1,5 @@
-import { NgModule, InjectionToken } from '@angular/core';
-import { StorageService } from '../core/services/storage.service';
+import { NgModule, InjectionToken, NO_ERRORS_SCHEMA } from '@angular/core';
+// import { StorageService } from '../core/services/storage.service';
 import { StorageWebService } from '../core/services/web/storage-web.service';
 import { StorageNsService } from '../core/services/ns/storage-ns.service';
 import { AppConfig } from '../core/models/core';
@@ -9,7 +9,12 @@ import { environment } from '../environments/environment';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
-const appConfig = <AppConfig>require(environment.appConfigFile);
+// Can't have dynamic requires with webpack.
+// You can define a new global variable
+// for "environment" inside the webpack config.
+const appConfig = global.TNS_WEBPACK ?
+  <AppConfig>require("./app.config.prod.json") :
+  <AppConfig>require(environment.appConfigFile);
 
 switch (appConfig.appType) {
     case 'Web':
@@ -22,8 +27,12 @@ switch (appConfig.appType) {
 
 @NgModule({
     providers: [
+
         { provide: APP_CONFIG, useValue: appConfig },
-        { provide: StorageService, useClass: appConfig.storageServiceClass }
+        // { provide: StorageService, useClass: StorageNsService }
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
     ]
 })
 export class AppConfigModule { }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from '../storage.service';
+// import { StorageService } from '../storage.service';
 import { getString, setString, clear, remove } from 'application-settings';
 
 @Injectable()
-export class StorageNsService extends StorageService {
+export class StorageNsService {
 
     constructor() {
-        super();
+        // super();
     }
 
     setItem<T>(key: string, value: T): void {

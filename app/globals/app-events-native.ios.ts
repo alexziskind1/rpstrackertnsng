@@ -1,5 +1,6 @@
-import * as app from 'application';
+// import * as app from 'application';
 
+/*
 class MyDelegate extends UIResponder implements UIApplicationDelegate {
     public static ObjCProtocols = [UIApplicationDelegate];
 
@@ -37,3 +38,5 @@ class MyDelegate extends UIResponder implements UIApplicationDelegate {
 export const setNativeEvents = () => {
     app.ios.delegate = MyDelegate;
 };
+
+*/

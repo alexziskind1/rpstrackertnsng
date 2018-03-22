@@ -1,9 +1,10 @@
-import * as app from 'application';
-import { setNativeEvents } from './app-events-native';
-import { setStatusBarColors } from '../utils';
+// import * as app from 'application';
+// import { setNativeEvents } from './app-events-native';
+// import { setStatusBarColors } from '../utils';
 
 export const setAppEvents = () => {
 
+    /*
     setNativeEvents();
 
     app.on(app.launchEvent, function (_args: app.ApplicationEventData) {
@@ -38,4 +39,5 @@ export const setAppEvents = () => {
     app.on(app.orientationChangedEvent, function (_args: app.ApplicationEventData) {
         console.logNativeScript('orientationChangedEvent');
     });
+    */
 };

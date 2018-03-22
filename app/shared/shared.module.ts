@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
@@ -45,6 +45,9 @@ import { LogoutDirective } from './directives/app-logout-attribute.directive';
     entryComponents: [
         TextInputModalComponent,
         ListSelectorModalComponent
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
     ]
 })
 export class SharedModule { }

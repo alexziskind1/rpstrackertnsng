@@ -1,5 +1,5 @@
 import { NgModule, NgModuleFactoryLoader, NO_ERRORS_SCHEMA } from '@angular/core';
-//import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
@@ -26,9 +26,11 @@ import { createTranslateLoader } from './utils';
 import './utils/console-color';
 import './rxjs-imports';
 
+/*
 import { registerElement } from 'nativescript-angular/element-registry';
 
 registerElement('PullToRefresh', () => require('nativescript-pulltorefresh').PullToRefresh);
+*/
 
 @NgModule({
     bootstrap: [

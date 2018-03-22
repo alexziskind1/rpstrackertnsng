@@ -1,4 +1,4 @@
-import { NgModule, Optional, SkipSelf, ErrorHandler } from '@angular/core';
+import { NgModule, Optional, SkipSelf, ErrorHandler, NO_ERRORS_SCHEMA } from '@angular/core';
 
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptHttpModule } from 'nativescript-angular/http';
@@ -20,6 +20,9 @@ import { RpsErrorHandler } from './helpers/rps-error-handler';
         ...SERVICES,
         Store,
         { provide: ErrorHandler, useClass: RpsErrorHandler }
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
     ]
 })
 export class CoreModule {

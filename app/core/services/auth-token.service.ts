@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
+// import { StorageService } from './storage.service';
 
 import { PtAuthToken } from '../../core/models/domain';
+import { StorageNsService } from './ns/storage-ns.service';
 
 const AUTH_TOKEN_KEY = 'AUTH_TOKEN_KEY';
 
@@ -18,7 +19,7 @@ export class AuthTokenService {
     }
 
 
-    constructor(private storageService: StorageService) { }
+    constructor(private storageService: StorageNsService) { }
 
 
 

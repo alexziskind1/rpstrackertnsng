@@ -5,7 +5,10 @@ import { Page } from 'ui/page';
     moduleId: module.id,
     selector: 'pt-auth-container',
     templateUrl: 'auth.container.component.html',
-    styleUrls: ['auth.container.component.css']
+    styleUrls: [
+        'auth.container.component.common.css',
+        'auth.container.component.css'
+    ]
 })
 export class AuthContainerComponent {
     constructor(

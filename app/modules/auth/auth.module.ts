@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 
 // import { TranslateModule } from '@ngx-translate/core';
 // import { TNSFontIconModule } from 'nativescript-ngx-fonticon';
@@ -37,6 +37,9 @@ export const AUTH_PROVIDERS = [
         AuthService,
         AUTH_PROVIDERS,
         Store
+    ],
+    schemas: [
+        NO_ERRORS_SCHEMA
     ]
 })
 export class AuthModule {

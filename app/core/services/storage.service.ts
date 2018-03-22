@@ -1,9 +1,8 @@
+/*
 import { Injectable } from '@angular/core';
 
 @Injectable()
 export abstract class StorageService {
-
-    constructor() { }
 
     abstract setItem<T>(key: string, value: T): void;
 
@@ -16,3 +15,4 @@ export abstract class StorageService {
     abstract clear(): void;
 
 }
+*/

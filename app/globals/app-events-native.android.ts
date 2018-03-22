@@ -1,7 +1,8 @@
-import * as app from 'application';
+// import * as app from 'application';
 
 export const setNativeEvents = () => {
 
+    /*
     app.android.on(app.AndroidApplication.activityCreatedEvent, function (args: app.AndroidActivityBundleEventData) {
         console.logAndroid(args.eventName);
     });
@@ -38,4 +39,5 @@ export const setNativeEvents = () => {
         console.logAndroid(args.eventName);
     });
 
+    */
 };

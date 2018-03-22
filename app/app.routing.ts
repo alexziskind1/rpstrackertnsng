@@ -10,7 +10,7 @@ const routes: Routes = [
     { path: 'backlog', redirectTo: 'backlog/open', pathMatch: 'full' },
     // { path: "auth", loadChildren: "./modules/auth/auth.module#AuthModule" },
     // { path: 'backlog', loadChildren: './modules/backlog/backlog.module#BacklogModule' },
-    { path: 'settings', loadChildren: './modules/settings/settings.module#SettingsModule' }
+    // { path: 'settings', loadChildren: './modules/settings/settings.module#SettingsModule' }
     // { path: 'settings', component: SettingsComponent  }
 ];
 

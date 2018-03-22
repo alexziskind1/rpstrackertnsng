@@ -21,7 +21,10 @@ import { PtNewItem } from '../../../../shared/models/dto';
     moduleId: module.id,
     selector: 'pt-backlog',
     templateUrl: 'backlog.page.component.html',
-    styleUrls: ['backlog.page.component.css']
+    styleUrls: [
+        'backlog.page.component.common.css',
+        'backlog.page.component.css'
+    ]
 })
 export class BacklogPageComponent implements AfterViewInit, OnInit {
 

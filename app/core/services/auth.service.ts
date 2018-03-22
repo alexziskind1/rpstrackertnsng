@@ -6,12 +6,13 @@ import { Observable } from 'rxjs/Observable';
 import { AppConfig } from '../models/core';
 import { APP_CONFIG } from '../../config/app-config.module';
 import { Store } from '../state/app-store';
-import { StorageService } from './storage.service';
+// import { StorageService } from './storage.service';
 import { ServerErrorHandlerService } from './server-error-handler.service';
 import { AuthTokenService } from './auth-token.service';
 import { PtUser, PtLoginModel, PtAuthToken, PtRegisterModel } from '../../core/models/domain';
 import { getUserAvatarUrl } from '../helpers/user-avatar-helper';
 import { EMPTY_STRING } from '../helpers/string-helpers';
+import { StorageNsService } from './ns/storage-ns.service';
 
 
 
@@ -44,7 +45,8 @@ export class AuthService {
         private http: Http,
         private store: Store,
         private authTokenService: AuthTokenService,
-        private storageService: StorageService,
+        // private storageService: StorageService,
+        private storageService: StorageNsService,
         private errorHandlerService: ServerErrorHandlerService
     ) { }
 
