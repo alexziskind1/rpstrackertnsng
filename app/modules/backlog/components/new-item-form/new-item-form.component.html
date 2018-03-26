@@ -1,8 +1,8 @@
 <GridLayout rows="60, *">
 
     <FlexboxLayout row="0" class="new-item-actions-container">
-        <Image src="res://iconcloseblack" (tap)="onCancelTap($event)" class="modal-close-img"></Image>
-        <Button [text]="btnOkText" (tap)="onSaveTap($event)" class="btn-save"></Button>
+        <Image src="res://iconcloseblack" (tap)="onCancelTap()" class="modal-close-img"></Image>
+        <Button [text]="btnOkText" (tap)="onSaveTap()" class="btn-save"></Button>
     </FlexboxLayout>
 
     <RadDataForm #itemDetailsDataForm [source]="newItemForm" commitMode="Manual" (editorUpdate)="onEditorUpdate($event)" row="1">
