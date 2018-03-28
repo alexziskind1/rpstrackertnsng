@@ -5,7 +5,7 @@
 <GridLayout rows="60, *" verticalAlignment="top">
 
     <FlexboxLayout row="0" class="modal-actions-container">
-        <Image src="res://iconcloseblack" (tap)="onCancelButtonTap($event)" class="modal-close-img"></Image>
+        <Image src="res://iconcloseblack" (tap)="onCancelButtonTap()" class="modal-close-img"></Image>
     </FlexboxLayout>
 
     <ListView row="1" [items]="items" (itemTap)="onItemSelected($event)" class="list-modal-list">

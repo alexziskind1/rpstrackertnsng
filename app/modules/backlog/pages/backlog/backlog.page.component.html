@@ -1,5 +1,5 @@
 <ActionBar title="Backlog">
-    <ActionItem (tap)="showSlideout($event)" ios.position="right">
+    <ActionItem (tap)="showSlideout()" ios.position="right">
         <StackLayout class="navbar_image_wrapper" ios:horizontalAlignment="right">
             <Image src="res://iconelipseswhite"></Image>
         </StackLayout>
@@ -27,7 +27,7 @@
 
             <GridLayout row="0" class="list-container">
                 <pt-list [items]="items$ | async" [isRefreshing]="isListRefreshing$ | async" (listItemSelected)="selectListItem($event)"
-                    (listRefreshRequested)="onListRefreshRequested($event)"></pt-list>
+                    (listRefreshRequested)="onListRefreshRequested()"></pt-list>
             </GridLayout>
 
             <StackLayout row="1" class="btn-add-wrapper">
