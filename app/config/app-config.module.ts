@@ -9,12 +9,16 @@ import { environment } from '../environments/environment';
 
 export let APP_CONFIG = new InjectionToken<AppConfig>('app.config');
 
+
+const envName = global.TNS_ENV;
+console.log('GLOBAL WEBPACK ENVIRONMENT: ' + envName);
+
 // Can't have dynamic requires with webpack.
 // You can define a new global variable
 // for "environment" inside the webpack config.
 const appConfig = global.TNS_WEBPACK ?
-  <AppConfig>require("./app.config.prod.json") :
-  <AppConfig>require(environment.appConfigFile);
+    <AppConfig>require(`./app.config.${envName}.json`) :
+    <AppConfig>require(environment.appConfigFile);
 
 switch (appConfig.appType) {
     case 'Web':

@@ -6,7 +6,7 @@
         "emitDecoratorMetadata": true,
         "noUnusedLocals": true,
         "noUnusedParameters": true,
-        "noEmitHelpers": false, //AZ: This is true by default - need to change.
+        "noEmitHelpers": true, //AZ: This is true by default - need to change.
         "noEmitOnError": true,
         "skipLibCheck": true, //AZ: Added this to skip checking the huge tns-platform-declarations
         "lib": [

@@ -5,4 +5,6 @@ import { AppModule } from './app.module';
 
 // setAppEvents();
 
+global.__assign = Object.assign;
+
 platformNativeScriptDynamic().bootstrapModule(AppModule);
